@@ -1,2 +1,5 @@
-
 \.idea/
+/TEST/*
+/TEST/
+TEST/*
+TEST/
