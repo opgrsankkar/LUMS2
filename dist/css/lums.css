@@ -1,0 +1,68 @@
+body.idcard {
+    height:99vh;
+}
+
+.hr-fade {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.square-image-logo{
+    height: 18vh;
+    width: auto
+}
+.square-image-logo.left{
+    position: absolute;
+    left:10px;
+    top:10px;
+}
+
+.square-image-logo.right{
+    position: absolute;
+    right: 10px;
+    top:10px;
+}
+
+
+.idcard-wrapper{
+    float: right;
+    text-align: center;
+}
+
+.idcard-instructions{
+    margin-top: 20vh;
+}
+
+.idcard-item {
+    border-radius: 4px;
+    background: #fff;
+    margin: 10vh auto 30px auto;
+    width: 25vw;
+}
+
+.idcard-credentials .form-control {
+    border: 0;
+    border-radius: 4px;
+}
+
+.idcard-credentials .btn{
+    background-color: #fff;
+    border: 0;
+    padding: 0 10px;
+}
+
+.idcard-logo {
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 300;
+    max-height: 20vh;
+}
+
+.news-panel{
+    margin-top: 5vh;
+}
+.news-item-div{
+    min-height: 20vh;
+}
