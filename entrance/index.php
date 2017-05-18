@@ -1,92 +1,220 @@
 <?php
     include("../scripts/db.php");
-    $news_sql = mysqli_query($connection,"select * from news");
-    $count = mysqli_num_rows($news_sql);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Lockscreen</title>
+    <title>LUMS | Entrance</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../ext-res/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../ext-res/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="../../dist/css/lums.css"/>
-    <link rel="stylesheet" href="../../TEST/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/css/site.css">
+    <link rel="stylesheet" href="../../dist/css/site.css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-<script src="../../jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/fullscreen/jquery.min.js"></script>
+	<script type="text/javascript" src="../../dist/js/fullscreen/release/jquery.fullscreen.min.js"></script>
+
+    <!--<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>-->
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="../../dist/js/news/jquery.bootstrap.newsbox.min.js"></script>
+    <script src="../../dist/js/news/script.js"></script>
+
+    <script src="../../dist/js/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../dist/css/sweetalert.css">
+
 </head>
-<img class="square-image-logo left" src="../../TEST/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/images/1.png"/>
-<div class="idcard-logo">
-      <b>Central Library</b><br/><small>Amrita Vishwa Vidyapeetham</small>
-</div>
-<img class="square-image-logo right" src="../../TEST/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box\images/1.png"/>
-<div class="hr-fade"></div>
-<body class="hold-transition lockscreen idcard">
+
+
+
+<body class="hold-transition lockscreen idcard" bgcolor="white">
+<div class="lockscreen" id="fullscreen">
+
+
+    <div class="idcard-logo">
+        <div class="col-md-3">
+            <img src="../ext-res/png/512/alert.png" height="100px" width="100px">
+        </div>
+
+        <div class="col-md-6">
+        <b>Central Library</b><br/><small>Amrita Vishwa Vidyapeetham</small>
+        </div>
+
+        <div class="col-md-3">
+            <img src="../ext-res/png/512/alert.png" height="100px" width="100px">
+        </div>
+
+        <div class="col-md-12">
+                <div class="hr-fade"></div>
+        </div>
+    </div>
+
+
+
+
+
     <div class="col-md-6 news-panel">
-                <div class="panel panel-default">
-                    <div class="panel-heading"> <span class="glyphicon glyphicon-list-alt"></span><b>News</b></div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <ul class="demo2">
-                                    <?php
-                                        while($row = mysqli_fetch_assoc($news_sql)) {
-                                            print '<li class="news-item"><div class="news-item-div">'.$row['news'].'</div></li>';
-                                        }
-                                    ?>
-                                </ul>
-                            </div>
-                        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading"> <span class="glyphicon glyphicon-list-alt"></span><b>News</b></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <ul class="demo2">
+
+                            <?php
+                            $news_sql = mysqli_query($connection,"select * from news");
+                            $count = mysqli_num_rows($news_sql);
+                            while($row = mysqli_fetch_assoc($news_sql)) {
+                                print '<li class="news-item"><div class="news-item-div">'.$row['news'].'</div></li>';
+                            }
+                            ?>
+                        </ul>
                     </div>
-                    <div class="panel-footer"> </div>
                 </div>
             </div>
-<!-- Automatic element centering -->
-<div class="idcard-wrapper col-md-6">
-    <h3 class="idcard-instructions">
-    Scan your ID card
-    </h3>
-  <!-- START LOCK SCREEN ITEM -->
-  <div class="idcard-item">
-      
-    <!-- lockscreen credentials (contains the form) -->
-    <form class="idcard-credentials">
-      <div class="input-group">
-        <input id="idcard-number" type="text" class="form-control" placeholder="Roll Number" autofocus>
-
-        <div class="input-group-btn">
-          <button type="button" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
+            <div class="panel-footer"> </div>
         </div>
-      </div>
-    </form>
-    <!-- /.lockscreen credentials -->
+    </div>
 
-  </div>
-  <!-- /.lockscreen-item -->
+
+    <div class="idcard-wrapper col-md-6">
+
+        <h1 class="">
+            Scan your ID card
+        </h1>
+
+        <div class="idcard-item" id="form-actual" >
+
+            <form class="idcard-credentials" method="post" id="reg-form" autocomplete="off">
+                <div class="input-group">
+                    <input id="idcard-number" type="text" class="form-control" name="id" placeholder="Roll Number" autofocus>
+                    <div class="input-group-btn">
+                        <button type="button" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="form-content">
+
+        </div>
+
+    </div>
+
+
+    <script type="text/javascript">
+
+
+        window.onload = function(){
+           checkFullScreen();
+        }
+
+        function checkFullScreen() {
+            if($.fullscreen.isNativelySupported() && !$.fullscreen.isFullScreen()){
+                swal({
+                        title: "Go Fullscreen?",
+                        text: "You must go Full Screen to continue!",
+                        type: "warning",
+                        confirmButtonColor: "#34dd61",
+                        confirmButtonText: "Yes, do it!",
+                        closeOnConfirm: true
+                    },
+                    function(){
+                        $('#fullscreen').fullscreen();
+                        $('#idcard-number').focus();
+                        return false;
+                    });
+            }
+        }
+
+
+        $(document).ready(function() {
+
+            // submit form using $.ajax() method
+
+            $('#reg-form').submit(function(e){
+
+                e.preventDefault(); // Prevent Default Submission
+
+                $.ajax({
+                    url: 'submit.php',
+                    type: 'POST',
+                    data: $(this).serialize() // it will serialize the form data
+                })
+                    .done(function(data){
+                        var elem = document.getElementById("idcard-number"); // Get text field
+                        elem.value = "";
+                        $('#form-content').fadeOut('slow', function(){
+                           $('#form-content').fadeIn('slow').html(data);
+                        });
+
+                        setTimeout(function(){
+                            startresettimer();
+                            }, 5000);
+
+
+                    })
+                    .fail(function(){
+                        alert('Submit Failed ...');
+                    });
+            });
+
+
+            /*
+             // submit form using ajax short hand $.post() method
+
+             $('#reg-form').submit(function(e){
+
+             e.preventDefault(); // Prevent Default Submission
+
+             $.post('submit.php', $(this).serialize() )
+             .done(function(data){
+             $('#form-content').fadeOut('slow', function(){
+             $('#form-content').fadeIn('slow').html(data);
+             });
+             })
+             .fail(function(){
+             alert('Ajax Submit Failed ...');
+             });
+
+             });
+             */
+
+
+            function startresettimer(){
+                $('#form-content').fadeOut('slow',null);
+            }
+        });
+
+
+        $(function() {
+
+            $('#fullscreen .exitfullscreen').click(function() {
+                $.fullscreen.exit();
+                return false;
+            });
+
+           $(document).bind('fscreenchange', function(e, state, elem) {
+                if ($.fullscreen.isFullScreen()) {
+
+                } else {
+                    checkFullScreen();
+                }
+            });
+        });
+    </script>
+
 </div>
-<!-- /.center -->
 
-<!-- jQuery 2.2.3 -->
-<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="../../bootstrap/js/bootstrap.min.js"></script>
-<!--carsousal scroll-->
-<script src="../../TEST/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/scripts/jquery.bootstrap.newsbox.min.js"></script>
-<script src="../../TEST/Responsive-jQuery-News-Ticker-Plugin-with-Bootstrap-3-Bootstrap-News-Box/scripts/script.js"></script>
 </body>
+
 </html>
