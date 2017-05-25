@@ -86,29 +86,29 @@
         <div class="col-lg-6 col-xs-12">
             <div class="small-box bg-aqua">
                 <div class="inner">
-                    <h3>150</h3>
+                    <h3 id="currently-in">150</h3>
                     <p>Currently In</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-users"></i>
                 </div>
-                <a href="#" class="small-box-footer">
-                    Central Library <i class="fa fa-arrow-circle-right"></i>
-                </a>
+                <span class="small-box-footer">
+                    Reloads in <span id="currently-in-timer"></span>
+                </span>
             </div>
         </div>
         <div class="col-lg-6 col-xs-12">
             <div class="small-box bg-teal">
                 <div class="inner">
-                    <h3>250</h3>
+                    <h3 id="visited-today">250</h3>
                     <p>Visited Today</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-users"></i>
                 </div>
-                <a href="#" class="small-box-footer">
-                    Central Library <i class="fa fa-arrow-circle-right"></i>
-                </a>
+                <span class="small-box-footer">
+                    Reloads in <span id="visited-today-timer"></span>
+                </span>
             </div>
         </div>
     </div>
@@ -239,6 +239,49 @@
                 }
             });
         });
+
+        updateCountTimerTime = 1000 * 60 * 3;
+        function updateCurrentlyIn(){
+            $.ajax({
+            type: "POST",
+            url: 'update_currently_in.php',
+            dataType: 'json',
+            data: {functionname: 'get_currently_in'},
+
+            success: function (obj, textstatus) {
+                        if( !('error' in obj) ) {
+                            currently_in = obj.result1;
+                            visited_today = obj.result2;
+                            $("#currently-in").text(currently_in);
+                            $("#visited-today").text(visited_today);
+                        }
+                        else {
+                            console.log(obj.error);
+                        }
+                    }
+            });
+        }
+        setInterval(updateCurrentlyIn,updateCountTimerTime);
+
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.text(minutes + ":" + seconds);
+
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+        timerTime = updateCountTimerTime/1000 - 1;
+        startTimer(timerTime, $("#currently-in-timer"));
+        startTimer(timerTime, $("#visited-today-timer"));
     </script>
 
 </div>
