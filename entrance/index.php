@@ -36,13 +36,13 @@
 
 
 
-<body class="hold-transition lockscreen idcard" bgcolor="white">
-<div class="lockscreen" id="fullscreen">
+<body class="hold-transition lockscreen bgcol idcard" bgcolor="white">
+<div class="lockscreen bgcol" id="fullscreen">
 
 
     <div class="idcard-logo">
         <div class="col-md-3">
-            <img src="../ext-res/png/512/alert.png" height="100px" width="100px">
+            <img src="../ext-res/amrita.png" height="100px" width="130px">
         </div>
 
         <div class="col-md-6">
@@ -50,7 +50,7 @@
         </div>
 
         <div class="col-md-3">
-            <img src="../ext-res/png/512/alert.png" height="100px" width="100px">
+            <img src="../ext-res/AMMA.png" height="100px" width="100px">
         </div>
 
         <div class="col-md-12">
@@ -83,6 +83,34 @@
             </div>
             <div class="panel-footer"> </div>
         </div>
+        <div class="col-lg-6 col-xs-12">
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>150</h3>
+                    <p>Currently In</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-users"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Central Library <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xs-12">
+            <div class="small-box bg-teal">
+                <div class="inner">
+                    <h3>250</h3>
+                    <p>Visited Today</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-users"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Central Library <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
     </div>
 
 
@@ -95,7 +123,7 @@
         <div class="idcard-item" id="form-actual" >
 
             <form class="idcard-credentials" method="post" id="reg-form" autocomplete="off">
-                <div class="input-group">
+                <div class="input-group idcard-group">
                     <input id="idcard-number" type="text" class="form-control" name="id" placeholder="Roll Number" autofocus>
                     <div class="input-group-btn">
                         <button type="button" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
@@ -153,13 +181,13 @@
                     .done(function(data){
                         var elem = document.getElementById("idcard-number"); // Get text field
                         elem.value = "";
-                        $('#form-content').fadeOut('slow', function(){
-                           $('#form-content').fadeIn('slow').html(data);
+                        $('#form-content').fadeOut('fast', function(){
+                           $('#form-content').fadeIn('fast').html(data);
                         });
 
                         setTimeout(function(){
                             startresettimer();
-                            }, 5000);
+                            }, 1000);
 
 
                     })
@@ -191,7 +219,7 @@
 
 
             function startresettimer(){
-                $('#form-content').fadeOut('slow',null);
+                $('#form-content').fadeOut('fast',null);
             }
         });
 

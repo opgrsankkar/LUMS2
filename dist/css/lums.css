@@ -41,6 +41,12 @@ body.idcard {
     width: 25vw;
 }
 
+.idcard-group{
+
+    border: 3px solid #f5f5f5;
+    border-radius: 4px;
+}
+
 .idcard-credentials .form-control {
     border: 0;
     border-radius: 4px;
@@ -65,4 +71,13 @@ body.idcard {
 }
 .news-item-div{
     min-height: 20vh;
+}
+
+.bgcol{
+    background-color: #fafafa;
+}
+.idcard-user-image{
+    width: 100px;
+    height: auto;
+    float: left;
 }

@@ -12,7 +12,7 @@ else if($_SESSION['permission']!=2){
     }
 else{
 	$username=$_SESSION['username'];
-	$ses_sql = mysqli_query($connection,"select * from login where username = '$username' and permission=1 ");
+	$ses_sql = mysqli_query($connection,"select * from login where username = '$username' and permission=2 ");
 	$row = mysqli_fetch_array($ses_sql,MYSQLI_ASSOC);
 	$count = mysqli_num_rows($ses_sql);
 
