@@ -75,15 +75,49 @@ else{
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">Last Login : <?php echo $lastlogin;?><br/>Last Login IP : <?php echo $lastip;?></li>
-		<li class="active">
+
+        <li class="active">
           <a href="index.php">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
-        </li>       
+        </li>
 
+        <li>
+          <a href="users.php">
+              <i class="fa fa-users"></i> <span>Users</span>
+          </a>
+        </li>
+
+
+        <li class="treeview">
+          <a href="#">
+              <i class="fa fa-table"></i> <span>Reports</span>
+              <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+          </a>
+          <ul class="treeview-menu">
+              <li><a href="report_entrance.php"><i class="fa fa-circle-o"></i> Central Library</a></li>
+              <li><a href="report_digilib.php"><i class="fa fa-circle-o"></i> Digital Library</a></li>
+          </ul>
+        </li>
 
 
         <li>
+          <a href="staff.php">
+              <i class="fa fa-user"></i> <span>Library Staff</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="news.php">
+              <i class="fa fa-newspaper-o"></i> <span>News</span>
+          </a>
+        </li>
+
+
+
+          <li>
           <a href="../../scripts/logout.php">
               <i class="fa fa-lock"></i> <span>Logout</span>
           </a>

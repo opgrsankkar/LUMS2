@@ -187,7 +187,7 @@
 
                         setTimeout(function(){
                             startresettimer();
-                            }, 1000);
+                            }, 2000);
 
 
                     })
@@ -240,7 +240,7 @@
             });
         });
 
-        updateCountTimerTime = 1000 * 60 * 3;
+        updateCountTimerTime = 1000 * 60 * 0.2;
         function updateCurrentlyIn(){
             $.ajax({
             type: "POST",
