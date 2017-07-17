@@ -77,13 +77,13 @@ else{
         <li class="header">Last Login : <?php echo $lastlogin;?><br/>Last Login IP : <?php echo $lastip;?></li>
 
         <li class="active">
-          <a href="index.php">
+          <a href="/">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
 
         <li>
-          <a href="users.php">
+          <a href="users/">
               <i class="fa fa-users"></i> <span>Users</span>
           </a>
         </li>
@@ -110,7 +110,7 @@ else{
         </li>
 
         <li>
-          <a href="news.php">
+          <a href="news/">
               <i class="fa fa-newspaper-o"></i> <span>News</span>
           </a>
         </li>
@@ -239,7 +239,7 @@ else{
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; <a href="http://sridarshan.tk">Sri Darshan S</a>.</strong> All rights
+    <strong>Copyright &copy; <a href="http://sridarshan.tk">Sri Darshan S</a>, Sankkara Narayanan.</strong> All rights
     reserved.
   </footer>
 
