@@ -45,7 +45,6 @@ else {
     <!-- angular includes -->
     <script src="../../dist/js/angular.min.js"></script>
     <script src="../../dist/js/angular-animate.min.js"></script>
-    <script src="../../dist/js/ng-file-upload.min.js"></script>
     <!-- angular news app -->
     <script src="usersApp.js">
 
