@@ -74,6 +74,7 @@ app.controller('usersControl', function ($scope, $http) {
         } else {
             alert("Invalid File Format\nPlease check if your file matches the format specified in the example.xls file");
         }
+        $('#load-data-btn').prop("disabled", true);
         $('#upload-data-btn').prop("disabled", false);
     };
 
@@ -87,6 +88,7 @@ app.controller('usersControl', function ($scope, $http) {
                 $scope.usersTable = {};
                 $scope.uploading = false;
                 $scope.uploadComplete = true;
+                $("#upload-data-btn").prop("disabled", true);
             } else {
                 alert("ERROR\n" + result.data.error_msg);
             }
