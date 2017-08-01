@@ -1,0 +1,95 @@
+/**
+ * make the list of news items to scroll
+ * instead of the whole page
+ */
+#news-list{
+    max-height: 70vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-top: 10px;
+}
+
+/**
+ * custom animations when hovering over news items
+ */
+.hov:not(.list-group-item-success):hover {
+    transition: 0.3s linear;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/**
+ * make each news item only one line and put ellipsis on overflow
+ * add a little boldness too
+ */
+.news-content{
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/**
+ * input checkbox styling
+ * source: https://codepen.io/KenanYusuf/pen/PZKEKd
+ */
+.control {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-size: 18px;
+}
+.control input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+.control__indicator {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background: #b6b6b6;
+}
+.control:hover input ~ .control__indicator,
+.control input:focus ~ .control__indicator {
+    background: #666;
+}
+.control input:checked ~ .control__indicator {
+    background: rgba(42, 161, 192, 0.68);
+}
+.control:hover input:not([disabled]):checked ~ .control__indicator,
+.control input:checked:focus ~ .control__indicator {
+    background: #0fa1bd;
+}
+.control input:disabled ~ .control__indicator {
+    background: #e6e6e6;
+    opacity: 0.6;
+    pointer-events: none;
+}
+.control__indicator:after {
+    content: '';
+    position: absolute;
+    display: none;
+}
+.control input:checked ~ .control__indicator:after {
+    display: block;
+}
+.control--checkbox .control__indicator:after {
+    left: 8px;
+    top: 4px;
+    width: 3px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+.control--checkbox input:disabled ~ .control__indicator:after {
+    border-color: #7b7b7b;
+}
+/**
+ * end input checkbox styling
+ * source: https://codepen.io/KenanYusuf/pen/PZKEKd
+ */
