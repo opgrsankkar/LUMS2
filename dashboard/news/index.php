@@ -91,7 +91,7 @@ else {
                 <li class="header">Last Login : <?php echo $lastlogin; ?><br/>Last Login IP : <?php echo $lastip; ?>
                 </li>
 
-                <li class="active">
+                <li>
                     <a href="../">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
@@ -119,12 +119,12 @@ else {
 
 
                 <li>
-                    <a href="staff.php">
+                    <a href="../staff">
                         <i class="fa fa-user"></i> <span>Library Staff</span>
                     </a>
                 </li>
 
-                <li>
+                <li class="active">
                     <a href=".">
                         <i class="fa fa-newspaper-o"></i> <span>News</span>
                     </a>

@@ -104,7 +104,7 @@ else{
 
 
         <li>
-          <a href="staff.php">
+            <a href="staff/">
               <i class="fa fa-user"></i> <span>Library Staff</span>
           </a>
         </li>
