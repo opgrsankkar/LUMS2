@@ -32,6 +32,24 @@ app.controller('staffController', function ($scope, $http) {
         url: staffApiURL,
         data: {"query": "DELETE_STAFF"}
     };
+    let editPassReq = {
+        method: 'POST',
+        url: staffApiURL,
+        data: {"query": "EDIT_PASS"}
+    }
+
+    let generateRandomPassword = function () {
+        let alphabets = ("abcdefghijklmnopqrstuvwxyz").split("");
+        let numbers = ("1234567890").split("");
+        let ran = "";
+        for (let i = 0; i < 4; i++) {
+            ran = ran + alphabets[Math.ceil(Math.random() * 26)];
+        }
+        for (let i = 0; i < 2; i++) {
+            ran = ran + numbers[Math.ceil(Math.random() * 10)];
+        }
+        return ran;
+    };
 
     /**
      * 'initialize' - function to run for each ajax request
@@ -76,17 +94,20 @@ app.controller('staffController', function ($scope, $http) {
             addReq.data.username = $scope.newStaff.username;
             addReq.data.name = $scope.newStaff.fullName;
             addReq.data.password = $scope.newStaff.password;
-            /* TODO use bcrypt to encrypt passwords */
             addReq.data.permission = $scope.newStaff.permission;
 
             $http(addReq).then(function (result) {
                 if (result.data.success) {
-                    $('#add-staff-modal').modal('hide');
+
                     sweetAlert("User Added");
+                    initialize();
+                    $('#add-staff-modal').modal('hide');
+                    $('#add-staff-form').trigger("reset");
+
                 } else {
                     alert(result.data.error_msg);
                 }
-                initialize();
+
             });
         }
 
@@ -114,23 +135,69 @@ app.controller('staffController', function ($scope, $http) {
         $scope.editStaff.permission = permission;
     };
 
+    $scope.refreshStaffTable = function () {
+        initialize();
+    }
+
     $scope.deleteStaff = function (username) {
 
-        if (confirm('You are about to delete a User\nUsername: ' + username + "\n\nThis action cannot be undone\nAre you sure you want to delete?")) {
-            deleteReq.data.username = username;
-            $http(deleteReq).then(function (result) {
-                if (result.data.success) {
-                    sweetAlert("User Deleted");
-                } else {
-                    alert(result.data.error_msg);
-                }
-            });
-        } else {
-            // TODO User cancelled delete operation
-        }
+        swal({
+                title: "Are you sure you want to delete?",
+                text: "You are about to delete a User\nUsername: " + username + "\n\nThis action cannot be undone",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
+            function () {
+                deleteReq.data.username = username;
+                $http(deleteReq).then(function (result) {
+                    if (result.data.success) {
+                        swal("Deleted!", "User has been deleted.", "success")
+                    } else {
+                        alert(result.data.error_msg);
+                    }
+                    initialize();
 
-        initialize();
+
+                });
+
+            });
     };
+
+    $scope.resetPassword = function (username) {
+        swal({
+                title: "Are you sure you want to Reset?",
+                text: "You are about to rest the password of <h3>Username: <lead>" + username + "</lead></h3>",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#03d034",
+                confirmButtonText: "Yes, Reset it!",
+                closeOnConfirm: false,
+                html: true
+            },
+            function () {
+                let newPassword = generateRandomPassword();
+                editPassReq.data.username = username;
+                editPassReq.data.password = newPassword;
+                $http(editPassReq).then(function (result) {
+                    if (result.data.success) {
+                        swal({
+                            title: "Password has been Reset",
+                            text: "New Password <h3>" + newPassword + "</h3> Please make a note of it",
+                            html: true
+                        });
+                    } else {
+                        swal(result.data.error_msg);
+                    }
+                    initialize();
+
+
+                });
+
+            });
+    }
 });
 
 app.filter('userPermissionsFilter', function () {

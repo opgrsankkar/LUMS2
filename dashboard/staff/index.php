@@ -176,6 +176,9 @@ else {
                         <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#add-staff-modal">
                             <i class="fa fa-plus"></i> Add Staff
                         </button>
+                        <button class="btn btn-warning btn-lg" ng-click="refreshStaffTable()">
+                            <i class="fa fa-refresh"></i> Refresh
+                        </button>
                     </div>
                     <div class="modal fade" id="add-staff-modal" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel">
@@ -299,7 +302,9 @@ else {
                             <td>{{s.username}}</td>
                             <td>{{s.name}}</td>
                             <td>
-                                <button class="btn btn-warning">Reset Password</button><!-- TODO Reset Password -->
+                                <button class="btn btn-warning" ng-click="resetPassword(s.username)">
+                                    Reset Password
+                                </button>
                             </td>
                             <td>{{s.permission | userPermissionsFilter}}</td>
                             <td>

@@ -65,6 +65,25 @@ function edit_staff($username, $name, $permission)
 
 }
 
+function edit_password($username, $password)
+{
+    global $connection;
+
+    $stmt = mysqli_stmt_init($connection);
+    if (mysqli_stmt_prepare($stmt, 'UPDATE login SET password=? WHERE username=?')) {
+        mysqli_stmt_bind_param($stmt, "ss", $password, $username);
+    }
+
+    if (!mysqli_stmt_execute($stmt)) {
+        return json_encode([
+            "success" => false,
+            "error_msg" => mysqli_error($connection)
+        ]);
+    } else {
+        return json_encode(["success" => true]);
+    }
+}
+
 function delete_staff($username)
 {
     global $connection;
@@ -115,6 +134,13 @@ if (isset($_POST)) {
                 $postdata['username'],
                 $postdata['name'],
                 $postdata['permission']
+            );
+            break;
+
+        case "EDIT_PASS":
+            echo edit_password(
+                $postdata['username'],
+                $postdata['password']
             );
             break;
 
