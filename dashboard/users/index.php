@@ -35,16 +35,18 @@ else {
     <!-- animate css -->
     <link rel="stylesheet" href="../../dist/css/animate.min.css">
     <!-- custom css for news page -->
-    <link rel="stylesheet" href="newsCustom.css">
+    <link rel="stylesheet" href="usersCustom.css">
 
 
     <!-- jquery -->
     <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <!-- excel parser -->
+    <script src="../../dist/js/xlsxjs.full.min.js"></script>
     <!-- angular includes -->
     <script src="../../dist/js/angular.min.js"></script>
     <script src="../../dist/js/angular-animate.min.js"></script>
     <!-- angular news app -->
-    <script src="newsApp.js">
+    <script src="usersApp.js">
 
     </script>
 
@@ -98,7 +100,7 @@ else {
                 </li>
 
                 <li>
-                    <a href="../users/">
+                    <a href=".">
                         <i class="fa fa-users"></i> <span>Users</span>
                     </a>
                 </li>
@@ -125,7 +127,7 @@ else {
                 </li>
 
                 <li>
-                    <a href=".">
+                    <a href="../news">
                         <i class="fa fa-newspaper-o"></i> <span>News</span>
                     </a>
                 </li>
@@ -160,57 +162,53 @@ else {
         </section>
 
         <!-- Main content -->
-        <section class="row content" ng-app="newsApp" ng-controller="newsControl">
-            <div class="col-lg-4">
-
-                <!-- input group with add and delete buttons -->
-                <div id="add-delete-group" class="row">
-                    <!-- begin: add button and number input -->
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            <input type="number" min="1" class="form-control" ng-model="numToAdd">
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button" ng-click="addNews(numToAdd)">Add News</button>
-                            </span>
-                        </div><!-- /input-group -->
-                        <div><small>number of items to add</small></div>
-                    </div><!-- /.col-lg-6 -->
-
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                                <button class="btn btn-danger" type="button" ng-click="deleteNewsItems()">Delete News</button>
-                            </span>
-                        </div><!-- /input-group -->
-                        <div><small>check items to delete</small></div>
-                    </div><!-- /.col-lg-6 -->
-                </div><!-- /#add-delete-group -->
-
-                <!-- begin: special content to show when there is no news -->
-                <div class="page-header" ng-hide="news.length">
-                    There are no News to display <br/>
-                    Click 'Add News' to add news
-                </div>
-                <!-- end: special content to show when there is no news -->
-
-                <div id="news-list" class="list-group">
-                    <div class="list-group-item hov" ng-class="n.isHighlighted" ng-click="highlightNews(n)"
-                         ng-repeat="n in news">
-                        <label for="{{n.id}}" class="control control--checkbox">
-                            <input id="{{n.id}}" type="checkbox" ng-model="n.isChecked" ng-checked="n.isChecked"/>
-                            <span class="control__indicator"></span>
-                            <span class="news-content">{{n.news}}</span>
-                        </label>
-
-                    </div>
-                </div>
+        <section class="row content" ng-app="usersApp" ng-controller="usersControl">
+            <label class="btn btn-primary btn-file">
+                Select File <input onchange="handleFileSelect(event)" type="file" name="files[]" style="display: none;">
+            </label>
+            <button id="load-data-btn" class="btn btn-success" ng-click="loadData()" disabled>Load File</button>
+            <button id="upload-data-btn" class="btn btn-success" ng-click="uploadData()" disabled>Upload File</button>
+            <br>
+            <div class="alert alert-success alert-dismissible" role="alert"
+                 ng-show="usersTable.numberOfRecords && uploadComplete">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                Upload Complete
             </div>
-            <div class="col-lg-8">
-                <div class="page-header">
-                    <h2>Edit news</h2>
-                </div>
-                <textarea id="edit-area" class="col-lg-12 form-control" rows="10" ng-model="currNews" autofocus></textarea>
-                <button id="save" ng-click="updateNewsItem(currNews)" class="btn btn-primary">Save</button>
+            <div id="uploading" class="alert alert-info" role="alert" ng-show="uploading">
+                Uploading...
+            </div>
+
+            <div class="alert alert-warning alert-dismissible" role="alert" ng-show="!usersTable.numberOfRecords">
+
+                <strong>Steps to upload Excel files</strong>
+                <ol>
+                    <li>Select the '.xls' file</li>
+                    <li>Load the file</li>
+                    <li>Upload the file</li>
+                </ol>
+            </div>
+
+            <div id="output" ng-show="usersTable.numberOfRecords">
+                <table>
+                    <caption class="page-header">There are {{usersTable.numberOfRecords}} records in the uploaded
+                        sheet
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th ng-repeat="key in usersTable.keys">
+                            {{key}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="user in usersTable.data">
+                        <td>{{$index + 1}}</td>
+                        <td ng-repeat="key in usersTable.keys">{{user[key]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
     </div>
@@ -219,7 +217,8 @@ else {
         <div class="pull-right hidden-xs">
             <b>Version</b> 1.0.0
         </div>
-        <strong>Copyright &copy; <a href="http://sridarshan.tk">Sri Darshan S</a>, Sankkara Narayanan.</strong> All rights
+        <strong>Copyright &copy; <a href="http://sridarshan.tk">Sri Darshan S</a>, Sankkara Narayanan.</strong> All
+        rights
         reserved.
     </footer>
 
@@ -227,13 +226,12 @@ else {
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery 2.2.3 -->
 <!-- Bootstrap 3.3.6 -->
 <script src="../../bootstrap/js/bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="../../plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../../../../dist//js/app.min.js"></script>
+<script src="../../dist/js/app.min.js"></script>
 <!-- Sparkline -->
 <script src="../../plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->

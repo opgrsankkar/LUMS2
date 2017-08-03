@@ -141,6 +141,8 @@ angular.module("newsApp", ['ngAnimate'])
             $http(updateReq).then(function (result) {
                 if (result.data.success) {
                     initialize();
+                } else {
+                    sweetAlert("ERROR\n" + result.data.error_msg);
                 }
             });
         };
@@ -156,6 +158,8 @@ angular.module("newsApp", ['ngAnimate'])
             $http(deleteReq).then(function (result) {
                 if (result.data.success) {
                     initialize();
+                } else {
+                    sweetAlert("ERROR\n" + result.data.error_msg);
                 }
             });
         };
@@ -174,8 +178,11 @@ angular.module("newsApp", ['ngAnimate'])
             addReq.data.numberOfItems = numberOfItems;
 
             $http(addReq).then(function (result) {
-                if (result.data.success)
+                if (result.data.success) {
                     initialize();
+                } else {
+                    sweetAlert("ERROR\n" + result.data.error_msg);
+                }
             });
         };
     });
