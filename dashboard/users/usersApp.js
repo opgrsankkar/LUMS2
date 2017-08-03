@@ -30,7 +30,7 @@ var handleFileSelect = function (event) {
 };
 
 var app = angular.module('usersApp', ['ngAnimate']);
-app.controller('usersControl', function ($scope, $http) {
+app.controller('userAddController', function ($scope, $http) {
 
     $scope.uploading = false;
     $scope.usersTable = {};
@@ -70,7 +70,6 @@ app.controller('usersControl', function ($scope, $http) {
         if (keys.length === 2 && keys[0] === "id" && keys[1] === "name") {
             $scope.usersTable.keys = keys;
             $scope.usersTable.numberOfRecords = Object.keys($scope.usersTable.data).length;
-            console.log($scope.usersTable.data);
         } else {
             alert("Invalid File Format\nPlease check if your file matches the format specified in the example.xls file");
         }
@@ -93,5 +92,39 @@ app.controller('usersControl', function ($scope, $http) {
                 alert("ERROR\n" + result.data.error_msg);
             }
         });
+    };
+
+    $scope.single = {};
+    $scope.single.uploading = false;
+    $scope.single.uploaded = false;
+    $scope.single.addUser = function () {
+        var id = $scope.single.id;
+        var name = $scope.single.fullName;
+
+        if (id === "" || id == null || name === "" || name == null) {
+            sweetAlert("Please ensure if all fields are filled appropriately");
+        } else {
+            $scope.single.uploading = true;
+            $scope.single.uploaded = false;
+
+            var data = [
+                {
+                    id: id,
+                    name: name
+                }
+            ];
+            addReq.data.users = data;
+            $http(addReq).then(function (result) {
+                $scope.single.uploading = false;
+                if (result.data.success) {
+                    $scope.single.uploaded = true;
+                    $("form#single-user-add")[0].reset();
+                    $("input#id-card-number").focus();
+                } else {
+                    alert("ERROR\n" + result.data.error_msg);
+                }
+            });
+        }
+
     };
 });

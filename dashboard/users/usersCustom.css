@@ -1,4 +1,4 @@
-.alert {
+.well, .alert {
     margin: 1%;
 }
 
@@ -24,4 +24,9 @@ td {
 
 #uploading.ng-enter, #uploading.ng-leave {
     animation: pulse .3s;
+}
+
+/* Form div group spacing */
+form > div.form-group-lg {
+    padding: 5px;
 }

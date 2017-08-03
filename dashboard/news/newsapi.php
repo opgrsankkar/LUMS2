@@ -14,7 +14,7 @@ else{
  * get_all_news()
  * returns all news items in DB
  *
- * @return json string containing all news items
+ * @return string json containing all news items
  */
 function get_all_news(){
     global $connection;
@@ -47,9 +47,9 @@ function delete_news_items($ids){
  * update_news_item( id, data )
  * replaces the news content in item with given id
  * with 'data'
- * @param id to update
- * @param data to update with
- * @return json string with success indication
+ * @param string - id to update
+ * @param string - data to update with
+ * @return string - json string with success indication
  */
 function update_news_item($id, $data){
     global $connection;
@@ -61,8 +61,8 @@ function update_news_item($id, $data){
 /**
  * add_news( numberOfItems )
  * add a new news item with prompt content - "Please Enter the new News"
- * @param number of items to add
- * @return json string with success indication
+ * @param int - number of items to add
+ * @return string - json string with success indication
  */
 function add_news( $num ){
     if($num<1){

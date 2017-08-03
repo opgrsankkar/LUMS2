@@ -42,6 +42,9 @@ else {
     <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- excel parser -->
     <script src="../../dist/js/xlsxjs.full.min.js"></script>
+
+    <script src="../../dist/js/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../dist/css/sweetalert.css">
     <!-- angular includes -->
     <script src="../../dist/js/angular.min.js"></script>
     <script src="../../dist/js/angular-animate.min.js"></script>
@@ -93,13 +96,13 @@ else {
                 <li class="header">Last Login : <?php echo $lastlogin; ?><br/>Last Login IP : <?php echo $lastip; ?>
                 </li>
 
-                <li class="active">
+                <li>
                     <a href="../">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li>
+                <li class="active">
                     <a href=".">
                         <i class="fa fa-users"></i> <span>Users</span>
                     </a>
@@ -121,7 +124,7 @@ else {
 
 
                 <li>
-                    <a href="staff.php">
+                    <a href="../staff">
                         <i class="fa fa-user"></i> <span>Library Staff</span>
                     </a>
                 </li>
@@ -162,54 +165,109 @@ else {
         </section>
 
         <!-- Main content -->
-        <section class="row content" ng-app="usersApp" ng-controller="usersControl">
-            <label class="btn btn-primary btn-file">
-                Select File <input onchange="handleFileSelect(event)" type="file" name="files[]" style="display: none;">
-            </label>
-            <button id="load-data-btn" class="btn btn-success" ng-click="loadData()" disabled>Load File</button>
-            <button id="upload-data-btn" class="btn btn-success" ng-click="uploadData()" disabled>Upload File</button>
-            <br>
-            <div class="alert alert-success alert-dismissible" role="alert"
-                 ng-show="usersTable.numberOfRecords && uploadComplete">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                Upload Complete
-            </div>
-            <div id="uploading" class="alert alert-info" role="alert" ng-show="uploading">
-                Uploading...
-            </div>
+        <section class="row content" ng-app="usersApp" ng-controller="userAddController">
+            <div class="col-sm-8">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h3>Add Batch of Users</h3>
+                    </div><!-- /.box-header-->
+                    <div class="box-body">
+                        <div class="btn-group">
+                            <label class="btn btn-success btn-file btn-lg">
+                                Select File <input onchange="handleFileSelect(event)" type="file" name="files[]"
+                                                   style="display: none;">
+                            </label>
+                            <button id="load-data-btn" class="btn btn-success btn-lg" ng-click="loadData()" disabled>
+                                Load File
+                            </button>
+                            <button id="upload-data-btn" class="btn btn-success btn-lg" ng-click="uploadData()"
+                                    disabled>Upload
+                                File
+                            </button>
+                        </div>
+                        <br>
+                        <div class="alert alert-success alert-dismissible" role="alert"
+                             ng-show="uploadComplete">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span>
+                            </button>
+                            Upload Complete
+                        </div>
+                        <div id="uploading" class="alert alert-info" role="alert" ng-show="uploading">
+                            Uploading...
+                        </div>
 
-            <div class="alert alert-warning alert-dismissible" role="alert" ng-show="!usersTable.numberOfRecords">
+                        <div class="well" ng-show="!usersTable.numberOfRecords">
+                            <h4>Steps to upload Excel files</h4>
+                            <ol>
+                                <li>Select the '.xls' file</li>
+                                <li>Load the file</li>
+                                <li>Upload the file</li>
+                            </ol>
+                        </div><!-- /.well -->
 
-                <strong>Steps to upload Excel files</strong>
-                <ol>
-                    <li>Select the '.xls' file</li>
-                    <li>Load the file</li>
-                    <li>Upload the file</li>
-                </ol>
-            </div>
-
-            <div id="output" ng-show="usersTable.numberOfRecords">
-                <table>
-                    <caption class="page-header">There are {{usersTable.numberOfRecords}} records in the uploaded
-                        sheet
-                    </caption>
-                    <thead>
-                    <tr>
-                        <th>S.No.</th>
-                        <th ng-repeat="key in usersTable.keys">
-                            {{key}}
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="user in usersTable.data">
-                        <td>{{$index + 1}}</td>
-                        <td ng-repeat="key in usersTable.keys">{{user[key]}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                        <div id="output" ng-show="usersTable.numberOfRecords">
+                            <table>
+                                <caption class="page-header">There are {{usersTable.numberOfRecords}} records in the
+                                    uploaded
+                                    sheet
+                                </caption>
+                                <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th ng-repeat="key in usersTable.keys">
+                                        {{key}}
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="user in usersTable.data">
+                                    <td>{{$index + 1}}</td>
+                                    <td ng-repeat="key in usersTable.keys">{{user[key]}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /.box-body-->
+                </div><!-- box -->
+            </div><!-- /.col-sm-8 -->
+            <div class="col-sm-4">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <h3>Add Single User</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="well" ng-show="single.uploading">
+                            <h4>Uploading Data</h4>
+                        </div>
+                        <div class="alert alert-success alert-dismissable" role="alert" ng-show="single.uploaded">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span>
+                            </button>
+                            <h4>User Added</h4>
+                        </div>
+                        <form id="single-user-add" ng-submit="single.addUser()">
+                            <div class="form-group-lg">
+                                <label for="id-card-number" class="control-label">
+                                    <h4>Enter ID card Number *</h4>
+                                </label>
+                                <input id="id-card-number" type="text" class="form-control" placeholder="ID card Number"
+                                       ng-model="single.id" tabindex="1">
+                            </div>
+                            <div class="form-group-lg">
+                                <label for="full-name" class="control-label">
+                                    <h4>Enter Name *</h4>
+                                </label>
+                                <input id="full-name" type="text" class="form-control" placeholder="Full Name"
+                                       ng-model="single.fullName" tabindex="2">
+                            </div>
+                            <div class="form-group-lg">
+                                <button type="submit" class="btn btn-success btn-lg" tabindex="3">Add New User</button>
+                            </div>
+                        </form>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div><!-- /.col-sm-4 -->
         </section>
     </div>
 
@@ -218,8 +276,7 @@ else {
             <b>Version</b> 1.0.0
         </div>
         <strong>Copyright &copy; <a href="http://sridarshan.tk">Sri Darshan S</a>, Sankkara Narayanan.</strong> All
-        rights
-        reserved.
+        rights reserved.
     </footer>
 
 
