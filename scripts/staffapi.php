@@ -1,10 +1,10 @@
 <?php
 session_start();
-include("../../scripts/sessionvariables.php");
+include("sessionvariables.php");
 if ($permission == 1)
-    include("../../scripts/adminsession.php");
+    include("adminsession.php");
 else if ($permission == 2)
-    include("../../scripts/usersession.php");
+    include("usersession.php");
 else {
     header("location:../");
     die();

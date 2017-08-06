@@ -1,10 +1,10 @@
 <?php
 session_start();
-include("../../scripts/sessionvariables.php");
+include("sessionvariables.php");
 if($permission==1)
-    include("../../scripts/adminsession.php");
+    include("adminsession.php");
 else if($permission==2)
-    include("../../scripts/usersession.php");
+    include("usersession.php");
 else{
     header("location:../");
     die();
@@ -75,11 +75,25 @@ function add_news( $num ){
 
     global $connection;
     $newNews = "Please Enter the new News";
-    $sql = "Insert into news (news) VALUES ('$newNews')";
-    for($i = 0; $i<$num; $i++) {
-        mysqli_query($connection, $sql);
+    $stmt = mysqli_stmt_init($connection);
+    if (mysqli_stmt_prepare($stmt, 'INSERT INTO news (news) VALUES (?)')) {
+        mysqli_stmt_bind_param($stmt, "s", $newNews);
     }
-    return json_encode(["success"=>true]);
+    $error_flag = false;
+    for ($i = 0; $i < $num; $i++) {
+        if (!mysqli_stmt_execute($stmt)) {
+            $error_flag = true;
+        }
+    }
+    if ($error_flag) {
+        return json_encode([
+            "success" => false,
+            "error_msg" => mysqli_error($connection)
+        ]);
+    } else {
+        return json_encode(["success" => true]);
+    }
+
 }
 
 if(isset($_POST)){
