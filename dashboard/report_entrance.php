@@ -26,9 +26,9 @@ else{
   <!-- Ionicons -->
   <link rel="stylesheet" href="../../ext-res/css/ionicons.min.css">
   <!-- DataTables-->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.css">
-
+  <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   <!-- jvectormap -->
   <link rel="stylesheet" href="../../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
   <!-- Theme style -->
@@ -157,26 +157,28 @@ else{
                 <div class="box">
                     <div class="box-header">
                         <div class="row">
-                        <h3 class="box-title col-md-2 col-sm-6 col-xs-12 pull-left">Students</h3>
-<!--                        </div>-->
-<!--                        <br/>-->
-<!--                        <div class="row">-->
-<!--                        <div class="col-md-2 col-sm-6 col-xs-12 pull-left">-->
-<!---->
-<!--                            <button type="button" class="btn btn-block btn-success btn-sm">Add new students</button>-->
-<!---->
-<!--                        </div>-->
-<!---->
-<!---->
-<!--                        <div class="col-md-2 col-sm-6 col-xs-12 pull-right">-->
-<!--                            <button type="button" name="showall" id="showall" class="btn btn-block btn-success btn-sm">Show All</button>-->
-<!--                        </div>-->
-<!---->
+                        <h3 class="box-title col-md-2 col-sm-6 col-xs-12 pull-left">Central Library</h3>
                         </div>
+                        <br/>
+                        <div class="row">
+                            <div class="pull-right" style="padding: 0cm 30px 0cm 0cm;">
+                                    <label>Date Range:</label>
+
+
+                                <div class="input-group">
+                                    <button type="button" class="btn btn-default pull-right" id="daterange-btn">
+                                        <span>
+                                          <i class="fa fa-calendar"></i> Filter
+                                        </span>
+                                        <i class="fa fa-caret-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="report" class="display" cellspacing="0" width="100%">
+                    <table id="report" class="table table-hover table-bordered ">
                             <thead>
                             <tr>
                                 <th>Id</th>
@@ -184,42 +186,19 @@ else{
                                 <th>Designation</th>
                                 <th>Time In</th>
                                 <th>Time Out</th>
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Designation</th>
-                                    <th>Time In</th>
-                                    <th>Time Out</th>
-                                </tr>
-                                </tfoot>
-                                <tbody>
-                                </tbody>
-                            </table>
+                            </tr>
+                            </thead>
 
-                                <!--                        <table id="reports" class="table table-hover table-bordered ">-->
-<!--                            <thead>-->
-<!--                            <tr>-->
-<!--                                <th>Id</th>-->
-<!--                                <th>Name</th>-->
-<!--                                <th>Designation</th>-->
-<!--                                <th>Time In</th>-->
-<!--                                <th>Time Out</th>-->
-<!--                            </tr>-->
-<!--                            </thead>-->
-<!---->
-<!--                            <tfoot>-->
-<!--                            <tr>-->
-<!--                                <th>Id</th>-->
-<!--                                <th>Name</th>-->
-<!--                                <th>Designation</th>-->
-<!--                                <th>Time In</th>-->
-<!--                                <th>Time Out</th>-->
-<!--                            </tr>-->
-<!--                            </tfoot>-->
-<!--                        </table>-->
+                            <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Designation</th>
+                                <th>Time In</th>
+                                <th>Time Out</th>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -244,7 +223,6 @@ else{
  
 </div>
 <!-- ./wrapper -->
-<!--datatables export-->
 
 <!-- jQuery 2.2.3 -->
 <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
@@ -252,9 +230,9 @@ else{
 <script src="../../bootstrap/js/bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="../../plugins/fastclick/fastclick.js"></script>
-<!-- DataTables
+<!-- DataTables-->
 <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-<!--<script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../../../dist//js/app.min.js"></script>
 <!-- Sparkline -->
@@ -266,32 +244,74 @@ else{
 <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- ChartJS 1.0.1 -->
 <script src="../../plugins/chartjs/Chart.min.js"></script>
+<!-- date-range-picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
 
-
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
 
 
 <script type="text/javascript">
-    $('#report').DataTable( {
-        dom: 'Blfrtip',
-        buttons: [
-            'copyHtml5',
-            'excelHtml5',
-            'csvHtml5',
-            'pdfHtml5'
-        ],
-        "lengthMenu": [[-1, 10, 25, 50, 100], [ "All", 10, 25, 50 ,100]],
+    var datefrom="";
+    var dateto="";
+
+    var table=$('#report').DataTable({
+
+        "lengthMenu": [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, "All"]],
         "processing": true,
         "serverSide": true,
-        "ajax": "../../scripts/entrance_report.php"
-    } );
+        "sAjaxSource": "../../scripts/entrance_report.php",
+        "sServerMethod": "GET",
+        "fnServerParams": function ( aoData ) {
+                aoData.push( { "name": "fromdate", "value": datefrom } );
+                aoData.push( { "name": "todate", "value": dateto } );
+            },
+
+    });
+
+
+    $(function () {
+        $('#daterange-btn').daterangepicker(
+            {
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment()
+            },
+            function (start, end) {
+                $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+        );
+
+        $('#daterange-btn').on('cancel.daterangepicker', function(ev, picker) {
+            //do something, like clearing an input
+            $('#daterange-btn span').html(" \<i class=\"fa fa-calendar\"\>\</i\> Filter");
+            dateto=datefrom="";
+
+            table.ajax.reload( null, false );
+
+            console.log("Cleared");
+
+        });
+        $('#daterange-btn').on('apply.daterangepicker', function(ev, picker) {
+            datefrom=picker.startDate.format('YYYY-MM-DD')+" 00:00:00";
+            dateto=picker.endDate.format('YYYY-MM-DD')+" 23:59:59";
+
+            table.ajax.reload( null, false );
+
+            console.log(picker.startDate.format('YYYY-MM-DD'));
+            console.log(picker.endDate.format('YYYY-MM-DD'));
+        });
+
+
+    });
 </script>
 
 </body>
