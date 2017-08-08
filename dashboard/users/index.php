@@ -53,6 +53,7 @@ else {
 
     </script>
 
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -169,18 +170,18 @@ else {
             <div class="col-sm-8">
                 <div class="box box-success">
                     <div class="box-header">
-                        <h3>Add Batch of Users</h3>
+                        <h4>Add Batch of Users</h4>
                     </div><!-- /.box-header-->
                     <div class="box-body">
                         <div class="btn-group">
-                            <label class="btn btn-success btn-file btn-lg">
+                            <label class="btn btn-success btn-file">
                                 Select File <input onchange="handleFileSelect(event)" type="file" name="files[]"
                                                    style="display: none;">
                             </label>
-                            <button id="load-data-btn" class="btn btn-success btn-lg" ng-click="loadData()" disabled>
+                            <button id="load-data-btn" class="btn btn-success" ng-click="loadData()" disabled>
                                 Load File
                             </button>
-                            <button id="upload-data-btn" class="btn btn-success btn-lg" ng-click="uploadData()"
+                            <button id="upload-data-btn" class="btn btn-success" ng-click="uploadData()"
                                     disabled>Upload
                                 File
                             </button>
@@ -198,7 +199,7 @@ else {
                         </div>
 
                         <div class="well" ng-show="!usersTable.numberOfRecords">
-                            <h4>Steps to upload Excel files</h4>
+                            <h5>Steps to upload Excel files</h5>
                             <ol>
                                 <li>Select the '.xls' file</li>
                                 <li>Load the file</li>
@@ -234,7 +235,7 @@ else {
             <div class="col-sm-4">
                 <div class="box box-success">
                     <div class="box-header">
-                        <h3>Add Single User</h3>
+                        <h4>Add Single User</h4>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div class="well" ng-show="single.uploading">
@@ -247,22 +248,22 @@ else {
                             <h4>User Added</h4>
                         </div>
                         <form id="single-user-add" ng-submit="single.addUser()">
-                            <div class="form-group-lg">
+                            <div class="form-group">
                                 <label for="id-card-number" class="control-label">
-                                    <h4>Enter ID card Number *</h4>
+                                    <h5>Enter ID card Number *</h5>
                                 </label>
                                 <input id="id-card-number" type="text" class="form-control" placeholder="ID card Number"
                                        ng-model="single.id" tabindex="1">
                             </div>
-                            <div class="form-group-lg">
+                            <div class="form-group">
                                 <label for="full-name" class="control-label">
-                                    <h4>Enter Name *</h4>
+                                    <h5>Enter Name *</h5>
                                 </label>
                                 <input id="full-name" type="text" class="form-control" placeholder="Full Name"
                                        ng-model="single.fullName" tabindex="2">
                             </div>
                             <div class="form-group-lg">
-                                <button type="submit" class="btn btn-success btn-lg" tabindex="3">Add New User</button>
+                                <button type="submit" class="btn btn-success" tabindex="3">Add New User</button>
                             </div>
                         </form>
                     </div><!-- /.box-body -->

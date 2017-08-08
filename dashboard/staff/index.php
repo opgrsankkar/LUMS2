@@ -172,11 +172,11 @@ else {
                 </div>
 
                 <div class="box-body">
-                    <div>
-                        <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#add-staff-modal">
+                    <div id="add-refresh-button-group">
+                        <button class="btn btn-success" data-toggle="modal" data-target="#add-staff-modal">
                             <i class="fa fa-plus"></i> Add Staff
                         </button>
-                        <button class="btn btn-warning btn-lg" ng-click="refreshStaffTable()">
+                        <button class="btn btn-warning" ng-click="refreshStaffTable()">
                             <i class="fa fa-refresh"></i> Refresh
                         </button>
                     </div>
@@ -302,19 +302,20 @@ else {
                             <td>{{s.username}}</td>
                             <td>{{s.name}}</td>
                             <td>
-                                <button class="btn btn-warning" ng-click="resetPassword(s.username)">
+                                <button class="btn btn-warning btn-xs" ng-click="resetPassword(s.username)">
                                     Reset Password
                                 </button>
                             </td>
                             <td>{{s.permission | userPermissionsFilter}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <button class="btn btn-info" title="Edit" data-toggle="modal"
+                                    <button class="btn btn-info btn-sm" title="Edit" data-toggle="modal"
                                             data-target="#edit-staff-modal"
                                             ng-click="editStaffFillModal(s.username,s.name,s.permission)">
                                         <i class="fa fa-pencil"></i>
                                     </button>
-                                    <button class="btn btn-danger" title="Delete" ng-click="deleteStaff(s.username)">
+                                    <button class="btn btn-danger btn-sm" title="Delete"
+                                            ng-click="deleteStaff(s.username)">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </div>
