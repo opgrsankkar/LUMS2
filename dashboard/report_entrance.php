@@ -245,7 +245,7 @@ else{
 <!-- ChartJS 1.0.1 -->
 <script src="../../plugins/chartjs/Chart.min.js"></script>
 <!-- date-range-picker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>//check
 <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
 <!-- bootstrap datepicker -->
 <script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
@@ -303,9 +303,7 @@ else{
         $('#daterange-btn').on('apply.daterangepicker', function(ev, picker) {
             datefrom=picker.startDate.format('YYYY-MM-DD')+" 00:00:00";
             dateto=picker.endDate.format('YYYY-MM-DD')+" 23:59:59";
-
             table.ajax.reload( null, false );
-
             console.log(picker.startDate.format('YYYY-MM-DD'));
             console.log(picker.endDate.format('YYYY-MM-DD'));
         });
