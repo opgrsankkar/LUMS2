@@ -1,4 +1,5 @@
 <?php
+include ("db.php");
 /*
  * Script:    DataTables server-side script for PHP and MySQL
  * Copyright: 2010 - Allan Jardine, 2012 - Chris Wright
@@ -21,11 +22,7 @@ $sIndexColumn = "id";
 /* DB table to use */
 $sTable = "entrance_records";
 
-/* Database connection information */
-$gaSql['user']       = "root";
-$gaSql['password']   = "root";
-$gaSql['db']         = "library";
-$gaSql['server']     = "localhost";
+
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -42,29 +39,14 @@ function fatal_error ( $sErrorMessage = '' )
     die( $sErrorMessage );
 }
 
-
-/*
- * MySQL connection
- */
-if ( ! $gaSql['link'] = mysql_pconnect( $gaSql['server'], $gaSql['user'], $gaSql['password']  ) )
-{
-    fatal_error( 'Could not open connection to server' );
-}
-
-if ( ! mysql_select_db( $gaSql['db'], $gaSql['link'] ) )
-{
-    fatal_error( 'Could not select database ' );
-}
-
-
 /*
  * Paging
  */
 $sLimit = "";
-if ( isset( $_GET['iDisplayStart'] ) && $_GET['iDisplayLength'] != '-1' )
+if ( isset( $_POST['iDisplayStart'] ) && $_POST['iDisplayLength'] != '-1' )
 {
-    $sLimit = "LIMIT ".intval( $_GET['iDisplayStart'] ).", ".
-        intval( $_GET['iDisplayLength'] );
+    $sLimit = "LIMIT ".intval( $_POST['iDisplayStart'] ).", ".
+        intval( $_POST['iDisplayLength'] );
 }
 
 
@@ -72,15 +54,15 @@ if ( isset( $_GET['iDisplayStart'] ) && $_GET['iDisplayLength'] != '-1' )
  * Ordering
  */
 $sOrder = "";
-if ( isset( $_GET['iSortCol_0'] ) )
+if ( isset( $_POST['iSortCol_0'] ) )
 {
     $sOrder = "ORDER BY  ";
-    for ( $i=0 ; $i<intval( $_GET['iSortingCols'] ) ; $i++ )
+    for ( $i=0 ; $i<intval( $_POST['iSortingCols'] ) ; $i++ )
     {
-        if ( $_GET[ 'bSortable_'.intval($_GET['iSortCol_'.$i]) ] == "true" )
+        if ( $_POST[ 'bSortable_'.intval($_POST['iSortCol_'.$i]) ] == "true" )
         {
-            $sOrder .= $aColumns[ intval( $_GET['iSortCol_'.$i] ) ]."
-                    ".($_GET['sSortDir_'.$i]==='asc' ? 'asc' : 'desc') .", ";
+            $sOrder .= $aColumns[ intval( $_POST['iSortCol_'.$i] ) ]."
+                    ".($_POST['sSortDir_'.$i]==='asc' ? 'asc' : 'desc') .", ";
         }
     }
 
@@ -99,14 +81,14 @@ if ( isset( $_GET['iSortCol_0'] ) )
  * on very large tables, and MySQL's regex functionality is very limited
  */
 $sWhere = "WHERE (true";
-if ( isset($_GET['sSearch']) && $_GET['sSearch'] != "" )
+if ( isset($_POST['sSearch']) && $_POST['sSearch'] != "" )
 {
     $sWhere.= " and(";
     for ( $i=0 ; $i<count($fColumns) ; $i++ )
     {
-        if ( isset($_GET['bSearchable_'.$i]) && $_GET['bSearchable_'.$i] == "true" )
+        if ( isset($_POST['bSearchable_'.$i]) && $_POST['bSearchable_'.$i] == "true" )
         {
-            $sWhere .= $aColumns[$i]." LIKE '%".mysql_real_escape_string( $_GET['sSearch'] )."%' OR ";
+            $sWhere .= $aColumns[$i]." LIKE '%".mysqli_real_escape_string( $_POST['sSearch'] )."%' OR ";
         }
     }
     $sWhere = substr_replace( $sWhere, "", -3 );
@@ -116,7 +98,7 @@ if ( isset($_GET['sSearch']) && $_GET['sSearch'] != "" )
 /* Individual column filtering */
 //for ( $i=0 ; $i<count($aColumns) ; $i++ )
 //{
-//    if ( isset($_GET['bSearchable_'.$i]) && $_GET['bSearchable_'.$i] == "true" && $_GET['sSearch_'.$i] != '' )
+//    if ( isset($_POST['bSearchable_'.$i]) && $_POST['bSearchable_'.$i] == "true" && $_POST['sSearch_'.$i] != '' )
 //    {
 //        if ( $sWhere == "" )
 //        {
@@ -126,7 +108,7 @@ if ( isset($_GET['sSearch']) && $_GET['sSearch'] != "" )
 //        {
 //            $sWhere .= " AND ";
 //        }
-//        $sWhere .= $aColumns[$i]." LIKE '%".mysql_real_escape_string($_GET['sSearch_'.$i])."%' ";
+//        $sWhere .= $aColumns[$i]." LIKE '%".mysql_real_escape_string($_POST['sSearch_'.$i])."%' ";
 //    }
 //}
 
@@ -135,10 +117,11 @@ if ( isset($_GET['sSearch']) && $_GET['sSearch'] != "" )
  * Added filter for date from and to
  */
 
-//var_dump($_GET);
-if(isset($_GET['fromdate']) && $_GET['fromdate']!='' && isset($_GET['todate']) && $_GET['todate']!=''){
-$sWhere.=" and (timein between '".$_GET['fromdate']."' and '".$_GET['todate']."')";
+//var_dump($_POST);
+if(isset($_POST['fromdate']) && $_POST['fromdate']!='' && isset($_POST['todate']) && $_POST['todate']!=''){
+$sWhere.=" and (timein between '".$_POST['fromdate']."' and '".$_POST['todate']."')";
 }
+
 
 $sWhere .= ')';
 
@@ -154,14 +137,14 @@ $sQuery = "
         $sOrder
         $sLimit
     ";
-$rResult = mysql_query( $sQuery, $gaSql['link'] ) or fatal_error( 'MySQL Error: ' . mysql_errno() );
+$rResult = mysqli_query($connection,$sQuery) or fatal_error( 'MySQL Error: ' . mysqli_errno() );
 
 /* Data set length after filtering */
 $sQuery = "
         SELECT FOUND_ROWS()
     ";
-$rResultFilterTotal = mysql_query( $sQuery, $gaSql['link'] ) or fatal_error( 'MySQL Error: ' . mysql_errno() );
-$aResultFilterTotal = mysql_fetch_array($rResultFilterTotal);
+$rResultFilterTotal = mysqli_query($connection, $sQuery) or fatal_error( '1MySQL Error: ' . mysqli_errno() );
+$aResultFilterTotal = mysqli_fetch_array($rResultFilterTotal);
 $iFilteredTotal = $aResultFilterTotal[0];
 
 /* Total data set length */
@@ -169,8 +152,8 @@ $sQuery = "
         SELECT COUNT(".$sIndexColumn.")
         FROM   $sTable
     ";
-$rResultTotal = mysql_query( $sQuery, $gaSql['link'] ) or fatal_error( 'MySQL Error: ' . mysql_errno() );
-$aResultTotal = mysql_fetch_array($rResultTotal);
+$rResultTotal = mysqli_query($connection, $sQuery) or fatal_error( '2MySQL Error: ' . mysqli_errno() );
+$aResultTotal = mysqli_fetch_array($rResultTotal);
 $iTotal = $aResultTotal[0];
 
 
@@ -178,13 +161,13 @@ $iTotal = $aResultTotal[0];
  * Output
  */
 $output = array(
-    "sEcho" => isset($_GET['sEcho'])?intval($_GET['sEcho']):0,
+    "sEcho" => isset($_POST['sEcho'])?intval($_POST['sEcho']):0,
     "iTotalRecords" => $iTotal,
     "iTotalDisplayRecords" => $iFilteredTotal,
     "aaData" => array()
 );
 
-while ( $aRow = mysql_fetch_array( $rResult ) )
+while ( $aRow = mysqli_fetch_array( $rResult ) )
 {
     $row = array();
     for ( $i=0 ; $i<count($aColumns) ; $i++ )

@@ -262,7 +262,7 @@ else{
         "processing": true,
         "serverSide": true,
         "sAjaxSource": "../../scripts/entrance_report.php",
-        "sServerMethod": "GET",
+        "sServerMethod": "POST",
         "fnServerParams": function ( aoData ) {
                 aoData.push( { "name": "fromdate", "value": datefrom } );
                 aoData.push( { "name": "todate", "value": dateto } );
