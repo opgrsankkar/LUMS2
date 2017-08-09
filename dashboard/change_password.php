@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <?php
 session_start();
-include("../../scripts/sessionvariables.php");
+include("../scripts/sessionvariables.php");
 if ($permission == 1)
-    include("../../scripts/adminsession.php");
+    include("../scripts/adminsession.php");
 else if ($permission == 2)
-    include("../../scripts/usersession.php");
+    include("../scripts/usersession.php");
 else {
     header("location:../");
     die();
@@ -17,8 +17,8 @@ else {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>LUMS | Dashboard</title>
+    <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -32,19 +32,12 @@ else {
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-    <!-- animate css -->
-    <link rel="stylesheet" href="../../dist/css/animate.min.css">
-    <!-- custom css for news page -->
-    <link rel="stylesheet" href="newsCustom.css">
-
 
     <!-- jquery -->
-    <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <!-- angular includes -->
-    <script src="../../dist/js/angular.min.js"></script>
-    <script src="../../dist/js/angular-animate.min.js"></script>
-    <!-- angular news app -->
-    <script src="newsApp.js"></script>
+    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+
+    <script src="../../dist/js/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../dist/css/sweetalert.css">
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -53,7 +46,7 @@ else {
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="../index.php" class="logo">
+        <a href="index.php" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b></b></span>
             <!-- logo for regular state and mobile devices -->
@@ -89,14 +82,14 @@ else {
                 <li class="header">Last Login : <?php echo $lastlogin; ?><br/>Last Login IP : <?php echo $lastip; ?>
                 </li>
 
-                <li>
-                    <a href="../">
+                <li class="active">
+                    <a href="/">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="../users/">
+                    <a href="users/">
                         <i class="fa fa-users"></i> <span>Users</span>
                     </a>
                 </li>
@@ -106,8 +99,8 @@ else {
                     <a href="#">
                         <i class="fa fa-table"></i> <span>Reports</span>
                         <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="report_entrance.php"><i class="fa fa-circle-o"></i> Central Library</a></li>
@@ -117,13 +110,13 @@ else {
 
 
                 <li>
-                    <a href="../staff">
+                    <a href="staff/">
                         <i class="fa fa-user"></i> <span>Library Staff</span>
                     </a>
                 </li>
 
-                <li class="active">
-                    <a href=".">
+                <li>
+                    <a href="news/">
                         <i class="fa fa-newspaper-o"></i> <span>News</span>
                     </a>
                 </li>
@@ -151,74 +144,64 @@ else {
                 <small>Version 1.0</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="../index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                <li class="active"><i class="fa fa-newspaper-o"></i> News</li>
+                <li><a href="index.php">Home</a></li>
+                <li><i class="fa fa-dashboard"></i> Dashboard</li>
+                <li class="active"><i class="fa fa-key"></i> Change Password</li>
             </ol>
-        </section>
+        </section><!-- /.content-header -->
 
         <!-- Main content -->
-        <section class="row content" ng-app="newsApp" ng-controller="newsControl">
-            <div class="col-lg-4">
-
-                <!-- input group with add and delete buttons -->
-                <div id="add-delete-group" class="row">
-                    <!-- begin: add button and number input -->
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            <input type="number" min="1" class="form-control" ng-model="numToAdd"
-                                   title="Number of News Items to add">
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button" ng-click="addNews(numToAdd)">Add News</button>
-                            </span>
-                        </div><!-- /input-group -->
-                        <div><small>number of items to add</small></div>
-                    </div><!-- /.col-lg-6 -->
-
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                                <button class="btn btn-danger" type="button" ng-click="deleteNewsItems()">Delete News</button>
-                            </span>
-                        </div><!-- /input-group -->
-                        <div><small>check items to delete</small></div>
-                    </div><!-- /.col-lg-6 -->
-                </div><!-- /#add-delete-group -->
-
-                <!-- begin: special content to show when there is no news -->
-                <div class="page-header" ng-hide="news.length">
-                    There are no News to display <br/>
-                    Click 'Add News' to add news
-                </div>
-                <!-- end: special content to show when there is no news -->
-
-                <div id="news-list" class="list-group">
-                    <div class="list-group-item hov" ng-class="n.isHighlighted" ng-click="highlightNews(n)"
-                         ng-repeat="n in news">
-                        <label for="{{n.id}}" class="control control--checkbox">
-                            <input id="{{n.id}}" type="checkbox" ng-model="n.isChecked" ng-checked="n.isChecked"/>
-                            <span class="control__indicator"></span>
-                            <span class="news-content">{{n.news}}</span>
-                        </label>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <div class="page-header">
-                    <h2>Edit news</h2>
-                </div>
-                <textarea id="edit-area" class="col-lg-12 form-control" rows="10" ng-model="currNews" autofocus></textarea>
-                <button id="save" ng-click="updateNewsItem(currNews)" class="btn btn-primary">Save</button>
-            </div>
-        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="box box-info">
+                        <div class="box-header">
+                            <h4>Change Password</h4>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <form id="password-change-form" action="../scripts/change_password_api.php" method="POST">
+                                <div class="form-group">
+                                    <label for="old-password" class="control-label">
+                                        <h5>Enter Old Password *</h5>
+                                    </label>
+                                    <input id="old-password" type="password" class="form-control"
+                                           placeholder="Old Password" name="old_password"
+                                           tabindex="1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="new-password" class="control-label">
+                                        <h5>Enter New Password *</h5>
+                                    </label>
+                                    <input id="new-password" type="password" class="form-control"
+                                           placeholder="New Password" name="new_password"
+                                           tabindex="2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="repeat-new-password" class="control-label">
+                                        <h5>Confirm New Password *</h5>
+                                    </label>
+                                    <input id="repeat-new-password" type="password" class="form-control"
+                                           placeholder="Re-enter New Password" name="repeat_new_password"
+                                           tabindex="3">
+                                </div>
+                                <div class="form-group">
+                                    <button id="submit-button" class="btn btn-info" tabindex="4">Change Password
+                                    </button>
+                                </div>
+                            </form>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+                </div><!-- /.col-sm-4 -->
+            </div><!-- /.row -->
+        </section><!-- /.content -->
     </div>
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
             <b>Version</b> 1.0.0
         </div>
-        <strong>Copyright &copy; <a href="http://sridarshan.tk">Sri Darshan S</a>, Sankkara Narayanan.</strong> All rights
+        <strong>Copyright &copy; <a href="http://sridarshan.tk">Sri Darshan S</a>, Sankkara Narayanan.</strong> All
+        rights
         reserved.
     </footer>
 
@@ -227,6 +210,7 @@ else {
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
+<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="../../bootstrap/js/bootstrap.min.js"></script>
 <!-- FastClick -->
@@ -242,6 +226,44 @@ else {
 <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- ChartJS 1.0.1 -->
 <script src="../../plugins/chartjs/Chart.min.js"></script>
+
+<!-- Jquery Form -->
+<script src="../dist/js/jquery.form.js"></script>
+
+<script>
+    /**
+     * add event listener to check confirm password entry
+     */
+    $("#repeat-new-password").on("change keyup paste click", function () {
+            if ($('#new-password').val() !== $('#repeat-new-password').val()) {
+                $('#repeat-new-password').parent().addClass('has-error');
+            } else {
+                $('#repeat-new-password').parent().removeClass('has-error');
+            }
+        }
+    );
+    /**
+     * Password change form submit using ajax
+     */
+    $("#password-change-form").ajaxForm({
+        data: {
+            "username": "<?php echo $username;?>"
+        },
+        success: function (result) {
+            $("#password-change-form").resetForm();
+            if (result.success) {
+                swal("Password Changed", null, "success");
+            } else {
+                if (result.error_msg === "DB_ERROR") {
+                    swal("Server Error\nTry Again Later", null, "error");
+                } else {
+                    console.log(result);
+                    swal("Old Password is Incorrect", null, "error");
+                }
+            }
+        }
+    });
+</script>
 
 </body>
 </html>

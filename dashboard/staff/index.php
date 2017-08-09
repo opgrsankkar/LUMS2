@@ -198,7 +198,8 @@ else {
                                             <input id="username" type="text" class="form-control" placeholder="Username"
                                                    ng-model="newStaff.username" ng-change="checkUsernameExists()"
                                                    autocomplete="false">
-                                            <span id="helpBlock" class="help-block" ng-show="usernameExists">Username already exists</span>
+                                            <span id="helpBlock"
+                                                  class="help-block hidden">Username already exists</span>
                                         </div>
                                         <div class="form-group">
                                             <label for="full-name" class="control-label">
@@ -230,7 +231,8 @@ else {
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button form="add-staff-form" type="submit" value="Submit" class="btn btn-primary">
+                                    <button id="add-staff-submit-button" form="add-staff-form" type="submit"
+                                            value="Submit" class="btn btn-primary">
                                         Add Staff
                                     </button>
                                 </div>

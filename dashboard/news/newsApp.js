@@ -7,14 +7,14 @@ angular.module("newsApp", ['ngAnimate'])
         /**
          * highlighted news items are assigned
          * 'list-group-item-success'    for giving the default bootstrap green
-         * 'unhighlighted'              is assigned as a placeholder for unhighlighted items
+         * 'unHighlighted'              is assigned as a placeholder for unHighlighted items
          */
-        var highlight= {
+        let highlight = {
             highlighted: 'list-group-item-success',
-            unhighlighted: 'unhighlighted'
+            unHighlighted: 'unHighlighted'
         };
 
-        var newsApiURL = 'newsapi.php';
+        let newsApiURL = '../../scripts/newsapi.php';
 
         /**
          * 'currNews'
@@ -27,52 +27,50 @@ angular.module("newsApp", ['ngAnimate'])
          * 'initReq'
          * is a request json for getting all news items
          */
-        var initReq = {
+        let initReq = {
             method: 'POST',
             url: newsApiURL,
-            data: { "query": "GET_ALL_NEWS" }
+            data: {"query": "GET_ALL_NEWS"}
         };
 
-        var updateReq = {
+        let updateReq = {
             method: 'POST',
             url: newsApiURL,
-            data: { "query": "UPDATE_NEWS" }
+            data: {"query": "UPDATE_NEWS"}
         };
 
-        var deleteReq = {
+        let deleteReq = {
             method: 'POST',
             url: newsApiURL,
-            data: { "query": "DELETE_NEWS" }
+            data: {"query": "DELETE_NEWS"}
         };
 
-        var addReq = {
+        let addReq = {
             method: 'POST',
             url: newsApiURL,
-            data: {
-                "query": "ADD_NEWS"
-            }
+            data: {"query": "ADD_NEWS"}
         };
 
         /**
          * 'prevhighlighted' - for keeping track of which news item
          *                  to highlight between ajax requests
          */
-        var prevHighlighted = 0;
+        let prevHighlighted = 0;
 
         /**
          * 'initialize' - function to run for each ajax request
          *                to refresh the news list
          */
-        var initialize = function () {
+        let initialize = function () {
             $scope.numToAdd = 1;
             $http(initReq).then(function (result) {
                 $scope.news = result.data;
                 if (prevHighlighted >= $scope.news.length) {
                     prevHighlighted = $scope.news.length - 1;
                 }
-                if($scope.news.length) {
-                    for (i = 0; i < $scope.news.length; i++) {
-                        $scope.news[i].isHighlighted = highlight.unhighlighted;
+                if ($scope.news.length) {
+                    for (let i = 0; i < $scope.news.length; i++) {
+                        $scope.news[i].isHighlighted = highlight.unHighlighted;
                         $scope.news[i].isChecked = false;
                     }
                     $scope.news[prevHighlighted].isHighlighted = highlight.highlighted;
@@ -89,9 +87,9 @@ angular.module("newsApp", ['ngAnimate'])
          * 'getHighlightedNews()'
          * @return the news item that is Highlighted
          */
-        var getHighlightedNews = function () {
-            for (i = 0; i < $scope.news.length; i++) {
-                if ($scope.news[i].isHighlighted == highlight.highlighted) {
+        let getHighlightedNews = function () {
+            for (let i = 0; i < $scope.news.length; i++) {
+                if ($scope.news[i].isHighlighted === highlight.highlighted) {
                     return $scope.news[i];
                 }
             }
@@ -102,24 +100,24 @@ angular.module("newsApp", ['ngAnimate'])
          * returns an array of ids of the checked items
          * @returns {Array} - array of ids of checked items
          */
-        var getCheckedNewsItems = function(){
-            var checkedItems = [];
-            for (i = 0; i < $scope.news.length; i++) {
-                if ($scope.news[i].isChecked == true) {
+        let getCheckedNewsItems = function () {
+            let checkedItems = [];
+            for (let i = 0; i < $scope.news.length; i++) {
+                if ($scope.news[i].isChecked === true) {
                     checkedItems.push($scope.news[i].id);
                 }
             }
             return checkedItems;
-        }
+        };
         /**
-         * 'highlightNews( newsToHighlight)' - unhighlights the
+         * 'highlightNews( newsToHighlight)' - un-highlights the
          * previously highlighted item and highlights the item
          * passed as argument
-         * @param newsToHighlight
+         * @param n newsToHighlight
          */
         $scope.highlightNews = function (n) {
-            var newsObj = getHighlightedNews();
-            newsObj.isHighlighted = highlight.unhighlighted;
+            let newsObj = getHighlightedNews();
+            newsObj.isHighlighted = highlight.unHighlighted;
             n.isHighlighted = highlight.highlighted;
             $scope.currNews = n.news;
             $('#edit-area').focus();
@@ -132,7 +130,7 @@ angular.module("newsApp", ['ngAnimate'])
          * @param stringToUpdateWith
          */
         $scope.updateNewsItem = function (stringToUpdateWith) {
-            var newsObj = getHighlightedNews();
+            let newsObj = getHighlightedNews();
             prevHighlighted = $scope.news.indexOf(newsObj);
 
             updateReq.data.id = newsObj.id;

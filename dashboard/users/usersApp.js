@@ -6,49 +6,51 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
 } else {
     alert('The File APIs are not fully supported in this browser.');
 }
-var content = {};
+let content = {};
 
-var handleFileSelect = function (event) {
+let handleFileSelect = function (event) {
     $("#load-data-btn").html("Wait...");
-    var file = event.target.files[0];
+    let file = event.target.files[0];
     if (!file) {
         alert("Failed to load file");
     } else {
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.onload = function () {
 
-            //TODO source : https://sheetjs.gitbooks.io/docs
-            // check if the current code is cross browser compatible
-            var workbook = XLSX.read(reader.result, {type: 'binary'});
+            //source : https://sheetjs.gitbooks.io/docs
+            let workbook = XLSX.read(reader.result, {type: 'binary'});
             content = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
             $("#load-data-btn").html("Load File");
             $("#load-data-btn").prop("disabled", false);
-        }
+        };
         reader.readAsBinaryString(file);
 
     }
 };
 
-var app = angular.module('usersApp', ['ngAnimate']);
+let app = angular.module('usersApp', ['ngAnimate']);
 app.controller('userAddController', function ($scope, $http) {
 
     $scope.uploading = false;
     $scope.usersTable = {};
+    $scope.single = {};
+    $scope.single.uploading = false;
+    $scope.single.uploaded = false;
 
-    var usersApiURL = 'usersapi.php';
-    var updateReq = {
+    let usersApiURL = '../../scripts/usersapi.php';
+    let updateReq = {
         method: 'POST',
         url: usersApiURL,
         data: {"query": "UPDATE_USERS"}
     };
 
-    var deleteReq = {
+    let deleteReq = {
         method: 'POST',
         url: usersApiURL,
         data: {"query": "DELETE_USERS"}
     };
 
-    var addReq = {
+    let addReq = {
         method: 'POST',
         url: usersApiURL,
         data: {"query": "ADD_USERS"}
@@ -58,15 +60,14 @@ app.controller('userAddController', function ($scope, $http) {
         let objectKeysToLowerCase = function (origObj) {
             return Object.keys(origObj).reduce(function (newObj, key) {
                 let val = origObj[key];
-                let newVal = (typeof val === 'object') ? objectKeysToLowerCase(val) : val;
-                newObj[key.toLowerCase()] = newVal;
+                newObj[key.toLowerCase()] = (typeof val === 'object') ? objectKeysToLowerCase(val) : val;
                 return newObj;
             }, {});
         };
 
         content = objectKeysToLowerCase(content);
         $scope.usersTable.data = content;
-        var keys = Object.keys(content[0]);
+        let keys = Object.keys(content[0]);
         if (keys.length === 2 && keys[0] === "id" && keys[1] === "name") {
             $scope.usersTable.keys = keys;
             $scope.usersTable.numberOfRecords = Object.keys($scope.usersTable.data).length;
@@ -94,26 +95,20 @@ app.controller('userAddController', function ($scope, $http) {
         });
     };
 
-    $scope.single = {};
-    $scope.single.uploading = false;
-    $scope.single.uploaded = false;
     $scope.single.addUser = function () {
-        var id = $scope.single.id;
-        var name = $scope.single.fullName;
+        let id = $scope.single.id;
+        let name = $scope.single.fullName;
 
-        if (id === "" || id == null || name === "" || name == null) {
+        if (id === "" || id === null || name === "" || name === null) {
             sweetAlert("Please ensure if all fields are filled appropriately");
         } else {
             $scope.single.uploading = true;
             $scope.single.uploaded = false;
 
-            var data = [
-                {
-                    id: id,
-                    name: name
-                }
-            ];
-            addReq.data.users = data;
+            addReq.data.users = [{
+                id: id,
+                name: name
+            }];
             $http(addReq).then(function (result) {
                 $scope.single.uploading = false;
                 if (result.data.success) {
