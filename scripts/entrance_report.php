@@ -88,7 +88,7 @@ if ( isset($_POST['sSearch']) && $_POST['sSearch'] != "" )
     {
         if ( isset($_POST['bSearchable_'.$i]) && $_POST['bSearchable_'.$i] == "true" )
         {
-            $sWhere .= $aColumns[$i]." LIKE '%".mysqli_real_escape_string( $_POST['sSearch'] )."%' OR ";
+            $sWhere .= $aColumns[$i]." LIKE '%".mysqli_real_escape_string($connection, $_POST['sSearch'] )."%' OR ";
         }
     }
     $sWhere = substr_replace( $sWhere, "", -3 );
