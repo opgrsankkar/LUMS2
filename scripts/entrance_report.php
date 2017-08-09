@@ -14,7 +14,7 @@ include ("db.php");
  * you want to insert a non-database field (for example a counter or static image)
  */
 $aColumns = array( 'id', 'name', 'designation', 'timein', 'timeout' );
-$fColumns = array( 'id', 'name', 'designation');
+$fColumns = array( 'id', 'name', 'timeout', 'designation');
 
 /* Indexed column (used for fast and accurate table cardinality) */
 $sIndexColumn = "id";
@@ -43,10 +43,10 @@ function fatal_error ( $sErrorMessage = '' )
  * Paging
  */
 $sLimit = "";
-if ( isset( $_POST['iDisplayStart'] ) && $_POST['iDisplayLength'] != '-1' )
+if ( isset( $_GET['iDisplayStart'] ) && $_GET['iDisplayLength'] != '-1' )
 {
-    $sLimit = "LIMIT ".intval( $_POST['iDisplayStart'] ).", ".
-        intval( $_POST['iDisplayLength'] );
+    $sLimit = "LIMIT ".intval( $_GET['iDisplayStart'] ).", ".
+        intval( $_GET['iDisplayLength'] );
 }
 
 
@@ -54,15 +54,15 @@ if ( isset( $_POST['iDisplayStart'] ) && $_POST['iDisplayLength'] != '-1' )
  * Ordering
  */
 $sOrder = "";
-if ( isset( $_POST['iSortCol_0'] ) )
+if ( isset( $_GET['iSortCol_0'] ) )
 {
     $sOrder = "ORDER BY  ";
-    for ( $i=0 ; $i<intval( $_POST['iSortingCols'] ) ; $i++ )
+    for ( $i=0 ; $i<intval( $_GET['iSortingCols'] ) ; $i++ )
     {
-        if ( $_POST[ 'bSortable_'.intval($_POST['iSortCol_'.$i]) ] == "true" )
+        if ( $_GET[ 'bSortable_'.intval($_GET['iSortCol_'.$i]) ] == "true" )
         {
-            $sOrder .= $aColumns[ intval( $_POST['iSortCol_'.$i] ) ]."
-                    ".($_POST['sSortDir_'.$i]==='asc' ? 'asc' : 'desc') .", ";
+            $sOrder .= $aColumns[ intval( $_GET['iSortCol_'.$i] ) ]."
+                    ".($_GET['sSortDir_'.$i]==='asc' ? 'asc' : 'desc') .", ";
         }
     }
 
@@ -81,45 +81,49 @@ if ( isset( $_POST['iSortCol_0'] ) )
  * on very large tables, and MySQL's regex functionality is very limited
  */
 $sWhere = "WHERE (true";
-if ( isset($_POST['sSearch']) && $_POST['sSearch'] != "" )
+if ( isset($_GET['sSearch']) && $_GET['sSearch'] != "" )
 {
     $sWhere.= " and(";
-    for ( $i=0 ; $i<count($fColumns) ; $i++ )
-    {
-        if ( isset($_POST['bSearchable_'.$i]) && $_POST['bSearchable_'.$i] == "true" )
-        {
-            $sWhere .= $aColumns[$i]." LIKE '%".mysqli_real_escape_string($connection, $_POST['sSearch'] )."%' OR ";
+    for ( $i=0 ; $i<count($fColumns) ; $i++ ) {
+        if (isset($_GET['bSearchable_' . $i]) && $_GET['bSearchable_' . $i] == "true") {
+
+            if ($i == 2 and strpos("CURRENTLY IN", strtoupper($_GET['sSearch'])) !== false) {
+                $sWhere .= $fColumns[$i] . " is null OR ";
+            } else if($i != 2)
+            {
+                $sWhere .= $fColumns[$i] . " LIKE '%" . mysqli_real_escape_string($connection, $_GET['sSearch']) . "%' OR ";
+            }
         }
     }
     $sWhere = substr_replace( $sWhere, "", -3 );
     $sWhere .= ')';
 }
 
-/* Individual column filtering */
-//for ( $i=0 ; $i<count($aColumns) ; $i++ )
-//{
-//    if ( isset($_POST['bSearchable_'.$i]) && $_POST['bSearchable_'.$i] == "true" && $_POST['sSearch_'.$i] != '' )
-//    {
-//        if ( $sWhere == "" )
-//        {
-//            $sWhere = "WHERE ";
-//        }
-//        else
-//        {
-//            $sWhere .= " AND ";
-//        }
-//        $sWhere .= $aColumns[$i]." LIKE '%".mysql_real_escape_string($_POST['sSearch_'.$i])."%' ";
-//    }
-//}
 
+/* Individual column filtering */
+for ( $i=0 ; $i<count($aColumns) ; $i++ ) {
+    if (isset($_GET['bSearchable_' . $i]) && $_GET['bSearchable_' . $i] == "true" && $_GET['sSearch_' . $i] != '') {
+        if ($sWhere == "") {
+            $sWhere = "WHERE ";
+        } else {
+            $sWhere .= " AND ";
+        }
+
+        if ($i == 4 and strpos("CURRENTLY IN",strtoupper($_GET['sSearch_' . $i])) !== false) {
+        $sWhere .= $aColumns[$i] . " is null ";
+        } else {
+            $sWhere .= $aColumns[$i] . " LIKE '%" . mysqli_real_escape_string($connection, $_GET['sSearch_' . $i]) . "%' ";
+        }
+    }
+}
 
 /*
  * Added filter for date from and to
  */
 
-//var_dump($_POST);
-if(isset($_POST['fromdate']) && $_POST['fromdate']!='' && isset($_POST['todate']) && $_POST['todate']!=''){
-$sWhere.=" and (timein between '".$_POST['fromdate']."' and '".$_POST['todate']."')";
+//var_dump($_GET);
+if(isset($_GET['fromdate']) && $_GET['fromdate']!='' && isset($_GET['todate']) && $_GET['todate']!=''){
+$sWhere.=" and (timein between '".$_GET['fromdate']."' and '".$_GET['todate']."')";
 }
 
 
@@ -137,6 +141,7 @@ $sQuery = "
         $sOrder
         $sLimit
     ";
+//echo $sQuery;
 $rResult = mysqli_query($connection,$sQuery) or fatal_error( 'MySQL Error: ' . mysqli_errno() );
 
 /* Data set length after filtering */
@@ -161,7 +166,7 @@ $iTotal = $aResultTotal[0];
  * Output
  */
 $output = array(
-    "sEcho" => isset($_POST['sEcho'])?intval($_POST['sEcho']):0,
+    "sEcho" => isset($_GET['sEcho'])?intval($_GET['sEcho']):0,
     "iTotalRecords" => $iTotal,
     "iTotalDisplayRecords" => $iFilteredTotal,
     "aaData" => array()
@@ -172,10 +177,10 @@ while ( $aRow = mysqli_fetch_array( $rResult ) )
     $row = array();
     for ( $i=0 ; $i<count($aColumns) ; $i++ )
     {
-        if ( $aColumns[$i] == "version" )
+        if ( $aColumns[$i] == "timeout" )
         {
             /* Special output formatting for 'version' column */
-            $row[] = ($aRow[ $aColumns[$i] ]=="0") ? '-' : $aRow[ $aColumns[$i] ];
+            $row[] = ($aRow[ $aColumns[$i] ]=="") ? 'Currently In' : $aRow[ $aColumns[$i] ];
         }
         else if ( $aColumns[$i] != ' ' )
         {
