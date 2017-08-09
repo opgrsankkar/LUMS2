@@ -111,6 +111,11 @@
                 </span>
             </div>
         </div>
+        <div class="col-md-12">
+            <button id="send-out-all-btn" class="btn btn-danger">
+                Send Out All Users
+            </button>
+        </div>
     </div>
 
 
@@ -169,6 +174,39 @@
 
             // submit form using $.ajax() method
 
+            $('#send-out-all-btn').click(function () {
+                swal({
+                    title: "Are You Sure?",
+                    text: "Do you really want to send out all users?\nYou will be logged out after this",
+                    type: "warning",
+                    showCancelButton: true,
+                    closeOnConfirm: false
+                }, function () {
+                    $.ajax({
+                        url: "send_out_all_api.php",
+                        type: "POST"
+                    }).done(function (data) {
+                        swal({
+                                title: "Done",
+                                text: data.updated + " people were exited\nClick OK to logout",
+                                type: "success",
+                                confirmButtonText: "OK",
+                                showCancelButton: false,
+                                closeOnConfirm: false
+                            }, function (isConfirm) {
+                                if (isConfirm) {
+                                    $.ajax({
+                                        url: "../scripts/logout.php",
+                                        type: "GET"
+                                    }).done(function (data) {
+                                        window.location = '/';
+                                    });
+                                }
+                            }
+                        );
+                    });
+                });
+            });
             $('#reg-form').submit(function(e){
 
                 e.preventDefault(); // Prevent Default Submission
@@ -195,28 +233,6 @@
                         alert('Submit Failed ...');
                     });
             });
-
-
-            /*
-             // submit form using ajax short hand $.post() method
-
-             $('#reg-form').submit(function(e){
-
-             e.preventDefault(); // Prevent Default Submission
-
-             $.post('submit.php', $(this).serialize() )
-             .done(function(data){
-             $('#form-content').fadeOut('slow', function(){
-             $('#form-content').fadeIn('slow').html(data);
-             });
-             })
-             .fail(function(){
-             alert('Ajax Submit Failed ...');
-             });
-
-             });
-             */
-
 
             function startresettimer(){
                 $('#form-content').fadeOut('fast',null);
