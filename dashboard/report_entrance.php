@@ -245,7 +245,7 @@ else{
 <!-- ChartJS 1.0.1 -->
 <script src="../../plugins/chartjs/Chart.min.js"></script>
 <!-- date-range-picker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>//check
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
 <!-- bootstrap datepicker -->
 <script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
@@ -256,13 +256,18 @@ else{
     var datefrom="";
     var dateto="";
 
+    $('#report tfoot th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    } );
+
     var table=$('#report').DataTable({
 
         "lengthMenu": [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, "All"]],
         "processing": true,
         "serverSide": true,
         "sAjaxSource": "../../scripts/entrance_report.php",
-        "sServerMethod": "POST",
+        "sServerMethod": "GET",
         "fnServerParams": function ( aoData ) {
                 aoData.push( { "name": "fromdate", "value": datefrom } );
                 aoData.push( { "name": "todate", "value": dateto } );
@@ -270,6 +275,17 @@ else{
 
     });
 
+    table.columns().every( function () {
+        var that = this;
+
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
 
     $(function () {
         $('#daterange-btn').daterangepicker(
