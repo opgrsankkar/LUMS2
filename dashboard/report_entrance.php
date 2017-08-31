@@ -161,6 +161,25 @@ else{
                         </div>
                         <br/>
                         <div class="row">
+                            <div class="pull-left" style="padding: 0px 0px 0px 30px;">
+                                <label>Export:</label>
+
+                                <div>
+                                    <div class="btn-group">
+                                            <button type="button" class="btn btn-default " id="Excel">
+                                                <i class="fa fa-file-excel-o"></i> Excel
+                                            </button>
+                                            <button type="button" class="btn btn-default " id="PDF">
+                                                <i class="fa fa-file-pdf-o"></i> PDF
+                                            </button>
+                                            <button type="button" class="btn btn-default " id="CSV">
+                                                <i class="fa fa-file-archive-o"></i> CSV
+                                            </button>
+
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="pull-right" style="padding: 0cm 30px 0cm 0cm;">
                                     <label>Date Range:</label>
 
