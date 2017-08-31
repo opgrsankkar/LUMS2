@@ -2,11 +2,11 @@
 <?php
 session_start();
 include("../../scripts/sessionvariables.php");
-if ($permission == 1)
+if($permission==1)
     include("../../scripts/adminsession.php");
-else if ($permission == 2)
+else if($permission==2)
     include("../../scripts/usersession.php");
-else {
+else{
     header("location:../");
     die();
 }
@@ -17,14 +17,19 @@ else {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>LUMS | Dashboard</title>
+    <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../ext-res/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="../../ext-res/css/ionicons.min.css">
+    <!-- DataTables-->
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.checkboxes.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
     <!-- jvectormap -->
     <link rel="stylesheet" href="../../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <!-- Theme style -->
@@ -32,26 +37,6 @@ else {
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-    <!-- animate css -->
-    <link rel="stylesheet" href="../../dist/css/animate.min.css">
-    <!-- custom css for news page -->
-    <link rel="stylesheet" href="usersCustom.css">
-
-
-    <!-- jquery -->
-    <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <!-- excel parser -->
-    <script src="../../dist/js/xlsxjs.full.min.js"></script>
-
-    <script src="../../dist/js/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../dist/css/sweetalert.css">
-    <!-- angular includes -->
-    <script src="../../dist/js/angular.min.js"></script>
-    <script src="../../dist/js/angular-animate.min.js"></script>
-    <!-- angular news app -->
-    <script src="usersApp.js">
-
-    </script>
 
 
 </head>
@@ -61,7 +46,7 @@ else {
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="../index.php" class="logo">
+        <a href="index.php" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b></b></span>
             <!-- logo for regular state and mobile devices -->
@@ -86,7 +71,7 @@ else {
                     <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p><?php echo $name; ?></p>
+                    <p><?php echo $name;?></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 
                 </div>
@@ -94,47 +79,47 @@ else {
 
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
-                <li class="header">Last Login : <?php echo $lastlogin; ?><br/>Last Login IP : <?php echo $lastip; ?>
-                </li>
+                <li class="header">Last Login : <?php echo $lastlogin;?><br/>Last Login IP : <?php echo $lastip;?></li>
 
                 <li>
-                    <a href="../">
+                    <a href="index.php">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li class="active">
-                    <a href=".">
+                <li>
+                    <a href="users.php">
                         <i class="fa fa-users"></i> <span>Users</span>
                     </a>
                 </li>
 
 
-                <li class="treeview">
+                <li class="treeview active">
                     <a href="#">
                         <i class="fa fa-table"></i> <span>Reports</span>
                         <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="report_entrance.php"><i class="fa fa-circle-o"></i> Central Library</a></li>
+                        <li class="active"><a href="report_entrance.php"><i class="fa fa-circle-o"></i> Central Library</a></li>
                         <li><a href="report_digilib.php"><i class="fa fa-circle-o"></i> Digital Library</a></li>
                     </ul>
                 </li>
 
 
                 <li>
-                    <a href="../staff">
+                    <a href="staff.php">
                         <i class="fa fa-user"></i> <span>Library Staff</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="../news">
+                    <a href="news.php">
                         <i class="fa fa-newspaper-o"></i> <span>News</span>
                     </a>
                 </li>
+
 
 
                 <li>
@@ -155,120 +140,104 @@ else {
         <section class="content-header">
 
             <h1>
-                Dashboard
-                <small>Version 1.0</small>
+                Report
+                <small>Central Library</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="../index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                <li class="active"><i class="fa fa-newspaper-o"></i> News</li>
+                <li><a href="index.php">Home</a></li>
+                <li class="active"> <i class="fa fa-table"></i> Report</li>
             </ol>
         </section>
 
         <!-- Main content -->
-        <section class="row content" ng-app="usersApp" ng-controller="userAddController">
-            <div class="col-sm-8">
-                <div class="box box-success">
-                    <div class="box-header">
-                        <h4>Add Batch of Users</h4>
-                    </div><!-- /.box-header-->
-                    <div class="box-body">
-                        <div class="btn-group">
-                            <label class="btn btn-success btn-file">
-                                Select File <input onchange="handleFileSelect(event)" type="file" name="files[]"
-                                                   style="display: none;">
-                            </label>
-                            <button id="load-data-btn" class="btn btn-success" ng-click="loadData()" disabled>
-                                Load File
-                            </button>
-                            <button id="upload-data-btn" class="btn btn-success" ng-click="uploadData()"
-                                    disabled>Upload
-                                File
-                            </button>
-                        </div>
-                        <br>
-                        <div class="alert alert-success alert-dismissible" role="alert"
-                             ng-show="uploadComplete">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span>
-                            </button>
-                            Upload Complete
-                        </div>
-                        <div id="uploading" class="alert alert-info" role="alert" ng-show="uploading">
-                            Uploading...
-                        </div>
+        <section class="content">
 
-                        <div class="well" ng-show="!usersTable.numberOfRecords">
-                            <h5>Steps to upload Excel files</h5>
-                            <ol>
-                                <li>Select the '.xls' file</li>
-                                <li>Load the file</li>
-                                <li>Upload the file</li>
-                            </ol>
-                        </div><!-- /.well -->
+            <div class="row">
+                <div class="col-xs-12">
 
-                        <div id="output" ng-show="usersTable.numberOfRecords">
-                            <table>
-                                <caption class="page-header">There are {{usersTable.numberOfRecords}} records in the
-                                    uploaded
-                                    sheet
-                                </caption>
-                                <thead>
-                                <tr>
-                                    <th>S.No.</th>
-                                    <th ng-repeat="key in usersTable.keys">
-                                        {{key}}
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="user in usersTable.data">
-                                    <td>{{$index + 1}}</td>
-                                    <td ng-repeat="key in usersTable.keys">{{user[key]}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div><!-- /.box-body-->
-                </div><!-- box -->
-            </div><!-- /.col-sm-8 -->
-            <div class="col-sm-4">
-                <div class="box box-success">
-                    <div class="box-header">
-                        <h4>Add Single User</h4>
-                    </div><!-- /.box-header -->
-                    <div class="box-body">
-                        <div class="well" ng-show="single.uploading">
-                            <h4>Uploading Data</h4>
-                        </div>
-                        <div class="alert alert-success alert-dismissable" role="alert" ng-show="single.uploaded">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span>
-                            </button>
-                            <h4>User Added</h4>
-                        </div>
-                        <form id="single-user-add" ng-submit="single.addUser()">
-                            <div class="form-group">
-                                <label for="id-card-number" class="control-label">
-                                    <h5>Enter ID card Number *</h5>
-                                </label>
-                                <input id="id-card-number" type="text" class="form-control" placeholder="ID card Number"
-                                       ng-model="single.id" tabindex="1">
+                    <div class="box">
+                        <form action="" method="get">
+                        <div class="box-header">
+                            <div class="row">
+                                <h3 class="box-title col-md-2 col-sm-6 col-xs-12 pull-left">Central Library</h3>
                             </div>
-                            <div class="form-group">
-                                <label for="full-name" class="control-label">
-                                    <h5>Enter Name *</h5>
-                                </label>
-                                <input id="full-name" type="text" class="form-control" placeholder="Full Name"
-                                       ng-model="single.fullName" tabindex="2">
+                            <br/>
+
+                            <div class="row">
+                                <div class="pull-left" style="padding: 0px 0px 0px 30px;">
+                                    <label>Export:</label>
+
+                                    <div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default " id="Excel">
+                                                <i class="fa fa-file-excel-o"></i> Excel
+                                            </button>
+                                            <button type="button" class="btn btn-default " id="PDF">
+                                                <i class="fa fa-file-pdf-o"></i> PDF
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pull-right" style="padding: 0cm 30px 0cm 0cm;">
+                                    <label>Select All:</label>
+
+                                    <div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default " id="Select-All">
+                                                <i class="fa fa-check"></i> Select All
+                                            </button>
+
+                                            <button type="submit" class="btn btn-default " id="Delete-Selected" >
+                                                <i class="fa fa-trash"></i> Delete Selected
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="form-group-lg">
-                                <button type="submit" class="btn btn-success" tabindex="3">Add New User</button>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                            <div class="table-responsive">
+                                <table id="users" class="table table-hover table-bordered ">
+                                    <thead>
+                                    <tr>
+                                        <th ></th>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Batch</th>
+                                        <th>Designation</th>
+                                        <th>Photo</th>
+                                        <th>Modify</th>
+
+                                    </tr>
+                                    </thead>
+
+                                    <tfoot>
+                                    <tr>
+                                        <th></th>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Batch</th>
+                                        <th>Designation</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
                             </div>
-                        </form>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
-            </div><!-- /.col-sm-4 -->
+                            </div>
+                            </form>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+
         </section>
     </div>
 
@@ -276,20 +245,26 @@ else {
         <div class="pull-right hidden-xs">
             <b>Version</b> 1.0.0
         </div>
-        <strong>Copyright &copy; <a href="http://sridarshan.tk">Sri Darshan S</a>, Sankkara Narayanan.</strong> All
-        rights reserved.
+        <strong>Copyright &copy; <a href="http://sridarshan.tk">Sri Darshan S</a>.</strong> All rights
+        reserved.
     </footer>
 
 
 </div>
 <!-- ./wrapper -->
 
+<!-- jQuery 2.2.3 -->
+<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="../../bootstrap/js/bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="../../plugins/fastclick/fastclick.js"></script>
+<!-- DataTables-->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables/dataTables.checkboxes.min.js"></script>
+<script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/app.min.js"></script>
+<script src="../../../../dist//js/app.min.js"></script>
 <!-- Sparkline -->
 <script src="../../plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -299,6 +274,174 @@ else {
 <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- ChartJS 1.0.1 -->
 <script src="../../plugins/chartjs/Chart.min.js"></script>
+
+
+
+<script type="text/javascript">
+
+
+    $('#users tfoot th').each( function () {
+        var title = $(this).text();
+        if(title!="")
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    } );
+
+    var table=$('#users').DataTable({
+        "lengthMenu": [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, "All"]],
+        "processing": true,
+        "serverSide": true,
+        "sAjaxSource": "/scripts/user_listing.php",
+        "sServerMethod": "POST",
+        'select': {
+            'style': 'multi'
+        },
+        "order": [[ 1, "asc" ]],
+        "columnDefs": [
+            {
+                'targets': 0,
+                'searchable': false,
+                'orderable': false,
+                'className': 'dt-body-center checkbox-data',
+                'render': function (data, type, full, meta) {
+                    return '<input type="checkbox" name="checkbox[]" value="' + $('<div/>').text(data).html() + '">';
+                }
+            },
+            {
+                'targets': 5,
+                'searchable': false,
+                'orderable': false,
+                'className': 'dt-body-center',
+                'render': function (data, type, full, meta) {
+                    return '<a href="'+ $('<div/>').text(data).html() +'" class="fa fa-file-image-o"></a>';
+
+                }
+            },
+            {
+            'targets': 6,
+            'searchable': false,
+            'orderable': false,
+            'className': 'dt-body-center',
+            'render': function (data, type, full, meta) {
+                return '<div class="btn-group">' +
+                    '<button class="btn btn-info btn-sm" title="Edit" data-toggle="modal" data-target="#edit-user-modal" ng-click="editUserFillModal(' + $('<div/>').text(data).html() + ')"><i class="fa fa-pencil"></i></button>' +
+                    '<button class="btn btn-danger btn-sm" title="Delete" ng-click="deleteStaff(' + $('<div/>').text(data).html() + ')"><i class="fa fa-trash"></i></button>' +
+                    '</div>';
+
+                }
+            }
+        ]
+
+    });
+
+    $('#Select-All').click(function(){
+        if(this.innerHTML.trim()=='<i class="fa fa-check"></i> Select All'.trim()) {
+            var that=this;
+            var t=table;
+            t.page.len( -1 ).draw();
+            t.on( 'draw.dt', function () {
+                    var rows = t.rows({ 'search': 'applied' }).nodes();
+                    $('input[type="checkbox"]', rows).prop('checked', true);
+                    that.innerHTML = '<i class="fa fa-check"></i> Unselect All';
+                }
+            );
+
+
+        }else{
+            var rows = table.rows({ 'search': 'applied' }).nodes();
+            $('input[type="checkbox"]', rows).prop('checked', false);
+            this.innerHTML = '<i class="fa fa-check"></i> Select All';
+        }
+    });
+
+
+    table.columns().every( function () {
+        var that = this;
+
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+
+
+
+
+    $('#Excel').click(function () {
+        var ur=table.ajax.url();
+        var pa=table.ajax.params();
+        pa.action="Excel";
+        pa.iDisplayLength=-1;
+
+
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', ur, true);
+        xhr.responseType = 'blob';
+
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function(e) {
+
+            if (this.status == 200) {
+                var blob = new Blob([this.response], {type: 'application/vnd.ms-excel'});
+                var downloadUrl = URL.createObjectURL(blob);
+                var a = document.createElement("a");
+                a.href = downloadUrl;
+                a.download = "data.xls";
+                document.body.appendChild(a);
+                a.click();
+            } else {
+                alert('Unable to download excel.')
+            }
+        };
+        xhr.send(jQuery.param(pa));
+
+
+
+
+    });
+
+
+
+
+
+    $('#PDF').click(function () {
+
+        var ur=table.ajax.url();
+        var pa=table.ajax.params();
+        pa.action="Pdf";
+        pa.iDisplayLength=-1;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', ur, true);
+        xhr.responseType = 'blob';
+
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function(e) {
+
+            if (this.status == 200) {
+                var blob = new Blob([this.response], {type: 'application/pdf'});
+                var downloadUrl = URL.createObjectURL(blob);
+                var a = document.createElement("a");
+                a.href = downloadUrl;
+                a.download = "data.pdf";
+                document.body.appendChild(a);
+                a.click();
+            } else {
+                alert('Unable to download PDF.')
+            }
+        };
+        xhr.send(jQuery.param(pa));
+
+
+
+
+    })
+
+
+</script>
 
 </body>
 </html>
