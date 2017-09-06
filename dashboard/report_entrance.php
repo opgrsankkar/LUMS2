@@ -172,9 +172,7 @@ else{
                                             <button type="button" class="btn btn-default " id="PDF">
                                                 <i class="fa fa-file-pdf-o"></i> PDF
                                             </button>
-                                            <button type="button" class="btn btn-default " id="CSV">
-                                                <i class="fa fa-file-archive-o"></i> CSV
-                                            </button>
+
 
                                     </div>
                                 </div>
@@ -286,7 +284,8 @@ else{
         "processing": true,
         "serverSide": true,
         "sAjaxSource": "../../scripts/entrance_report.php",
-        "sServerMethod": "GET",
+        "sServerMethod": "POST",
+        "order": [[ 3, "desc" ]],
         "fnServerParams": function ( aoData ) {
                 aoData.push( { "name": "fromdate", "value": datefrom } );
                 aoData.push( { "name": "todate", "value": dateto } );
@@ -345,6 +344,81 @@ else{
 
 
     });
+
+
+
+
+    $('#Excel').click(function () {
+        var ur=table.ajax.url();
+        var pa=table.ajax.params();
+        pa.action="Excel";
+        pa.iDisplayLength=-1;
+
+
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', ur, true);
+        xhr.responseType = 'blob';
+
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function(e) {
+
+            if (this.status == 200) {
+                var blob = new Blob([this.response], {type: 'application/vnd.ms-excel'});
+                var downloadUrl = URL.createObjectURL(blob);
+                var a = document.createElement("a");
+                a.href = downloadUrl;
+                a.download = "data.xls";
+                document.body.appendChild(a);
+                a.click();
+            } else {
+                alert('Unable to download excel.')
+            }
+        };
+        xhr.send(jQuery.param(pa));
+
+
+
+
+    });
+
+
+
+
+
+    $('#PDF').click(function () {
+
+        var ur=table.ajax.url();
+        var pa=table.ajax.params();
+        pa.action="Pdf";
+        pa.iDisplayLength=-1;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', ur, true);
+        xhr.responseType = 'blob';
+
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function(e) {
+
+            if (this.status == 200) {
+                var blob = new Blob([this.response], {type: 'application/pdf'});
+                var downloadUrl = URL.createObjectURL(blob);
+                var a = document.createElement("a");
+                a.href = downloadUrl;
+                a.download = "data.pdf";
+                document.body.appendChild(a);
+                a.click();
+            } else {
+                alert('Unable to download PDF.')
+            }
+        };
+        xhr.send(jQuery.param(pa));
+
+
+
+
+    })
+
 </script>
 
 </body>

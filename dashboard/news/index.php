@@ -232,7 +232,7 @@ else {
 <!-- FastClick -->
 <script src="../../plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="../../../../dist//js/app.min.js"></script>
+<script src="../../../../dist/js/app.min.js"></script>
 <!-- Sparkline -->
 <script src="../../plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -242,6 +242,10 @@ else {
 <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- ChartJS 1.0.1 -->
 <script src="../../plugins/chartjs/Chart.min.js"></script>
+
+<script src="../../dist/js/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../dist/css/sweetalert.css">
+
 
 </body>
 </html>

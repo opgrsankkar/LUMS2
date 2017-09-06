@@ -113,6 +113,8 @@ app.controller('staffController', function ($scope, $http) {
             addReq.data.permission = $scope.newStaff.permission;
 
             $http(addReq).then(function (result) {
+                console.log(result);
+                /*
                 if (result.data.success) {
                     swal("User Added", None, "success");
                     initialize();
@@ -120,7 +122,9 @@ app.controller('staffController', function ($scope, $http) {
                     $('#add-staff-form').trigger("reset");
                 } else {
                     swal("Error", "Please Report to the Development Team", "error");
+                    console.log("err1 add error");
                 }
+                */
 
             });
         }
@@ -138,6 +142,7 @@ app.controller('staffController', function ($scope, $http) {
                 sweetAlert("User Details Updated");
             } else {
                 swal("Error", "Please Report to the Development Team", "error");
+                console.log("err2 edit");
             }
             initialize();
         });
@@ -177,6 +182,7 @@ app.controller('staffController', function ($scope, $http) {
                         swal("Deleted!", "User has been deleted.", "success")
                     } else {
                         swal("Error", "Please Report to the Development Team", "error");
+                        console.log("err3 delete");
                     }
                     initialize();
                 });
@@ -210,6 +216,7 @@ app.controller('staffController', function ($scope, $http) {
                         });
                     } else {
                         swal("Error", "Please Report to the Development Team", "error");
+                        console.log("err4 pass reset error");
                     }
                     initialize();
                 });

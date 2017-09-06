@@ -156,7 +156,7 @@ else{
                 <div class="col-xs-12">
 
                     <div class="box">
-                        <form action="" method="get">
+                        <form action="usersDelete.php"  method="POST">
                         <div class="box-header">
                             <div class="row">
                                 <h3 class="box-title col-md-2 col-sm-6 col-xs-12 pull-left">Central Library</h3>
