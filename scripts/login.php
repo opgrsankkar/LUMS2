@@ -5,12 +5,12 @@ if (isset($_POST['login']))
 {
     $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
     $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
-    //$password = md5($password);
-    $sql = "SELECT * FROM login WHERE username = '$username' and password = '$password'";
+
+    $sql = "SELECT * FROM login WHERE username = '$username'";
     $result = mysqli_query($connection,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
     $count = mysqli_num_rows($result);
-    if($count == 1)
+    if($count == 1 && password_verify($password, $row['password']))
     {
         $_SESSION['username']=$row['username'];
         $_SESSION['name'] = $row['name'];

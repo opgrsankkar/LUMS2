@@ -31,10 +31,10 @@ app.controller('staffController', function ($scope, $http) {
         url: staffApiURL,
         data: {"query": "DELETE_STAFF"}
     };
-    let editPassReq = {
+    let resetPassReq = {
         method: 'POST',
         url: staffApiURL,
-        data: {"query": "EDIT_PASS"}
+        data: {"query": "RESET_PASS"}
     };
 
     /**
@@ -116,10 +116,10 @@ app.controller('staffController', function ($scope, $http) {
                 console.log(result);
                 /*
                 if (result.data.success) {
-                    swal("User Added", None, "success");
                     initialize();
                     $('#add-staff-modal').modal('hide');
                     $('#add-staff-form').trigger("reset");
+                    swal("User Added", "", "success");
                 } else {
                     swal("Error", "Please Report to the Development Team", "error");
                     console.log("err1 add error");
@@ -205,9 +205,9 @@ app.controller('staffController', function ($scope, $http) {
             },
             function () {
                 let newPassword = generateRandomPassword();
-                editPassReq.data.username = username;
-                editPassReq.data.password = newPassword;
-                $http(editPassReq).then(function (result) {
+                resetPassReq.data.username = username;
+                resetPassReq.data.password = newPassword;
+                $http(resetPassReq).then(function (result) {
                     if (result.data.success) {
                         swal({
                             title: "Password has been Reset",
