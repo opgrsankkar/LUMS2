@@ -10,6 +10,7 @@ else{
     header("location:../");
     die();
 }
+include("variables.php");
 ?>
 
 <html>
@@ -77,7 +78,7 @@ else{
         <li class="header">Last Login : <?php echo $lastlogin;?><br/>Last Login IP : <?php echo $lastip;?></li>
 
         <li class="active">
-          <a href="/">
+          <a href="index.php">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
@@ -153,7 +154,7 @@ else{
               <!-- small box -->
               <div class="small-box bg-aqua">
                   <div class="inner">
-                      <h3>150</h3>
+                      <h3><?php echo $entrance_in;?></h3>
 
                       <p>Currently In</p>
                   </div>
@@ -168,7 +169,7 @@ else{
           <div class="col-lg-3 col-xs-6">
               <div class="small-box bg-aqua">
                   <div class="inner">
-                      <h3>250</h3>
+                      <h3><?php echo $entrance;?></h3>
 
                       <p>Visited Today</p>
                   </div>
@@ -183,7 +184,7 @@ else{
           <div class="col-lg-3 col-xs-6">
               <div class="small-box bg-teal">
                   <div class="inner">
-                      <h3>50</h3>
+                      <h3><?php echo $digilib_in;?></h3>
 
                       <p>Currently In</p>
                   </div>
@@ -198,7 +199,7 @@ else{
           <div class="col-lg-3 col-xs-6">
               <div class="small-box bg-teal ">
                   <div class="inner">
-                      <h3>150</h3>
+                      <h3><?php echo $digilib;?></h3>
 
                       <p>Visited Today</p>
                   </div>
