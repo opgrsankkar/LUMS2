@@ -29,9 +29,10 @@ function add_staff($username, $name, $password, $permission)
 {
     global $connection;
 
+    $hashed_password = password_hash( $password, PASSWORD_BCRYPT);
     $stmt = mysqli_stmt_init($connection);
     if (mysqli_stmt_prepare($stmt, 'INSERT INTO login (username, name, password, permission) VALUES (?, ?, ?, ?)')) {
-        mysqli_stmt_bind_param($stmt, "ssss", $username, $name, $password, $permission);
+        mysqli_stmt_bind_param($stmt, "ssss", $username, $name, $hashed_password, $permission);
     }
 
     if (!mysqli_stmt_execute($stmt)) {
@@ -65,13 +66,14 @@ function edit_staff($username, $name, $permission)
 
 }
 
-function edit_password($username, $password)
+function reset_password($username, $password)
 {
     global $connection;
 
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
     $stmt = mysqli_stmt_init($connection);
     if (mysqli_stmt_prepare($stmt, 'UPDATE login SET password=? WHERE username=?')) {
-        mysqli_stmt_bind_param($stmt, "ss", $password, $username);
+        mysqli_stmt_bind_param($stmt, "ss", $hashed_password, $username);
     }
 
     if (!mysqli_stmt_execute($stmt)) {
@@ -116,10 +118,6 @@ if (isset($_POST)) {
             echo get_all_staff();
             break;
 
-        case "STAFF_USER":
-            echo update_user();
-            break;
-
         case "ADD_STAFF":
             echo add_staff(
                 $postdata['username'],
@@ -137,8 +135,8 @@ if (isset($_POST)) {
             );
             break;
 
-        case "EDIT_PASS":
-            echo edit_password(
+        case "RESET_PASS":
+            echo reset_password(
                 $postdata['username'],
                 $postdata['password']
             );
