@@ -86,7 +86,7 @@
         <div class="col-lg-6 col-xs-12">
             <div class="small-box bg-aqua">
                 <div class="inner">
-                    <h3 id="currently-in">150</h3>
+                    <h3 id="currently-in">0</h3>
                     <p>Currently In</p>
                 </div>
                 <div class="icon">
@@ -100,7 +100,7 @@
         <div class="col-lg-6 col-xs-12">
             <div class="small-box bg-teal">
                 <div class="inner">
-                    <h3 id="visited-today">250</h3>
+                    <h3 id="visited-today">0</h3>
                     <p>Visited Today</p>
                 </div>
                 <div class="icon">
@@ -112,7 +112,7 @@
             </div>
         </div>
         <div class="col-md-12">
-            <button id="send-out-all-btn" class="btn btn-danger">
+            <button id="send-out-all-btn" class="btn btn-danger" tabindex="-1">
                 Send Out All Users
             </button>
         </div>
@@ -131,7 +131,7 @@
                 <div class="input-group idcard-group">
                     <input id="idcard-number" type="text" class="form-control" name="id" placeholder="Roll Number" autofocus>
                     <div class="input-group-btn">
-                        <button type="button" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
+                        <button type="button" class="btn" tabindex="-1"><i class="fa fa-arrow-right text-muted"></i></button>
                     </div>
                 </div>
             </form>
@@ -207,6 +207,7 @@
                     });
                 });
             });
+            var resetvariable;
             $('#reg-form').submit(function(e){
 
                 e.preventDefault(); // Prevent Default Submission
@@ -223,7 +224,8 @@
                            $('#form-content').fadeIn('fast').html(data);
                         });
 
-                        setTimeout(function(){
+                        clearTimeout(resetvariable);
+                        resetvariable=setTimeout(function(){
                             startresettimer();
                             }, 2000);
 
@@ -256,7 +258,7 @@
             });
         });
 
-        updateCountTimerTime = 1000 * 60 * 0.2;
+        updateCountTimerTime = 1000 * 60 * 0.5;
         function updateCurrentlyIn(){
             $.ajax({
             type: "POST",

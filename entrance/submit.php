@@ -63,15 +63,18 @@ if( $_POST ){
 
                 <?php if($status=='ENTRY'){?>
                     <div class="widget-user-header bg-green">
+                        <div class="col-md-3">
+                            <img class="img-rounded img-responsive" src="../../ext-res/png/512/android-social-user.png" onError="this.onerror=null;this.src='../../ext-res/png/512/android-social-user.png';" alt="User Avatar">
+                        </div>
                 <?php }else if($status=='EXIT'){?>
                     <div class="widget-user-header bg-red">
+                        <div class="col-md-3">
+                            <img class="img-rounded img-responsive" src="../../ext-res/png/512/android-social-user.png" onError="this.onerror=null;this.src='../../ext-res/png/512/android-social-user.png';" alt="User Avatar">
+                        </div>
                 <?php }else{?>
                     <div class="widget-user-header bg-yellow">
                 <?php } ?>
 
-                    <div class="col-md-3">
-                    <img class="img-rounded img-responsive" src="http://gpms.amritanet.edu/gpis/photos/U4CSE14/U4CSE14008.png" onError="this.onerror=null;this.src='../../ext-res/png/512/android-social-user.png';" alt="User Avatar">
-                </div>
 
 
                 <h1 align="center"><?php echo $status;?></h1>
