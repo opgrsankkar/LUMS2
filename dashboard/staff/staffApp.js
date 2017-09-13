@@ -46,10 +46,10 @@ app.controller('staffController', function ($scope, $http) {
         let numbers = ("1234567890").split("");
         let randomString = "";
         for (let i = 0; i < 4; i++) {
-            randomString = randomString + alphabets[Math.ceil(Math.random() * 26)];
+            randomString = randomString + alphabets[Math.floor(Math.random() * 26)];
         }
         for (let i = 0; i < 2; i++) {
-            randomString = randomString + numbers[Math.ceil(Math.random() * 10)];
+            randomString = randomString + numbers[Math.floor(Math.random() * 10)];
         }
         return randomString;
     };
