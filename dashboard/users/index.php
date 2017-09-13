@@ -154,6 +154,58 @@ else {
         <!-- Main content -->
         <section class="content">
 
+            <div class="modal fade" id="edit-user-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">User Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="edit-users-form">
+                                <div class="form-group">
+                                    <label for="id" class="control-label">
+                                        <h5>ID</h5>
+                                    </label>
+                                    <input id="id" type="text" class="form-control" placeholder="ID"
+                                           name="id"
+                                           readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="control-label">
+                                        <h5>Edit Name</h5>
+                                    </label>
+                                    <input id="name" type="text" class="form-control" placeholder="Full Name"
+                                           name="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Batch" class="control-label">
+                                        <h5>Edit Batch</h5>
+                                    </label>
+                                    <input id="batch" type="text" class="form-control" placeholder="Batch"
+                                           name="batch">
+                                </div>
+                                <div class="form-group">
+                                    <label for="designation" class="control-label">
+                                        <h5>Edit Designation</h5>
+                                    </label>
+                                    <input id="designation" type="text" class="form-control" placeholder="Designation"
+                                           name="designation">
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button form="edit-users-form" type="submit" value="Submit" class="btn btn-primary">
+                                Edit User Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /#edit-user-modal -->
+
             <div class="row">
                 <div class="col-xs-12">
 
@@ -264,7 +316,7 @@ else {
 <script src="../../../../dist//js/app.min.js"></script>
 <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="/dist/js/sweetalert.min.js"></script>
-
+<script src="/dist/js/jquery.form.js"></script>
 
 <script type="text/javascript">
 
@@ -312,7 +364,7 @@ else {
                 'className': 'dt-body-center',
                 'render': function (data, type, full, meta) {
                     return '<div class="btn-group">' +
-                        '<a class="btn btn-info btn-sm" title="Edit" onclick="editUser(' + '\'' + $('<div/>').text(data).html() + '\'' + ')"><i class="fa fa-pencil"></i></a>' +
+                        '<a class="btn btn-info btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>' +
                         '<a class="btn btn-danger btn-sm" title="Delete" onclick="deleteUser(' + '\'' + $('<div/>').text(data).html() + '\'' + ')"><i class="fa fa-trash"></i></a>' +
                         '</div>';
 
@@ -419,8 +471,12 @@ else {
 
     });
 
-    function editUser() {
-
+    function showEditModal(id, name, batch, designation) {
+        $('#edit-user-modal #id').val(id);
+        $('#edit-user-modal #name').val(name);
+        $('#edit-user-modal #batch').val(batch);
+        $('#edit-user-modal #designation').val(designation);
+        $('#edit-user-modal').modal();
     }
 
     function deleteUser(id) {
@@ -431,7 +487,6 @@ else {
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete it!",
-                closeOnConfirm: false,
                 html: true
             },
             function () {
@@ -445,9 +500,29 @@ else {
                         }
                     });
             }
-        )
-        ;
+        );
     }
+$(document).ready(function () {
+    $('#users tbody').on( 'click', '.btn-info', function () {
+        var data = table.row( $(this).parents('tr') ).data();
+        showEditModal( data[1], data[2], data[3], data[4] );
+    } );
+
+    $("#edit-users-form").ajaxForm({
+        url: '/scripts/editUser.php',
+        method: 'POST',
+        success: function (result) {
+            $('#edit-user-modal').modal('hide');
+            $('#edit-users-form').resetForm();
+            table.ajax.reload();
+            if(result.success) {
+                swal("User Data Updated", "", "success");
+            } else {
+                swal("Server Error\nTry Again Later", "", "error");
+            }
+        }
+    });
+})
 
 </script>
 
