@@ -98,7 +98,7 @@ include("variables.php");
         </span>
           </a>
           <ul class="treeview-menu">
-              <li><a href="report_entrance.php"><i class="fa fa-circle-o"></i> Central Library</a></li>
+              <li><a href="reports/report_entrance.php"><i class="fa fa-circle-o"></i> Central Library</a></li>
               <li><a href="report_digilib.php"><i class="fa fa-circle-o"></i> Digital Library</a></li>
           </ul>
         </li>
@@ -222,16 +222,53 @@ include("variables.php");
 	  
 
 	<div class="col-md-4 col-sm-6 col-xs-12">
-		<a href="manageCourses.php">
-		<div class="info-box bg-aqua">
-            <span class="info-box-icon"><i class="fa fa-edit"></i></span>
+		<a href="users/">
+		<div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-users"></i></span>
             <div class="info-box-content">
-              <span class="info-box-text">TITLE</span>
-              <span class="info-box-number">Description</span>
+              <span class="info-box-text">Users</span>
+              <span class="info-box-number">Manage Staff and Students</span>
             </div>           
 		</div>
 		</a>
 	</div>
+
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <a href="reports/">
+            <div class="info-box bg-green">
+                <span class="info-box-icon"><i class="fa fa-table"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Reports</span>
+                    <span class="info-box-number">Collect reports of library users</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <a href="staff/">
+            <div class="info-box bg-green">
+                <span class="info-box-icon"><i class="fa fa-user"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Library Staff</span>
+                    <span class="info-box-number">Manage Library Staff</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <a href="users/">
+            <div class="info-box bg-green">
+                <span class="info-box-icon"><i class="fa fa-newspaper-o"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">News</span>
+                    <span class="info-box-number">Manage Scrolls on home page</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
 	  
     </section>
    </div>
