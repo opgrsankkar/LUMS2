@@ -28,6 +28,17 @@ include("variables.php");
     <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" type="text/css" href="/dist/css/sweetalert.css">
 
+    <style>
+        .hover a{
+        color: #444444;
+        }
+        .hover a:hover{
+            color: #0c0c0c;
+        }
+        .hoverinfo:hover{
+            box-shadow: 0px 4px 3px rgba(0,0,0,0.2);
+        }
+    </style>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -216,10 +227,11 @@ include("variables.php");
             </h4>
 
 
-            <div class="col-md-4 col-sm-6 col-xs-12">
+
+            <div class="col-md-4 col-sm-6 col-xs-12 hover">
                 <a href="users/">
-                    <div class="info-box bg-green">
-                        <span class="info-box-icon"><i class="fa fa-users"></i></span>
+                    <div class="info-box hoverinfo">
+                        <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Users</span>
                             <span class="info-box-number">Manage Staff and Students</span>
@@ -228,10 +240,10 @@ include("variables.php");
                 </a>
             </div>
 
-            <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="col-md-4 col-sm-6 col-xs-12 hover">
                 <a href="reports/">
-                    <div class="info-box bg-green">
-                        <span class="info-box-icon"><i class="fa fa-table"></i></span>
+                    <div class="info-box hoverinfo">
+                        <span class="info-box-icon bg-aqua"><i class="fa fa-table"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Reports</span>
                             <span class="info-box-number">Collect reports of library users</span>
@@ -240,10 +252,10 @@ include("variables.php");
                 </a>
             </div>
 
-            <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="col-md-4 col-sm-6 col-xs-12 hover">
                 <a href="staff/">
-                    <div class="info-box bg-green">
-                        <span class="info-box-icon"><i class="fa fa-user"></i></span>
+                    <div class="info-box hoverinfo">
+                        <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Library Staff</span>
                             <span class="info-box-number">Manage Library Staff</span>
@@ -252,10 +264,10 @@ include("variables.php");
                 </a>
             </div>
 
-            <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="col-md-4 col-sm-6 col-xs-12 hover">
                 <a href="users/">
-                    <div class="info-box bg-green">
-                        <span class="info-box-icon"><i class="fa fa-newspaper-o"></i></span>
+                    <div class="info-box hoverinfo">
+                        <span class="info-box-icon bg-aqua"><i class="fa fa-newspaper-o"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">News</span>
                             <span class="info-box-number">Manage Scrolls on home page</span>
