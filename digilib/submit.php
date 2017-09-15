@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../scripts/entrancesession.php");
+include("../scripts/digilibsession.php");
 
 if( $_POST ){
 
@@ -17,9 +17,9 @@ if( $_POST ){
 
             date_default_timezone_set("Asia/Kolkata");
             $name = $row['name'];
-            $visitsThisMonth = $row['entrance'];
+            $visitsThisMonth = $row['digilib'];
 
-            $sql = "SELECT * FROM entrance WHERE id = '$id' and timeout is null";
+            $sql = "SELECT * FROM digilib WHERE id = '$id' and timeout is null";
             $result = mysqli_query($connection, $sql);
             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
             $count = mysqli_num_rows($result);
@@ -29,15 +29,15 @@ if( $_POST ){
                 $timespent = strtotime(date("Y-m-d H:i:s"))-$timein;
                 $status = 'EXIT';//ENTRY,EXIT,ERROR
 
-                $sqltime="Update entrance set timeout=now() where id = '$id' and timeout is null";
+                $sqltime="Update digilib set timeout=now() where id = '$id' and timeout is null";
                 mysqli_query($connection, $sqltime);
 
             } else {
                 $status = 'ENTRY';
 
-                $sqltime="Insert into entrance (id,timein) values('$id',now())";
+                $sqltime="Insert into digilib (id,timein) values('$id',now())";
                 mysqli_query($connection, $sqltime);
-                $sqltime="Update users set entrance=case when month = ".date("m")." then entrance+1 else 1 end, month=".date("m")." where id='$id'";
+                $sqltime="Update users set digilib=case when month = ".date("m")." then digilib+1 else 1 end, month=".date("m")." where id='$id'";
                 mysqli_query($connection, $sqltime);
 
 
@@ -96,6 +96,6 @@ if( $_POST ){
         </div>
         <!-- /.widget-user -->
     </div>
-
+    
     <?php
 } ?>

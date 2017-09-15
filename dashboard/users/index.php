@@ -89,14 +89,14 @@ else {
                     </a>
                 </li>
 
-                <li>
+                <li class="active">
                     <a href="users.php">
                         <i class="fa fa-users"></i> <span>Users</span>
                     </a>
                 </li>
 
 
-                <li class="treeview active">
+                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-table"></i> <span>Reports</span>
                         <span class="pull-right-container">

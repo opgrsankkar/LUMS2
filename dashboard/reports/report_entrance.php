@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <?php
 session_start();
-include("../scripts/sessionvariables.php");
+include("../../scripts/sessionvariables.php");
 if($permission==1)
-    include("../scripts/adminsession.php");
+    include("../../scripts/adminsession.php");
 else if($permission==2)
-    include("../scripts/usersession.php");
+    include("../../scripts/usersession.php");
 else{
     header("location:../");
     die();
@@ -45,7 +45,7 @@ else{
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index.php" class="logo">
+    <a href="../index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b></b></span>
       <!-- logo for regular state and mobile devices -->
@@ -81,7 +81,7 @@ else{
         <li class="header">Last Login : <?php echo $lastlogin;?><br/>Last Login IP : <?php echo $lastip;?></li>
 
         <li>
-          <a href="index.php">
+          <a href="../index.php">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
@@ -143,7 +143,7 @@ else{
         <small>Central Library</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="index.php">Home</a></li>
+        <li><a href="../index.php">Home</a></li>
         <li class="active"> <i class="fa fa-table"></i> Report</li>
       </ol>
     </section>
