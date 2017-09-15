@@ -210,7 +210,7 @@ else {
                 <div class="col-xs-12">
 
                     <div class="box">
-                        <form action="../../scripts/userDeleteBatchAPI.php" method="POST">
+                        <form id="users-table-form">
                             <div class="box-header">
                                 <div class="row">
                                     <h3 class="box-title col-md-2 col-sm-6 col-xs-12 pull-left">Central Library</h3>
@@ -235,7 +235,6 @@ else {
                                             </div>
                                         </div>
                                     </div>
-
 
 
                                     <div class="pull-right" style="padding: 0cm 30px 0cm 0cm;">
@@ -500,7 +499,7 @@ else {
     function deleteUser(id) {
         swal({
                 title: "Delete?",
-                text: "Are you sure you want to delete user",
+                text: "Are you sure you want to delete user?",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -509,7 +508,52 @@ else {
                 html: true
             },
             function () {
-                $.post('/scripts/userDelete.php', {id: id},function (result) {
+                $.post('/scripts/userDelete.php', {id: id}, function (result) {
+                    table.ajax.reload();
+                    if (result.success) {
+                        swal("User Deleted", "", "success");
+                    } else {
+                        swal("Error", result.message, "error");
+                    }
+                });
+            }
+        );
+    }
+
+    $(document).ready(function () {
+        $('#users tbody').on('click', '.btn-info', function () {
+            var data = table.row($(this).parents('tr')).data();
+            showEditModal(data[1], data[2], data[3], data[4]);
+        });
+
+        $("#edit-users-form").ajaxForm({
+            url: '/scripts/editUser.php',
+            method: 'POST',
+            success: function (result) {
+                $('#edit-user-modal').modal('hide');
+                $('#edit-users-form').resetForm();
+                table.ajax.reload();
+                if (result.success) {
+                    swal("User Data Updated", "", "success");
+                } else {
+                    swal("Server Error\nTry Again Later", "", "error");
+                }
+            }
+        });
+        $("#users-table-form").ajaxForm({
+            beforeSubmit: function (formData, jqForm, options) {
+                swal({
+                    title: "Delete?",
+                    text: "Are you sure you want to delete <strong>" + (formData.length - 1) + "</strong> item(s)?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: false,
+                    html: true
+                },
+                function () {
+                    $.post('/scripts/userDeleteBatchAPI.php', formData, function (result) {
                         table.ajax.reload();
                         if (result.success) {
                             swal("User Deleted", "", "success");
@@ -517,30 +561,10 @@ else {
                             swal("Error", result.message, "error");
                         }
                     });
-            }
-        );
-    }
-$(document).ready(function () {
-    $('#users tbody').on( 'click', '.btn-info', function () {
-        var data = table.row( $(this).parents('tr') ).data();
-        showEditModal( data[1], data[2], data[3], data[4] );
-    } );
-
-    $("#edit-users-form").ajaxForm({
-        url: '/scripts/editUser.php',
-        method: 'POST',
-        success: function (result) {
-            $('#edit-user-modal').modal('hide');
-            $('#edit-users-form').resetForm();
-            table.ajax.reload();
-            if(result.success) {
-                swal("User Data Updated", "", "success");
-            } else {
-                swal("Server Error\nTry Again Later", "", "error");
-            }
-        }
-    });
-})
+                });
+                return false;
+            }});
+    })
 
 </script>
 
