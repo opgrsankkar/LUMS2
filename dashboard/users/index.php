@@ -210,7 +210,7 @@ else {
                 <div class="col-xs-12">
 
                     <div class="box">
-                        <form action="../../scripts/userDelete.php" method="POST">
+                        <form action="../../scripts/userDeleteBatchAPI.php" method="POST">
                             <div class="box-header">
                                 <div class="row">
                                     <h3 class="box-title col-md-2 col-sm-6 col-xs-12 pull-left">Central Library</h3>
@@ -218,6 +218,8 @@ else {
                                 <br/>
 
                                 <div class="row">
+
+
                                     <div class="pull-left" style="padding: 0px 0px 0px 30px;">
                                         <label>Export:</label>
 
@@ -234,6 +236,8 @@ else {
                                         </div>
                                     </div>
 
+
+
                                     <div class="pull-right" style="padding: 0cm 30px 0cm 0cm;">
                                         <label>Select All:</label>
 
@@ -249,6 +253,20 @@ else {
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="pull-right" style="padding: 0px 10px 0px 0px;">
+                                        <label>Add Users:</label>
+
+                                        <div>
+                                            <div class="btn-group">
+                                                <a href="useradd.php" class="btn btn-success ">
+                                                    <i class="fa fa-plus"></i> Add Users
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                 </div>
                                 <!-- /.box-header -->
@@ -340,7 +358,7 @@ else {
         "columnDefs": [
             {
                 'targets': 0,
-                'searchable': false,
+                'searchable': true,
                 'orderable': false,
                 'className': 'dt-body-center checkbox-data',
                 'render': function (data, type, full, meta) {

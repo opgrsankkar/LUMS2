@@ -91,187 +91,183 @@ include("variables.php");
                         <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
         </span>
-          </a>
-          <ul class="treeview-menu">
-              <li><a href="reports/report_entrance.php"><i class="fa fa-circle-o"></i> Central Library</a></li>
-              <li><a href="report_digilib.php"><i class="fa fa-circle-o"></i> Digital Library</a></li>
-          </ul>
-        </li>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="reports/report_entrance.php"><i class="fa fa-circle-o"></i> Central Library</a>
+                        </li>
+                        <li><a href="report_digilib.php"><i class="fa fa-circle-o"></i> Digital Library</a></li>
+                    </ul>
+                </li>
 
 
-        <li>
-            <a href="staff/">
-              <i class="fa fa-user"></i> <span>Library Staff</span>
-          </a>
-        </li>
+                <li>
+                    <a href="staff/">
+                        <i class="fa fa-user"></i> <span>Library Staff</span>
+                    </a>
+                </li>
 
-        <li>
-          <a href="news/">
-              <i class="fa fa-newspaper-o"></i> <span>News</span>
-          </a>
-        </li>
-
-
-
-          <li>
-          <a href="../../scripts/logout.php">
-              <i class="fa fa-lock"></i> <span>Logout</span>
-          </a>
-        </li>
+                <li>
+                    <a href="news/">
+                        <i class="fa fa-newspaper-o"></i> <span>News</span>
+                    </a>
+                </li>
 
 
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+                <li>
+                    <a href="../../scripts/logout.php">
+                        <i class="fa fa-lock"></i> <span>Logout</span>
+                    </a>
+                </li>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-	
-      <h1>
-        Dashboard
-        <small>Version 1.0</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="index.php">Home</a></li>
-        <li class="active"> <i class="fa fa-dashboard"></i> Dashboard</li>
-      </ol>
-    </section>
 
-    <!-- Main content -->
-    <section class="content">
-      <!-- Info boxes -->
-      <div class="row">
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
 
-          <div class="col-lg-3 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-aqua">
-                  <div class="inner">
-                      <h3><?php echo $entrance_in;?></h3>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
 
-                      <p>Currently In</p>
-                  </div>
-                  <div class="icon">
-                      <i class="fa fa-users"></i>
-                  </div>
-                  <a href="#" class="small-box-footer">
-                      Central Library <i class="fa fa-arrow-circle-right"></i>
-                  </a>
-              </div>
-          </div>
-          <div class="col-lg-3 col-xs-6">
-              <div class="small-box bg-aqua">
-                  <div class="inner">
-                      <h3><?php echo $entrance;?></h3>
+            <h1>
+                Dashboard
+                <small>Version 1.0</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="index.php">Home</a></li>
+                <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
+            </ol>
+        </section>
 
-                      <p>Visited Today</p>
-                  </div>
-                  <div class="icon">
-                      <i class="fa fa-users"></i>
-                  </div>
-                  <a href="#" class="small-box-footer">
-                      Central Library <i class="fa fa-arrow-circle-right"></i>
-                  </a>
-              </div>
-          </div>
-          <div class="col-lg-3 col-xs-6">
-              <div class="small-box bg-teal">
-                  <div class="inner">
-                      <h3><?php echo $digilib_in;?></h3>
+        <!-- Main content -->
+        <section class="content">
+            <!-- Info boxes -->
+            <div class="row">
 
-                      <p>Currently In</p>
-                  </div>
-                  <div class="icon">
-                      <i class="fa fa-users"></i>
-                  </div>
-                  <a href="#" class="small-box-footer">
-                      Digital Library <i class="fa fa-arrow-circle-right"></i>
-                  </a>
-              </div>
-          </div>
-          <div class="col-lg-3 col-xs-6">
-              <div class="small-box bg-teal ">
-                  <div class="inner">
-                      <h3><?php echo $digilib;?></h3>
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3><?php echo $entrance_in; ?></h3>
 
-                      <p>Visited Today</p>
-                  </div>
-                  <div class="icon">
-                      <i class="fa fa-users"></i>
-                  </div>
-                  <a href="#" class="small-box-footer">
-                      Digital Library <i class="fa fa-arrow-circle-right"></i>
-                  </a>
-              </div>
-          </div>
-
-      </div>
-      <!-- /.row -->
-
-	  <h4>
-        Hello  <b><?php echo $name;?></b>
-        <small>You have access to the following modules</small>
-      </h4>
-	  
-
-	<div class="col-md-4 col-sm-6 col-xs-12">
-		<a href="users/">
-		<div class="info-box bg-green">
-            <span class="info-box-icon"><i class="fa fa-users"></i></span>
-            <div class="info-box-content">
-              <span class="info-box-text">Users</span>
-              <span class="info-box-number">Manage Staff and Students</span>
-            </div>           
-		</div>
-		</a>
-	</div>
-
-    <div class="col-md-4 col-sm-6 col-xs-12">
-        <a href="reports/">
-            <div class="info-box bg-green">
-                <span class="info-box-icon"><i class="fa fa-table"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Reports</span>
-                    <span class="info-box-number">Collect reports of library users</span>
+                            <p>Currently In</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Central Library <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </a>
-    </div>
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3><?php echo $entrance; ?></h3>
 
-    <div class="col-md-4 col-sm-6 col-xs-12">
-        <a href="staff/">
-            <div class="info-box bg-green">
-                <span class="info-box-icon"><i class="fa fa-user"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Library Staff</span>
-                    <span class="info-box-number">Manage Library Staff</span>
+                            <p>Visited Today</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Central Library <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </a>
-    </div>
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-teal">
+                        <div class="inner">
+                            <h3><?php echo $digilib_in; ?></h3>
 
-    <div class="col-md-4 col-sm-6 col-xs-12">
-        <a href="users/">
-            <div class="info-box bg-green">
-                <span class="info-box-icon"><i class="fa fa-newspaper-o"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">News</span>
-                    <span class="info-box-number">Manage Scrolls on home page</span>
+                            <p>Currently In</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Digital Library <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
                 </div>
+                <div class="col-lg-3 col-xs-6">
+                    <div class="small-box bg-teal ">
+                        <div class="inner">
+                            <h3><?php echo $digilib; ?></h3>
+
+                            <p>Visited Today</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Digital Library <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
             </div>
-        </a>
+            <!-- /.row -->
+
+            <h4>
+                Hello <b><?php echo $name; ?></b>
+                <small>You have access to the following modules</small>
+            </h4>
+
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <a href="users/">
+                    <div class="info-box bg-green">
+                        <span class="info-box-icon"><i class="fa fa-users"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Users</span>
+                            <span class="info-box-number">Manage Staff and Students</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <a href="reports/">
+                    <div class="info-box bg-green">
+                        <span class="info-box-icon"><i class="fa fa-table"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Reports</span>
+                            <span class="info-box-number">Collect reports of library users</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <a href="staff/">
+                    <div class="info-box bg-green">
+                        <span class="info-box-icon"><i class="fa fa-user"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Library Staff</span>
+                            <span class="info-box-number">Manage Library Staff</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <a href="users/">
+                    <div class="info-box bg-green">
+                        <span class="info-box-icon"><i class="fa fa-newspaper-o"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">News</span>
+                            <span class="info-box-number">Manage Scrolls on home page</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+        </section>
     </div>
 
-	  
-    </section>
-   </div>
- 
- <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0.0
-    </div>
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
