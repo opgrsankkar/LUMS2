@@ -187,12 +187,6 @@ else {
                             </button>
                         </div>
 
-                        <div class="btn-group pull-right">
-                            <a href="../../ext-res/sample.xlsx" class="btn btn-warning">
-                                Sample Excel File
-                            </a>
-                        </div>
-
                         <br>
                         <div class="alert alert-success alert-dismissible" role="alert"
                              ng-show="uploadComplete">
@@ -212,6 +206,10 @@ else {
                                 <li>Load the file</li>
                                 <li>Upload the file</li>
                             </ol>
+                            <a href="../../ext-res/sample.xlsx">
+                                <u>Sample Excel File</u>
+                            </a>
+
                         </div><!-- /.well -->
 
                         <div id="output" ng-show="usersTable.numberOfRecords">
