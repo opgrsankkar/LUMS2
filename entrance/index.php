@@ -111,11 +111,7 @@
                 </span>
             </div>
         </div>
-        <div class="col-md-12">
-            <button id="send-out-all-btn" class="btn btn-danger" tabindex="-1">
-                Send Out All Users
-            </button>
-        </div>
+
     </div>
 
 
@@ -304,6 +300,11 @@
 
 </div>
 
+<div class="col-md-12">
+    <button id="send-out-all-btn" class="btn btn-danger" tabindex="-1">
+        Send Out All Users
+    </button>
+</div>
 </body>
 
 </html>
