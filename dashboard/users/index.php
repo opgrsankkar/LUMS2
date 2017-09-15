@@ -505,11 +505,11 @@ else {
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false,
                 html: true
             },
             function () {
-                $.post('/scripts/userDelete.php', {id: id})
-                    .done(function (result) {
+                $.post('/scripts/userDelete.php', {id: id},function (result) {
                         table.ajax.reload();
                         if (result.success) {
                             swal("User Deleted", "", "success");
