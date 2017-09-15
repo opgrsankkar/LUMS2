@@ -103,7 +103,7 @@ else {
         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="report_entrance.php"><i class="fa fa-circle-o"></i> Central Library</a></li>
+                        <li><a href="reports/report_entrance.php"><i class="fa fa-circle-o"></i> Central Library</a></li>
                         <li><a href="report_digilib.php"><i class="fa fa-circle-o"></i> Digital Library</a></li>
                     </ul>
                 </li>
