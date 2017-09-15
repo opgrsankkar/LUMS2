@@ -68,7 +68,7 @@ app.controller('userAddController', function ($scope, $http) {
         content = objectKeysToLowerCase(content);
         $scope.usersTable.data = content;
         let keys = Object.keys(content[0]);
-        if (keys.length === 2 && keys[0] === "id" && keys[1] === "name") {
+        if (keys.length === 4 && keys[0] === "id" && keys[1] === "name" && keys[2] === "batch" && keys[3] === "designation") {
             $scope.usersTable.keys = keys;
             $scope.usersTable.numberOfRecords = Object.keys($scope.usersTable.data).length;
         } else {
@@ -98,8 +98,10 @@ app.controller('userAddController', function ($scope, $http) {
     $scope.single.addUser = function () {
         let id = $scope.single.id;
         let name = $scope.single.fullName;
+        let batch = $scope.single.batch;
+        let designation = $scope.single.designation;
 
-        if (id === "" || id === null || name === "" || name === null) {
+        if (id === "" || id === null || name === "" || name === null || batch===null || designation===null) {
             sweetAlert("Please ensure if all fields are filled appropriately");
         } else {
             $scope.single.uploading = true;
@@ -107,7 +109,9 @@ app.controller('userAddController', function ($scope, $http) {
 
             addReq.data.users = [{
                 id: id,
-                name: name
+                name: name,
+                batch: batch,
+                designation: designation
             }];
             $http(addReq).then(function (result) {
                 $scope.single.uploading = false;

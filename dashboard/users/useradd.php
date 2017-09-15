@@ -186,6 +186,13 @@ else {
                                 File
                             </button>
                         </div>
+
+                        <div class="btn-group pull-right">
+                            <a href="../../ext-res/sample.xlsx" class="btn btn-warning">
+                                Sample Excel File
+                            </a>
+                        </div>
+
                         <br>
                         <div class="alert alert-success alert-dismissible" role="alert"
                              ng-show="uploadComplete">
@@ -264,8 +271,23 @@ else {
                                 <input id="full-name" type="text" class="form-control" placeholder="Full Name"
                                        ng-model="single.fullName" tabindex="2">
                             </div>
+                            <div class="form-group">
+                                <label for="batch" class="control-label">
+                                    <h5>Enter Batch *</h5>
+                                </label>
+                                <input id="batch" type="text" class="form-control" placeholder="Batch"
+                                       ng-model="single.batch" tabindex="3">
+                            </div>
+                            <div class="form-group">
+                                <label for="designation" class="control-label">
+                                    <h5>Enter Name *</h5>
+                                </label>
+                                <input id="designation" type="text" class="form-control" placeholder="Designation"
+                                       ng-model="single.designation" tabindex="4">
+                            </div>
+
                             <div class="form-group-lg">
-                                <button type="submit" class="btn btn-success" tabindex="3">Add New User</button>
+                                <button type="submit" class="btn btn-success" tabindex="6">Add New User</button>
                             </div>
                         </form>
                     </div><!-- /.box-body -->

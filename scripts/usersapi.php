@@ -17,20 +17,25 @@ function add_users($users)
 
     $id = "";
     $name = "";
+    $batch = "";
+    $designation = "";
 
     // prepare sql and bind parameters
     $stmt = mysqli_stmt_init($connection);
-    if (mysqli_stmt_prepare($stmt, 'INSERT INTO users (id,name) VALUES (?,?)')) {
-        mysqli_stmt_bind_param($stmt, "ss", $id, $name);
+    if (mysqli_stmt_prepare($stmt, 'INSERT INTO users (id,name,batch,designation) VALUES (?,?,?,?)')) {
+        mysqli_stmt_bind_param($stmt, "ssss", $id, $name,$batch,$designation);
     }
 
     foreach ($users as &$user) {
-        if (isset($user['id']) && isset($user['name'])) {
+        if (isset($user['id']) && isset($user['name']) && isset($user['batch']) && isset($user['designation'])) {
             $id = $user['id'];
             $name = $user['name'];
+            $batch=$user['batch'];
+            $designation=$user['designation'];
+
             mysqli_stmt_execute($stmt);
         } else {
-            $error_msg = "ID_AND_NAME_REQUIRED";
+            $error_msg = "ALL_FIELDS_REQUIRED";
             return json_encode([
                 "success" => false,
                 "error_msg" => $error_msg
