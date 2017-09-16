@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+$path=$_SERVER['DOCUMENT_ROOT'];
 session_start();
 include("../../scripts/sessionvariables.php");
 if ($permission == 1)
@@ -10,6 +11,7 @@ else {
     header("location:../");
     die();
 }
+include($path."/scripts/includejs.php");
 ?>
 
 <html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+$path=$_SERVER['DOCUMENT_ROOT'];
 session_start();
 include("../scripts/sessionvariables.php");
 if ($permission == 1)
@@ -11,6 +12,7 @@ else {
     die();
 }
 include("variables.php");
+include($path."/scripts/includejs.php");
 ?>
 
 <html>
@@ -293,13 +295,6 @@ include("variables.php");
 
 </div><!-- ./wrapper -->
 
-<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="../../bootstrap/js/bootstrap.min.js"></script>
-<script src="../../plugins/fastclick/fastclick.js"></script>
-<script src="../../../../dist//js/app.min.js"></script>
-<script src="../../plugins/sparkline/jquery.sparkline.min.js"></script>
-<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<script src="../../dist/js/sweetalert.min.js"></script>
 
 </body>
 </html>
