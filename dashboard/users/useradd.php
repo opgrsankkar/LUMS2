@@ -41,7 +41,7 @@ else {
     <!-- jquery -->
     <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- excel parser -->
-    <script src="../../dist/js/xlsxjs.full.min.js"></script>
+
 
     <script src="../../dist/js/sweetalert.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../dist/css/sweetalert.css">
