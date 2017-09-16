@@ -86,6 +86,45 @@ function reset_password($username, $password)
     }
 }
 
+function change_password($username, $old_password, $new_password, $check_old_password){
+    global $connection;
+
+    $sql = "SELECT * FROM login WHERE username = '$username'";
+    $result = mysqli_query($connection, $sql);
+    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $count = mysqli_num_rows($result);
+    if($count == 1) {
+        if( !$check_old_password || password_verify($old_password, $row['password'])) {
+            $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
+            $stmt = mysqli_stmt_init($connection);
+            if (mysqli_stmt_prepare($stmt, 'UPDATE login SET password=? WHERE username=?')) {
+                mysqli_stmt_bind_param($stmt, "ss", $hashed_password, $username);
+            }
+            if (mysqli_stmt_execute($stmt)) {
+                return json_encode([
+                    "success" => true
+                ]);
+            } else {
+                return json_encode([
+                    "success" => false,
+                    "error_msg" => mysqli_error($connection)
+                ]);
+            }
+        } else {
+            return json_encode([
+               "success" => false,
+               "message" => "Incorrect Old Password"
+            ]);
+        }
+    } else {
+        return json_encode([
+           "success" => false,
+            "message" => "Username not found"
+        ]);
+    }
+
+}
+
 function delete_staff($username)
 {
     global $connection;
@@ -117,7 +156,6 @@ if (isset($_POST)) {
         case "GET_ALL_STAFF":
             echo get_all_staff();
             break;
-
         case "ADD_STAFF":
             echo add_staff(
                 $postdata['username'],
@@ -141,7 +179,14 @@ if (isset($_POST)) {
                 $postdata['password']
             );
             break;
-
+        case "CHANGE_PASS":
+            echo change_password(
+                $postdata['username'],
+                $postdata['oldPassword'],
+                $postdata['newPassword'],
+                $postdata['checkOldPassword']
+            );
+            break;
         case "DELETE_STAFF":
             echo delete_staff($postdata['username']);
             break;

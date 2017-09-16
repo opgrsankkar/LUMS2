@@ -4,6 +4,8 @@
 
 let app = angular.module('staffApp', ['ngAnimate']);
 app.controller('staffController', function ($scope, $http) {
+    $scope.checkOldPassword = false;
+    $scope.changePassword = {};
     $scope.staffTable = {};
 
     let staffApiURL = '../../scripts/staffapi.php';
@@ -35,6 +37,11 @@ app.controller('staffController', function ($scope, $http) {
         method: 'POST',
         url: staffApiURL,
         data: {"query": "RESET_PASS"}
+    };
+    let changePassReq = {
+        method: 'POST',
+        url: staffApiURL,
+        data: {"query": "CHANGE_PASS"}
     };
 
     /**
@@ -114,7 +121,6 @@ app.controller('staffController', function ($scope, $http) {
 
             $http(addReq).then(function (result) {
                 console.log(result);
-                /*
                 if (result.data.success) {
                     initialize();
                     $('#add-staff-modal').modal('hide');
@@ -124,7 +130,6 @@ app.controller('staffController', function ($scope, $http) {
                     swal("Error", "Please Report to the Development Team", "error");
                     console.log("err1 add error");
                 }
-                */
 
             });
         }
@@ -139,7 +144,7 @@ app.controller('staffController', function ($scope, $http) {
         $http(editReq).then(function (result) {
             if (result.data.success) {
                 $('#edit-staff-modal').modal('hide');
-                sweetAlert("User Details Updated");
+                sweetAlert("User Details Updated", "", "success");
             } else {
                 swal("Error", "Please Report to the Development Team", "error");
                 console.log("err2 edit");
@@ -222,7 +227,35 @@ app.controller('staffController', function ($scope, $http) {
                 });
 
             });
-    }
+    };
+
+    $scope.changePasswordFunction = function () {
+        changePassReq.data.username = $scope.changePassword.username;
+        changePassReq.data.oldPassword = $scope.changePassword.oldPassword;
+        changePassReq.data.newPassword = $scope.changePassword.newPassword;
+        changePassReq.data.checkOldPassword = $scope.checkOldPassword;
+        if (changePassReq.data.username == null || changePassReq.data.username == "" ||
+            ($scope.checkOldPassword && (changePassReq.data.oldPassword == null || changePassReq.data.oldPassword == "" )) ||
+            changePassReq.data.newPassword == null || changePassReq.data.newPassword == "") {
+            swal("Ensure All fields are filled", "", "warning");
+        } else {
+            if ($scope.changePassword.newPassword === $scope.changePassword.repeatNewPassword) {
+                $http(changePassReq).then(function (result) {
+                    if (result.data.success) {
+                        $('#change-password-form')[0].reset();
+                        $('#change-password-modal').modal('hide');
+                        swal("Password Successfully Changed", "", "success");
+                    } else {
+                        swal("Error", result.data.message, "error");
+                    }
+                });
+            }
+        }
+    };
+
+    $scope.changePasswordFillModal = function (username) {
+        $scope.changePassword.username = username;
+    };
 });
 
 app.filter('userPermissionsFilter', function () {
