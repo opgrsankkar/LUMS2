@@ -23,12 +23,10 @@ include($path."/scripts/includejs.php");
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../ext-res/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../ext-res/css/ionicons.min.css">
-    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" type="text/css" href="/dist/css/sweetalert.css">
+    <?php
+        include ($path."/scripts/includecss.php");
+    ?>
+
 
     <style>
         .hover a{
