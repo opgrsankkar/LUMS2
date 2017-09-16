@@ -166,7 +166,7 @@ angular.module("newsApp", ['ngAnimate'])
          * 'addNews( )' - add a news item with a default prompt string
          * and highlighting the newly added item to facilitate easy edit
          */
-        $scope.addNews = function ( numberOfItems ) {
+        $scope.addNews = function (numberOfItems) {
             /**
              * highlighting the newly added item by setting 'prevHighlighted'
              * to one beyond the last element

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-$path=$_SERVER['DOCUMENT_ROOT'];
+$path = $_SERVER['DOCUMENT_ROOT'];
 session_start();
 include("../scripts/sessionvariables.php");
 if ($permission == 1)
@@ -12,7 +12,7 @@ else {
     die();
 }
 include("variables.php");
-include($path."/scripts/includejs.php");
+include($path . "/scripts/includejs.php");
 ?>
 
 <html>
@@ -24,19 +24,26 @@ include($path."/scripts/includejs.php");
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <?php
-        include ($path."/scripts/includecss.php");
+    include($path . "/scripts/includecss.php");
     ?>
 
+    <script>
+        $(document).ready(function () {
+            $(".sidebar-menu-dashboard").addClass("active");
+        });
+    </script>
 
     <style>
-        .hover a{
-        color: #444444;
+        .hover a {
+            color: #444444;
         }
-        .hover a:hover{
+
+        .hover a:hover {
             color: #0c0c0c;
         }
-        .hoverinfo:hover{
-            box-shadow: 0px 4px 3px rgba(0,0,0,0.2);
+
+        .hoverinfo:hover {
+            box-shadow: 0px 4px 3px rgba(0, 0, 0, 0.2);
         }
     </style>
 
@@ -44,97 +51,9 @@ include($path."/scripts/includejs.php");
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-    <header class="main-header">
-
-        <!-- Logo -->
-        <a href="index.php" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b></b></span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Administrator</b></span>
-        </a>
-
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">Toggle navigation</span>
-            </a>
-        </nav>
-    </header>
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p><?php echo $name; ?></p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-
-                </div>
-            </div>
-
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
-                <li class="header">Last Login : <?php echo $lastlogin; ?><br/>Last Login IP : <?php echo $lastip; ?>
-                </li>
-
-                <li class="active">
-                    <a href="index.php">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="users/">
-                        <i class="fa fa-users"></i> <span>Users</span>
-                    </a>
-                </li>
-
-
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-table"></i> <span>Reports</span>
-                        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="reports/report_entrance.php"><i class="fa fa-circle-o"></i> Central Library</a>
-                        </li>
-                        <li><a href="report_digilib.php"><i class="fa fa-circle-o"></i> Digital Library</a></li>
-                    </ul>
-                </li>
-
-
-                <li>
-                    <a href="staff/">
-                        <i class="fa fa-user"></i> <span>Library Staff</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="news/">
-                        <i class="fa fa-newspaper-o"></i> <span>News</span>
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="../../scripts/logout.php">
-                        <i class="fa fa-lock"></i> <span>Logout</span>
-                    </a>
-                </li>
-
-
-            </ul>
-        </section>
-        <!-- /.sidebar -->
-    </aside>
+    <?php
+    include($path . '/dashboard/sidebar-menu.php');
+    ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -146,7 +65,7 @@ include($path."/scripts/includejs.php");
                 <small>Version 1.0</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="/dashboard/index.php">Home</a></li>
                 <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
             </ol>
         </section>
@@ -227,9 +146,8 @@ include($path."/scripts/includejs.php");
             </h4>
 
 
-
             <div class="col-md-4 col-sm-6 col-xs-12 hover">
-                <a href="users/">
+                <a href="/dashboard/users/">
                     <div class="info-box hoverinfo">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
                         <div class="info-box-content">
@@ -241,7 +159,7 @@ include($path."/scripts/includejs.php");
             </div>
 
             <div class="col-md-4 col-sm-6 col-xs-12 hover">
-                <a href="reports/">
+                <a href="/dashboard/reports/">
                     <div class="info-box hoverinfo">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-table"></i></span>
                         <div class="info-box-content">
@@ -253,7 +171,7 @@ include($path."/scripts/includejs.php");
             </div>
 
             <div class="col-md-4 col-sm-6 col-xs-12 hover">
-                <a href="staff/">
+                <a href="/dashboard/staff/">
                     <div class="info-box hoverinfo">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
                         <div class="info-box-content">
@@ -265,7 +183,7 @@ include($path."/scripts/includejs.php");
             </div>
 
             <div class="col-md-4 col-sm-6 col-xs-12 hover">
-                <a href="users/">
+                <a href="/dashboard/users/">
                     <div class="info-box hoverinfo">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-newspaper-o"></i></span>
                         <div class="info-box-content">
