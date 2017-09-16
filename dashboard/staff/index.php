@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php
+$path=$_SERVER['DOCUMENT_ROOT'];
 session_start();
 include("../../scripts/sessionvariables.php");
 if ($permission == 1)
@@ -10,6 +11,7 @@ else {
     header("location:../");
     die();
 }
+include($path."/scripts/includejs.php");
 ?>
 
 <html>
@@ -37,21 +39,9 @@ else {
     <!-- custom css for news page -->
     <link rel="stylesheet" href="staffCustom.css">
 
-
-    <!-- jquery -->
-    <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <!-- excel parser -->
-    <script src="../../dist/js/xlsxjs.full.min.js"></script>
-
-    <script src="../../dist/js/sweetalert.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../dist/css/sweetalert.css">
-    <!-- angular includes -->
-    <script src="../../dist/js/angular.min.js"></script>
-    <script src="../../dist/js/angular-animate.min.js"></script>
-    <!-- angular news app -->
-    <script src="staffApp.js">
 
-    </script>
+
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -197,7 +187,7 @@ else {
                                             </label>
                                             <input id="username" type="text" class="form-control" placeholder="Username"
                                                    ng-model="newStaff.username" ng-change="checkUsernameExists()"
-                                                   autocomplete="false" autofocus="autofocus">
+                                                   autocomplete="false">
                                             <span id="helpBlock"
                                                   class="help-block hidden">Username already exists</span>
                                         </div>
@@ -262,8 +252,7 @@ else {
                                                 <h5>Edit Full name</h5>
                                             </label>
                                             <input id="full-name" type="text" class="form-control"
-                                                   placeholder="Full Name" ng-model="editStaff.fullName"
-                                                   autofocus="autofocus">
+                                                   placeholder="Full Name" ng-model="editStaff.fullName">
                                         </div>
                                         <div class="form-group">
                                             <label for="permission" class="control-label">
@@ -288,57 +277,6 @@ else {
                             </div>
                         </div>
                     </div><!-- /#edit-staff-modal -->
-                    <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                                aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Staff Details</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form id="change-password-form" ng-submit="changePasswordFunction()">
-                                        <div class="form-group">
-                                            <label for="username" class="control-label">
-                                                <h5>Username</h5>
-                                            </label>
-                                            <input id="username" type="text" class="form-control" placeholder="Username"
-                                                   ng-model="changePassword.username" readonly="readonly">
-                                        </div>
-                                        <div class="form-group" ng-show="checkOldPassword">
-                                            <label for="old-password" class="control-label">
-                                                <h5>Enter Old Password</h5>
-                                            </label>
-                                            <input id="old-password" type="password" class="form-control"
-                                                   placeholder="Old Password" ng-model="changePassword.oldPassword">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="new-password" class="control-label">
-                                                <h5>Enter New Password</h5>
-                                            </label>
-                                            <input id="new-password" type="password" class="form-control"
-                                                   placeholder="New Password" ng-model="changePassword.newPassword">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="repeat-new-password" class="control-label">
-                                                <h5>Repeat New Password</h5>
-                                            </label>
-                                            <input id="repeat-new-password" type="password" class="form-control"
-                                                   placeholder="Repeat Password" ng-model="changePassword.repeatNewPassword">
-                                        </div>
-
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button form="change-password-form" type="submit" value="Submit" class="btn btn-primary disable-on-check-repeat">
-                                        Edit Staff Details
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- /#change-password-modal -->
-
                     <table class="table table-bordered table-responsive table-hover" ng-show="staffTable.data.length">
 
                         <thead>
@@ -356,15 +294,8 @@ else {
                             <td>{{s.username}}</td>
                             <td>{{s.name}}</td>
                             <td>
-
-                                <button class="btn btn-warning btn-xs" ng-click="resetPassword(s.username)" ng-show="checkOldPassword || s.username == '<?= $username ?>'">
+                                <button class="btn btn-warning btn-xs" ng-click="resetPassword(s.username)">
                                     Reset Password
-                                </button>
-
-                                <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#change-password-modal"
-                                        ng-click="changePasswordFillModal(s.username)"
-                                        ng-show="!(s.username == '<?= $username ?>') && (!checkOldPassword || s.permission == 3 || s.permission == 4)">
-                                    Change Password
                                 </button>
                             </td>
                             <td>{{s.permission | userPermissionsFilter}}</td>
@@ -403,38 +334,5 @@ else {
 </div>
 <!-- ./wrapper -->
 
-<!-- Bootstrap 3.3.6 -->
-<script src="../../bootstrap/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="../../plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/app.min.js"></script>
-<!-- Sparkline -->
-<script src="../../plugins/sparkline/jquery.sparkline.min.js"></script>
-<!-- jvectormap -->
-<script src="../../plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="../../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- SlimScroll 1.3.0 -->
-<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- ChartJS 1.0.1 -->
-<script src="../../plugins/chartjs/Chart.min.js"></script>
-
-<script>
-    $(document).ready(function () {
-        /**
-         * add event listener to check confirm password entry
-         */
-        $("#repeat-new-password").on("change keyup paste click", function () {
-                if ($('#new-password').val() !== $('#repeat-new-password').val()) {
-                    $('#repeat-new-password').parent().addClass('has-error');
-                    $('.disable-on-check-repeat').prop('disabled', true);
-                } else {
-                    $('#repeat-new-password').parent().removeClass('has-error');
-                    $('.disable-on-check-repeat').prop('disabled', false);
-                }
-            }
-        );
-    });
-</script>
 </body>
 </html>
