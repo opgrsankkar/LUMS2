@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-$path=$_SERVER['DOCUMENT_ROOT'];
+$path = $_SERVER['DOCUMENT_ROOT'];
 session_start();
 include("../../scripts/sessionvariables.php");
 if ($permission == 1)
@@ -11,7 +11,7 @@ else {
     header("location:../");
     die();
 }
-include($path."/scripts/includejs.php");
+include($path . "/scripts/includejs.php");
 ?>
 
 <html>
@@ -23,104 +23,22 @@ include($path."/scripts/includejs.php");
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <?php
-    include ($path."/scripts/includecss.php");
+    include($path . "/scripts/includecss.php");
     ?>
+
+    <script>
+        $(document).ready(function () {
+            $(".sidebar-menu-users").addClass("active");
+        });
+    </script>
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-    <header class="main-header">
-
-        <!-- Logo -->
-        <a href="index.php" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b></b></span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Administrator</b></span>
-        </a>
-
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">Toggle navigation</span>
-            </a>
-        </nav>
-    </header>
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p><?php echo $name; ?></p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-
-                </div>
-            </div>
-
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
-                <li class="header">Last Login : <?php echo $lastlogin; ?><br/>Last Login IP : <?php echo $lastip; ?>
-                </li>
-
-                <li>
-                    <a href="index.php">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                    </a>
-                </li>
-
-                <li class="active">
-                    <a href="users.php">
-                        <i class="fa fa-users"></i> <span>Users</span>
-                    </a>
-                </li>
-
-
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-table"></i> <span>Reports</span>
-                        <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
-        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active"><a href="report_entrance.php"><i class="fa fa-circle-o"></i> Central Library</a>
-                        </li>
-                        <li><a href="report_digilib.php"><i class="fa fa-circle-o"></i> Digital Library</a></li>
-                    </ul>
-                </li>
-
-
-                <li>
-                    <a href="staff.php">
-                        <i class="fa fa-user"></i> <span>Library Staff</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="news.php">
-                        <i class="fa fa-newspaper-o"></i> <span>News</span>
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="../../scripts/logout.php">
-                        <i class="fa fa-lock"></i> <span>Logout</span>
-                    </a>
-                </li>
-
-
-            </ul>
-        </section>
-        <!-- /.sidebar -->
-    </aside>
+    <?php
+    include($path . '/dashboard/sidebar-menu.php');
+    ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -518,27 +436,28 @@ include($path."/scripts/includejs.php");
         $("#users-table-form").ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
                 swal({
-                    title: "Delete?",
-                    text: "Are you sure you want to delete <strong>" + (formData.length - 1) + "</strong> item(s)?",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, delete it!",
-                    closeOnConfirm: false,
-                    html: true
-                },
-                function () {
-                    $.post('/scripts/userDeleteBatchAPI.php', formData, function (result) {
-                        table.ajax.reload();
-                        if (result.success) {
-                            swal("User Deleted", "", "success");
-                        } else {
-                            swal("Error", result.message, "error");
-                        }
+                        title: "Delete?",
+                        text: "Are you sure you want to delete <strong>" + (formData.length - 1) + "</strong> item(s)?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Yes, delete it!",
+                        closeOnConfirm: false,
+                        html: true
+                    },
+                    function () {
+                        $.post('/scripts/userDeleteBatchAPI.php', formData, function (result) {
+                            table.ajax.reload();
+                            if (result.success) {
+                                swal("User Deleted", "", "success");
+                            } else {
+                                swal("Error", result.message, "error");
+                            }
+                        });
                     });
-                });
                 return false;
-            }});
+            }
+        });
     })
 
 </script>
