@@ -5,8 +5,6 @@ session_start();
 include("../../scripts/sessionvariables.php");
 if ($permission == 1)
     include("../../scripts/adminsession.php");
-else if ($permission == 2)
-    include("../../scripts/usersession.php");
 else {
     header("location:../");
     die();

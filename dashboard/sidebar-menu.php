@@ -84,13 +84,20 @@ echo <<<EOD
                         </li>
                     </ul>
                 </li>
+EOD;
 
+if($permission==1) {
+    echo <<<EOD
 
                 <li class="sidebar-menu-staff">
                     <a href="/dashboard/staff/">
                         <i class="fa fa-user"></i> <span>Library Staff</span>
                     </a>
                 </li>
+EOD;
+}
+
+echo <<<EOD
 
                 <li class="sidebar-menu-news">
                     <a href="/dashboard/news/">

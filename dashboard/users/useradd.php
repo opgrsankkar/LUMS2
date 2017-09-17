@@ -61,78 +61,86 @@ include($path . "/scripts/includejs.php");
 
         <!-- Main content -->
         <section class="row content" ng-app="usersApp" ng-controller="userAddController">
-            <div class="col-sm-8">
-                <div class="box box-success">
-                    <div class="box-header">
-                        <h4>Add Batch of Users</h4>
-                    </div><!-- /.box-header-->
-                    <div class="box-body">
-                        <div class="btn-group">
-                            <label class="btn btn-success btn-file">
-                                Select File <input onchange="handleFileSelect(event)" type="file" name="files[]"
-                                                   style="display: none;">
-                            </label>
-                            <button id="load-data-btn" class="btn btn-success" ng-click="loadData()" disabled>
-                                Load File
-                            </button>
-                            <button id="upload-data-btn" class="btn btn-success" ng-click="uploadData()"
-                                    disabled>Upload
-                                File
-                            </button>
-                        </div>
 
-                        <br>
-                        <div class="alert alert-success alert-dismissible" role="alert"
-                             ng-show="uploadComplete">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span>
-                            </button>
-                            Upload Complete
-                        </div>
-                        <div id="uploading" class="alert alert-info" role="alert" ng-show="uploading">
-                            Uploading...
-                        </div>
+            <?php if ($permission == 1) {
+                ?>
 
-                        <div class="well" ng-show="!usersTable.numberOfRecords">
-                            <h5>Steps to upload Excel files</h5>
-                            <ol>
-                                <li>Select the '.xls' file</li>
-                                <li>Load the file</li>
-                                <li>Upload the file</li>
-                            </ol>
-                            <a href="../../ext-res/sample.xlsx">
-                                <u>Sample Excel File</u>
-                            </a>
+                <div class="col-sm-8">
+                    <div class="box box-success">
+                        <div class="box-header">
+                            <h4>Add Batch of Users</h4>
+                        </div><!-- /.box-header-->
+                        <div class="box-body">
+                            <div class="btn-group">
+                                <label class="btn btn-success btn-file">
+                                    Select File <input onchange="handleFileSelect(event)" type="file" name="files[]"
+                                                       style="display: none;">
+                                </label>
+                                <button id="load-data-btn" class="btn btn-success" ng-click="loadData()" disabled>
+                                    Load File
+                                </button>
+                                <button id="upload-data-btn" class="btn btn-success" ng-click="uploadData()"
+                                        disabled>Upload
+                                    File
+                                </button>
+                            </div>
 
-                        </div><!-- /.well -->
+                            <br>
+                            <div class="alert alert-success alert-dismissible" role="alert"
+                                 ng-show="uploadComplete">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span>
+                                </button>
+                                Upload Complete
+                            </div>
+                            <div id="uploading" class="alert alert-info" role="alert" ng-show="uploading">
+                                Uploading...
+                            </div>
 
-                        <div id="output" ng-show="usersTable.numberOfRecords">
-                            <table>
-                                <caption class="page-header">There are {{usersTable.numberOfRecords}} records in the
-                                    uploaded
-                                    sheet
-                                </caption>
-                                <thead>
-                                <tr>
-                                    <th>S.No.</th>
-                                    <th ng-repeat="key in usersTable.keys">
-                                        {{key}}
-                                    </th>
-                                </tr>
-                                </thead>
+                            <div class="well" ng-show="!usersTable.numberOfRecords">
+                                <h5>Steps to upload Excel files</h5>
+                                <ol>
+                                    <li>Select the '.xls' file</li>
+                                    <li>Load the file</li>
+                                    <li>Upload the file</li>
+                                </ol>
+                                <a href="../../ext-res/sample.xlsx">
+                                    <u>Sample Excel File</u>
+                                </a>
 
-                                <tbody>
-                                <tr ng-repeat="user in usersTable.data">
-                                    <td>{{$index + 1}}</td>
-                                    <td ng-repeat="key in usersTable.keys">{{user[key]}}</td>
-                                </tr>
-                                </tbody>
+                            </div><!-- /.well -->
 
-                            </table>
-                        </div>
-                    </div><!-- /.box-body-->
-                </div><!-- box -->
-            </div><!-- /.col-sm-8 -->
+                            <div id="output" ng-show="usersTable.numberOfRecords">
+                                <table>
+                                    <caption class="page-header">There are {{usersTable.numberOfRecords}} records in the
+                                        uploaded
+                                        sheet
+                                    </caption>
+                                    <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th ng-repeat="key in usersTable.keys">
+                                            {{key}}
+                                        </th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr ng-repeat="user in usersTable.data">
+                                        <td>{{$index + 1}}</td>
+                                        <td ng-repeat="key in usersTable.keys">{{user[key]}}</td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div><!-- /.box-body-->
+                    </div><!-- box -->
+                </div><!-- /.col-sm-8 -->
+                <?php
+            }
+            ?>
+
             <div class="col-sm-4">
                 <div class="box box-success">
                     <div class="box-header">

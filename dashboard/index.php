@@ -170,17 +170,24 @@ include($path . "/scripts/includejs.php");
                 </a>
             </div>
 
-            <div class="col-md-4 col-sm-6 col-xs-12 hover">
-                <a href="/dashboard/staff/">
-                    <div class="info-box hoverinfo">
-                        <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Library Staff</span>
-                            <span class="info-box-number">Manage Library Staff</span>
+            <?php
+            if ($permission == 1) {
+                ?>
+
+                <div class="col-md-4 col-sm-6 col-xs-12 hover">
+                    <a href="/dashboard/staff/">
+                        <div class="info-box hoverinfo">
+                            <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Library Staff</span>
+                                <span class="info-box-number">Manage Library Staff</span>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>
+                <?php
+            }
+            ?>
 
             <div class="col-md-4 col-sm-6 col-xs-12 hover">
                 <a href="/dashboard/users/">
