@@ -6,7 +6,8 @@
  * Time: 6:26 PM
  */
 session_start();
-include("../scripts/digilibsession.php");
+$path=$_SERVER['DOCUMENT_ROOT'];
+include($path."/scripts/digilibsession.php");
 if (isset($_POST)) {
     header('Content-Type: application/json');
 

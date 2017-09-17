@@ -1,6 +1,7 @@
 <?php
 session_start();
-include("../scripts/entrancesession.php");
+$path=$_SERVER['DOCUMENT_ROOT'];
+include($path."/scripts/entrancesession.php");
 
 if( $_POST ){
 
@@ -64,12 +65,12 @@ if( $_POST ){
                 <?php if($status=='ENTRY'){?>
                     <div class="widget-user-header bg-green">
                         <div class="col-md-3">
-                            <img class="img-rounded img-responsive" src="../../ext-res/png/512/android-social-user.png" onError="this.onerror=null;this.src='../../ext-res/png/512/android-social-user.png';" alt="User Avatar">
+                            <img class="img-rounded img-responsive" src="/ext-res/png/512/android-social-user.png" onError="this.onerror=null;this.src='/ext-res/png/512/android-social-user.png';" alt="User Avatar">
                         </div>
                 <?php }else if($status=='EXIT'){?>
                     <div class="widget-user-header bg-red">
                         <div class="col-md-3">
-                            <img class="img-rounded img-responsive" src="../../ext-res/png/512/android-social-user.png" onError="this.onerror=null;this.src='../../ext-res/png/512/android-social-user.png';" alt="User Avatar">
+                            <img class="img-rounded img-responsive" src="/ext-res/png/512/android-social-user.png" onError="this.onerror=null;this.src='/ext-res/png/512/android-social-user.png';" alt="User Avatar">
                         </div>
                 <?php }else{?>
                     <div class="widget-user-header bg-yellow">

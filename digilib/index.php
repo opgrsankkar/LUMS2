@@ -1,5 +1,7 @@
 <?php
-    include("../scripts/db.php");
+session_start();
+$path=$_SERVER['DOCUMENT_ROOT'];
+include($path."/scripts/digilibsession.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,28 +11,21 @@
     <title>LUMS | Digilib</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../ext-res/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="../../ext-res/css/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="../../dist/css/lums.css"/>
-    <link rel="stylesheet" href="../../dist/css/site.css">
 
-    <script type="text/javascript" src="../../dist/js/fullscreen/jquery.min.js"></script>
-	<script type="text/javascript" src="../../dist/js/fullscreen/release/jquery.fullscreen.min.js"></script>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/ext-res/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/ext-res/css/ionicons.min.css">
+    <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/dist/css/lums.css"/>
+    <link rel="stylesheet" href="/dist/css/site.css">
+    <link rel="stylesheet" href="/dist/css/sweetalert.css">
 
-    <!--<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>-->
-    <script src="../../bootstrap/js/bootstrap.min.js"></script>
-
-    <script src="../../dist/js/news/jquery.bootstrap.newsbox.min.js"></script>
-    <script src="../../dist/js/news/script.js"></script>
-
-    <script src="../../dist/js/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../dist/css/sweetalert.css">
+    <script src="/dist/js/fullscreen/jquery.min.js"></script>
+    <script src="/dist/js/fullscreen/release/jquery.fullscreen.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/dist/js/news/jquery.bootstrap.newsbox.min.js"></script>
+    <script src="/dist/js/news/script.js"></script>
+    <script src="/dist/js/sweetalert.min.js"></script>
 
 </head>
 
@@ -42,7 +37,7 @@
 
     <div class="idcard-logo">
         <div class="col-md-3">
-            <img src="../ext-res/amrita.png" height="100px" width="130px">
+            <img src="/ext-res/amrita.png" height="100px" width="130px">
         </div>
 
         <div class="col-md-6">
@@ -50,7 +45,7 @@
         </div>
 
         <div class="col-md-3">
-            <img src="../ext-res/AMMA.png" height="100px" width="100px">
+            <img src="/ext-res/AMMA.png" height="100px" width="100px">
         </div>
 
         <div class="col-md-12">
@@ -192,7 +187,7 @@
                             }, function (isConfirm) {
                                 if (isConfirm) {
                                     $.ajax({
-                                        url: "../scripts/logout.php",
+                                        url: "/scripts/logout.php",
                                         type: "GET"
                                     }).done(function (data) {
                                         window.location = '/';
@@ -228,7 +223,7 @@
 
                     })
                     .fail(function(){
-                        alert('Submit Failed ...');
+                        alert('Submit Failed.');
                     });
             });
 
