@@ -15,12 +15,14 @@
 
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <!-- Bootstrap 3.3.6 -->
-        <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
-        <script src="../../dist/js/sweetalert.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="../../dist/css/sweetalert.css">
+
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
+        <link rel="stylesheet" href="/dist/css/sweetalert.css">
+
+        <script src="/dist/js/sweetalert.min.js"></script>
+        <script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
 
     <body class="hold-transition login-page">
 
@@ -86,11 +88,6 @@
         </div>
     </div>
 
-
-    <!-- jQuery 2.2.3 -->
-    <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <!-- Bootstrap 3.3.6 -->
-    <script src="../../bootstrap/js/bootstrap.min.js"></script>
 
     </body>
     </html>
