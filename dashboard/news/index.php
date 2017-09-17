@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-$path=$_SERVER['DOCUMENT_ROOT'];
+$path = $_SERVER['DOCUMENT_ROOT'];
 session_start();
 include("../../scripts/sessionvariables.php");
 if ($permission == 1)
@@ -11,7 +11,7 @@ else {
     header("location:../");
     die();
 }
-include($path."/scripts/includejs.php");
+include($path . "/scripts/includejs.php");
 ?>
 
 <html>
@@ -23,108 +23,26 @@ include($path."/scripts/includejs.php");
 
 
     <?php
-    include ($path."/scripts/includecss.php");
+    include($path . "/scripts/includecss.php");
     ?>
+
+    <script>
+        $(document).ready(function () {
+            $(".sidebar-menu-news").addClass("active");
+        });
+    </script>
 
     <!-- custom css for news page -->
     <link rel="stylesheet" href="newsCustom.css">
-
 
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-    <header class="main-header">
-
-        <!-- Logo -->
-        <a href="../index.php" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b></b></span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Administrator</b></span>
-        </a>
-
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">Toggle navigation</span>
-            </a>
-        </nav>
-    </header>
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p><?php echo $name; ?></p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-
-                </div>
-            </div>
-
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
-                <li class="header">Last Login : <?php echo $lastlogin; ?><br/>Last Login IP : <?php echo $lastip; ?>
-                </li>
-
-                <li>
-                    <a href="../">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="../users/">
-                        <i class="fa fa-users"></i> <span>Users</span>
-                    </a>
-                </li>
-
-
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-table"></i> <span>Reports</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="report_entrance.php"><i class="fa fa-circle-o"></i> Central Library</a></li>
-                        <li><a href="report_digilib.php"><i class="fa fa-circle-o"></i> Digital Library</a></li>
-                    </ul>
-                </li>
-
-
-                <li>
-                    <a href="../staff">
-                        <i class="fa fa-user"></i> <span>Library Staff</span>
-                    </a>
-                </li>
-
-                <li class="active">
-                    <a href=".">
-                        <i class="fa fa-newspaper-o"></i> <span>News</span>
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="../../scripts/logout.php">
-                        <i class="fa fa-lock"></i> <span>Logout</span>
-                    </a>
-                </li>
-
-
-            </ul>
-        </section>
-        <!-- /.sidebar -->
-    </aside>
+    <?php
+    include($path . '/dashboard/sidebar-menu.php');
+    ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -154,19 +72,25 @@ include($path."/scripts/includejs.php");
                             <input type="number" min="1" class="form-control" ng-model="numToAdd"
                                    title="Number of News Items to add">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button" ng-click="addNews(numToAdd)">Add News</button>
+                                <button class="btn btn-primary" type="button"
+                                        ng-click="addNews(numToAdd)">Add News</button>
                             </span>
                         </div><!-- /input-group -->
-                        <div><small>number of items to add</small></div>
+                        <div>
+                            <small>number of items to add</small>
+                        </div>
                     </div><!-- /.col-lg-6 -->
 
                     <div class="col-lg-6">
                         <div class="input-group">
                             <span class="input-group-btn">
-                                <button class="btn btn-danger" type="button" ng-click="deleteNewsItems()">Delete News</button>
+                                <button class="btn btn-danger" type="button"
+                                        ng-click="deleteNewsItems()">Delete News</button>
                             </span>
                         </div><!-- /input-group -->
-                        <div><small>check items to delete</small></div>
+                        <div>
+                            <small>check items to delete</small>
+                        </div>
                     </div><!-- /.col-lg-6 -->
                 </div><!-- /#add-delete-group -->
 
@@ -193,7 +117,8 @@ include($path."/scripts/includejs.php");
                 <div class="page-header">
                     <h2>Edit news</h2>
                 </div>
-                <textarea id="edit-area" class="col-lg-12 form-control" rows="10" ng-model="currNews" autofocus></textarea>
+                <textarea id="edit-area" class="col-lg-12 form-control" rows="10" ng-model="currNews"
+                          autofocus></textarea>
                 <button id="save" ng-click="updateNewsItem(currNews)" class="btn btn-primary">Save</button>
             </div>
         </section>
@@ -203,7 +128,8 @@ include($path."/scripts/includejs.php");
         <div class="pull-right hidden-xs">
             <b>Version</b> 1.0.0
         </div>
-        <strong>Copyright &copy; <a href="http://sridarshan.tk">Sri Darshan S</a>, Sankkara Narayanan.</strong> All rights
+        <strong>Copyright &copy; <a href="http://sridarshan.tk">Sri Darshan S</a>, Sankkara Narayanan.</strong> All
+        rights
         reserved.
     </footer>
 
