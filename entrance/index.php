@@ -1,7 +1,7 @@
 <?php
 session_start();
-$path=$_SERVER['DOCUMENT_ROOT'];
-include($path."/scripts/entrancesession.php");
+$path = $_SERVER['DOCUMENT_ROOT'];
+include($path . "/scripts/entrancesession.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,7 +21,7 @@ include($path."/scripts/entrancesession.php");
     <link rel="stylesheet" href="/dist/css/sweetalert.css">
 
     <script src="/dist/js/fullscreen/jquery.min.js"></script>
-	<script src="/dist/js/fullscreen/release/jquery.fullscreen.min.js"></script>
+    <script src="/dist/js/fullscreen/release/jquery.fullscreen.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/dist/js/news/jquery.bootstrap.newsbox.min.js"></script>
     <script src="/dist/js/news/script.js"></script>
@@ -29,7 +29,6 @@ include($path."/scripts/entrancesession.php");
 
 
 </head>
-
 
 
 <body class="hold-transition lockscreen bgcol idcard" bgcolor="white">
@@ -42,7 +41,8 @@ include($path."/scripts/entrancesession.php");
         </div>
 
         <div class="col-md-6">
-        <b>Central Library</b><br/><small>Amrita Vishwa Vidyapeetham</small>
+            <b>Central Library</b><br/>
+            <small>Amrita Vishwa Vidyapeetham</small>
         </div>
 
         <div class="col-md-3">
@@ -50,34 +50,31 @@ include($path."/scripts/entrancesession.php");
         </div>
 
         <div class="col-md-12">
-                <div class="hr-fade"></div>
+            <div class="hr-fade"></div>
         </div>
     </div>
 
 
-
-
-
     <div class="col-md-6 news-panel">
         <div class="panel panel-default">
-            <div class="panel-heading"> <span class="glyphicon glyphicon-list-alt"></span><b>News</b></div>
+            <div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span><b>News</b></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-xs-12">
                         <ul class="demo2">
 
                             <?php
-                            $news_sql = mysqli_query($connection,"select * from news");
+                            $news_sql = mysqli_query($connection, "select * from news");
                             $count = mysqli_num_rows($news_sql);
-                            while($row = mysqli_fetch_assoc($news_sql)) {
-                                print '<li class="news-item"><div class="news-item-div">'.$row['news'].'</div></li>';
+                            while ($row = mysqli_fetch_assoc($news_sql)) {
+                                print '<li class="news-item"><div class="news-item-div">' . $row['news'] . '</div></li>';
                             }
                             ?>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="panel-footer"> </div>
+            <div class="panel-footer"></div>
         </div>
         <div class="col-lg-6 col-xs-12">
             <div class="small-box bg-aqua">
@@ -117,13 +114,15 @@ include($path."/scripts/entrancesession.php");
             Scan your ID card
         </h1>
 
-        <div class="idcard-item" id="form-actual" >
+        <div class="idcard-item" id="form-actual">
 
             <form class="idcard-credentials" method="post" id="reg-form" autocomplete="off">
                 <div class="input-group idcard-group">
-                    <input id="idcard-number" type="text" class="form-control" name="id" placeholder="Roll Number" autofocus>
+                    <input id="idcard-number" type="text" class="form-control" name="id" placeholder="Roll Number"
+                           autofocus>
                     <div class="input-group-btn">
-                        <button type="button" class="btn" tabindex="-1"><i class="fa fa-arrow-right text-muted"></i></button>
+                        <button type="button" class="btn" tabindex="-1"><i class="fa fa-arrow-right text-muted"></i>
+                        </button>
                     </div>
                 </div>
             </form>
@@ -139,12 +138,12 @@ include($path."/scripts/entrancesession.php");
     <script type="text/javascript">
 
 
-        window.onload = function(){
-           checkFullScreen();
+        window.onload = function () {
+            checkFullScreen();
         }
 
         function checkFullScreen() {
-            if($.fullscreen.isNativelySupported() && !$.fullscreen.isFullScreen()){
+            if ($.fullscreen.isNativelySupported() && !$.fullscreen.isFullScreen()) {
                 swal({
                         title: "Go Fullscreen?",
                         text: "You must go Full Screen to continue!",
@@ -153,7 +152,7 @@ include($path."/scripts/entrancesession.php");
                         confirmButtonText: "Yes, do it!",
                         closeOnConfirm: true
                     },
-                    function(){
+                    function () {
                         $('#fullscreen').fullscreen();
                         $('#idcard-number').focus();
                         return false;
@@ -162,7 +161,7 @@ include($path."/scripts/entrancesession.php");
         }
 
 
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             // submit form using $.ajax() method
 
@@ -200,7 +199,7 @@ include($path."/scripts/entrancesession.php");
                 });
             });
             var resetvariable;
-            $('#reg-form').submit(function(e){
+            $('#reg-form').submit(function (e) {
 
                 e.preventDefault(); // Prevent Default Submission
 
@@ -209,39 +208,39 @@ include($path."/scripts/entrancesession.php");
                     type: 'POST',
                     data: $(this).serialize() // it will serialize the form data
                 })
-                    .done(function(data){
+                    .done(function (data) {
                         var elem = document.getElementById("idcard-number"); // Get text field
                         elem.value = "";
-                        $('#form-content').fadeOut('fast', function(){
-                           $('#form-content').fadeIn('fast').html(data);
+                        $('#form-content').fadeOut('fast', function () {
+                            $('#form-content').fadeIn('fast').html(data);
                         });
 
                         clearTimeout(resetvariable);
-                        resetvariable=setTimeout(function(){
+                        resetvariable = setTimeout(function () {
                             startresettimer();
-                            }, 2000);
+                        }, 2000);
 
 
                     })
-                    .fail(function(){
+                    .fail(function () {
                         alert('Submit Failed.');
                     });
             });
 
-            function startresettimer(){
-                $('#form-content').fadeOut('fast',null);
+            function startresettimer() {
+                $('#form-content').fadeOut('fast', null);
             }
         });
 
 
-        $(function() {
+        $(function () {
 
-            $('#fullscreen .exitfullscreen').click(function() {
+            $('#fullscreen .exitfullscreen').click(function () {
                 $.fullscreen.exit();
                 return false;
             });
 
-           $(document).bind('fscreenchange', function(e, state, elem) {
+            $(document).bind('fscreenchange', function (e, state, elem) {
                 if ($.fullscreen.isFullScreen()) {
 
                 } else {
@@ -251,27 +250,29 @@ include($path."/scripts/entrancesession.php");
         });
 
         updateCountTimerTime = 1000 * 60 * 0.5;
-        function updateCurrentlyIn(){
-            $.ajax({
-            type: "POST",
-            url: 'update_currently_in.php',
-            dataType: 'json',
-            data: {functionname: 'get_currently_in'},
 
-            success: function (obj, textstatus) {
-                        if( !('error' in obj) ) {
-                            currently_in = obj.result1;
-                            visited_today = obj.result2;
-                            $("#currently-in").text(currently_in);
-                            $("#visited-today").text(visited_today);
-                        }
-                        else {
-                            console.log(obj.error);
-                        }
+        function updateCurrentlyIn() {
+            $.ajax({
+                type: "POST",
+                url: 'update_currently_in.php',
+                dataType: 'json',
+                data: {functionname: 'get_currently_in'},
+
+                success: function (obj, textstatus) {
+                    if (!('error' in obj)) {
+                        currently_in = obj.result1;
+                        visited_today = obj.result2;
+                        $("#currently-in").text(currently_in);
+                        $("#visited-today").text(visited_today);
                     }
+                    else {
+                        console.log(obj.error);
+                    }
+                }
             });
         }
-        setInterval(updateCurrentlyIn,updateCountTimerTime);
+
+        setInterval(updateCurrentlyIn, updateCountTimerTime);
 
         function startTimer(duration, display) {
             var timer = duration, minutes, seconds;
@@ -289,7 +290,8 @@ include($path."/scripts/entrancesession.php");
                 }
             }, 1000);
         }
-        timerTime = updateCountTimerTime/1000 - 1;
+
+        timerTime = updateCountTimerTime / 1000 - 1;
         startTimer(timerTime, $("#currently-in-timer"));
         startTimer(timerTime, $("#visited-today-timer"));
     </script>

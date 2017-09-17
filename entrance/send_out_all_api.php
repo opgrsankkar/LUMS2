@@ -6,8 +6,8 @@
  * Time: 6:26 PM
  */
 session_start();
-$path=$_SERVER['DOCUMENT_ROOT'];
-include($path."/scripts/entrancesession.php");
+$path = $_SERVER['DOCUMENT_ROOT'];
+include($path . "/scripts/entrancesession.php");
 if (isset($_POST)) {
     header('Content-Type: application/json');
 
