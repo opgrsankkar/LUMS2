@@ -2,11 +2,11 @@
 <?php
 $path = $_SERVER['DOCUMENT_ROOT'];
 session_start();
-include("../../scripts/sessionvariables.php");
+include($path."/scripts/sessionvariables.php");
 if ($permission == 1)
-    include("../../scripts/adminsession.php");
+    include($path."/scripts/adminsession.php");
 else if ($permission == 2)
-    include("../../scripts/usersession.php");
+    include($path."/scripts/usersession.php");
 else {
     header("location:../");
     die();
@@ -166,7 +166,7 @@ include($path . "/scripts/includejs.php");
         "lengthMenu": [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, "All"]],
         "processing": true,
         "serverSide": true,
-        "sAjaxSource": "../../scripts/entrance_report.php",
+        "sAjaxSource": "/scripts/entrance_report.php",
         "sServerMethod": "POST",
         "order": [[3, "desc"]],
         "fnServerParams": function (aoData) {

@@ -37,7 +37,7 @@ angular.module('usersApp', ['ngAnimate'])
         $scope.single.uploading = false;
         $scope.single.uploaded = false;
 
-        let usersApiURL = '../../scripts/usersapi.php';
+        let usersApiURL = '/scripts/usersapi.php';
         let updateReq = {
             method: 'POST',
             url: usersApiURL,

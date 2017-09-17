@@ -1,11 +1,12 @@
 <?php
 
 session_start();
-include("../scripts/sessionvariables.php");
+$path=$_SERVER['DOCUMENT_ROOT'];
+include($path."/scripts/sessionvariables.php");
 if ($permission == 1)
-    include("../scripts/adminsession.php");
+    include($path."/scripts/adminsession.php");
 else if ($permission == 2)
-    include("../scripts/usersession.php");
+    include($path."/scripts/usersession.php");
 else {
     header("location:../");
     die();

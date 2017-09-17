@@ -14,7 +14,7 @@ angular.module("newsApp", ['ngAnimate'])
             unHighlighted: 'unHighlighted'
         };
 
-        let newsApiURL = '../../scripts/newsapi.php';
+        let newsApiURL = '/scripts/newsapi.php';
 
         /**
          * 'currNews'

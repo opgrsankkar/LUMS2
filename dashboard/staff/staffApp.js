@@ -8,7 +8,7 @@ app.controller('staffController', function ($scope, $http) {
     $scope.changePassword = {};
     $scope.staffTable = {};
 
-    let staffApiURL = '../../scripts/staffapi.php';
+    let staffApiURL = '/scripts/staffapi.php';
 
     let initReq = {
         method: 'POST',
