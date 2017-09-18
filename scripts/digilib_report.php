@@ -1,5 +1,15 @@
 <?php
-include ("db.php");
+session_start();
+include("sessionvariables.php");
+if ($permission == 1)
+    include("adminsession.php");
+else if ($permission == 2)
+    include("usersession.php");
+else {
+    header("location:../");
+    die();
+}
+//include ("db.php");
 require_once dirname(__FILE__) . '../../plugins/PhpExcel/PHPExcel.php';
 
 /*

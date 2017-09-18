@@ -5,4 +5,5 @@ unset($_SESSION['username']);
 unset($_SESSION['lastlogin']);
 unset($_SESSION['lastip']);
 unset($_SESSION['permission']);
-header("Location: ../../../");
+$path=$_SERVER['DOCUMENT_ROOT'];
+header("Location: $path");
