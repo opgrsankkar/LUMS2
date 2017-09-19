@@ -173,14 +173,14 @@ include($path . "/scripts/includejs.php");
                             </div>
                             <div class="form-group">
                                 <label for="batch" class="control-label">
-                                    <h5>Enter Batch *</h5>
+                                    <h5>Enter Batch</h5>
                                 </label>
                                 <input id="batch" type="text" class="form-control" placeholder="Batch"
                                        ng-model="single.batch" tabindex="3">
                             </div>
                             <div class="form-group">
                                 <label for="designation" class="control-label">
-                                    <h5>Enter Name *</h5>
+                                    <h5>Enter Designation</h5>
                                 </label>
                                 <input id="designation" type="text" class="form-control" placeholder="Designation"
                                        ng-model="single.designation" tabindex="4">

@@ -169,6 +169,7 @@ app.controller('staffController', function ($scope, $http) {
     };
 
     $scope.deleteStaff = function (username) {
+        var previousWindowKeyDown = window.onkeydown;
         swal({
                 title: "Are you sure you want to delete?",
                 // language=HTML
@@ -180,23 +181,26 @@ app.controller('staffController', function ($scope, $http) {
                 closeOnConfirm: false,
                 html: true
             },
-            function () {
-                deleteReq.data.username = username;
-                $http(deleteReq).then(function (result) {
-                    if (result.data.success) {
-                        swal("Deleted!", "User has been deleted.", "success")
-                    } else {
-                        swal("Error", "Please Report to the Development Team", "error");
-                        console.log("err3 delete");
-                    }
-                    initialize();
-                });
-
+            function (isConfirm) {
+                window.onkeydown = previousWindowKeyDown;
+                if (isConfirm) {
+                    deleteReq.data.username = username;
+                    $http(deleteReq).then(function (result) {
+                        if (result.data.success) {
+                            swal("Deleted!", "User has been deleted.", "success")
+                        } else {
+                            swal("Error", "Please Report to the Development Team", "error");
+                            console.log("err3 delete");
+                        }
+                        initialize();
+                    });
+                }
             }
         );
     };
 
     $scope.resetPassword = function (username) {
+        var previousWindowKeyDown = window.onkeydown;
         swal({
                 title: "Are you sure you want to Reset?",
                 // language=HTML
@@ -208,24 +212,27 @@ app.controller('staffController', function ($scope, $http) {
                 closeOnConfirm: false,
                 html: true
             },
-            function () {
-                let newPassword = generateRandomPassword();
-                resetPassReq.data.username = username;
-                resetPassReq.data.password = newPassword;
-                $http(resetPassReq).then(function (result) {
-                    if (result.data.success) {
-                        swal({
-                            title: "Password has been Reset",
-                            text: "New Password <h3>" + newPassword + "</h3> Please make a note of it",
-                            html: true
-                        });
-                    } else {
-                        swal("Error", "Please Report to the Development Team", "error");
-                        console.log("err4 pass reset error");
-                    }
-                    initialize();
-                });
+            function (isConfirm) {
+                window.onkeydown = previousWindowKeyDown;
 
+                if (isConfirm) {
+                    let newPassword = generateRandomPassword();
+                    resetPassReq.data.username = username;
+                    resetPassReq.data.password = newPassword;
+                    $http(resetPassReq).then(function (result) {
+                        if (result.data.success) {
+                            swal({
+                                title: "Password has been Reset",
+                                text: "New Password <h3>" + newPassword + "</h3> Please make a note of it",
+                                html: true
+                            });
+                        } else {
+                            swal("Error", "Please Report to the Development Team", "error");
+                            console.log("err4 pass reset error");
+                        }
+                        initialize();
+                    });
+                }
             });
     };
 

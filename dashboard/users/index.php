@@ -387,9 +387,12 @@ include($path . "/scripts/includejs.php");
         $('#edit-user-modal #batch').val(batch);
         $('#edit-user-modal #designation').val(designation);
         $('#edit-user-modal').modal();
+
+
     }
 
     function deleteUser(id) {
+        var previousWindowKeyDown = window.onkeydown;
         swal({
                 title: "Delete?",
                 text: "Are you sure you want to delete user?",
@@ -400,15 +403,18 @@ include($path . "/scripts/includejs.php");
                 closeOnConfirm: false,
                 html: true
             },
-            function () {
-                $.post('/scripts/userDelete.php', {id: id}, function (result) {
-                    table.ajax.reload();
-                    if (result.success) {
-                        swal("User Deleted", "", "success");
-                    } else {
-                        swal("Error", result.message, "error");
-                    }
-                });
+            function (isConfirm) {
+                window.onkeydown = previousWindowKeyDown;
+                if (isConfirm) {
+                    $.post('/scripts/userDelete.php', {id: id}, function (result) {
+                        table.ajax.reload();
+                        if (result.success) {
+                            swal("User Deleted", "", "success");
+                        } else {
+                            swal("Error", result.message, "error");
+                        }
+                    });
+                }
             }
         );
     }
