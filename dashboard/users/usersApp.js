@@ -68,7 +68,7 @@ angular.module('usersApp', ['ngAnimate'])
             content = objectKeysToLowerCase(content);
             $scope.usersTable.data = content;
             let keys = Object.keys(content[0]);
-            if (keys.length === 4 && keys[0] === "id" && keys[1] === "name" && keys[2] === "batch" && keys[3] === "designation") {
+            if (keys.length >= 2 && keys[0] === "id" && keys[1] === "name" ) {
                 $scope.usersTable.keys = keys;
                 $scope.usersTable.numberOfRecords = Object.keys($scope.usersTable.data).length;
             } else {

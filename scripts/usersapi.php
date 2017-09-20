@@ -27,11 +27,11 @@ function add_users($users)
     }
 
     foreach ($users as &$user) {
-        if (isset($user['id']) && isset($user['name']) && isset($user['batch']) && isset($user['designation'])) {
+        if (isset($user['id']) && isset($user['name'])) {
             $id = $user['id'];
             $name = $user['name'];
-            $batch=$user['batch'];
-            $designation=$user['designation'];
+            $batch = (isset($user['batch'])?$user['batch']:" ");
+            $designation = (isset($user['designation'])?$user['designation']:" ");
 
             mysqli_stmt_execute($stmt);
         } else {

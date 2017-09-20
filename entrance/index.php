@@ -120,7 +120,7 @@ include($path . "/scripts/entrancesession.php");
 
             <form class="idcard-credentials" method="post" id="reg-form" autocomplete="off">
                 <div class="input-group idcard-group">
-                    <input id="idcard-number" type="text" class="form-control" name="id" placeholder="Roll Number"
+                    <input id="idcard-number" type="text" class="form-control" name="id" placeholder="Roll Number" onfocusout="focusBack()"
                            autofocus>
                     <div class="input-group-btn">
                         <button type="button" class="btn" tabindex="-1"><i class="fa fa-arrow-right text-muted"></i>
@@ -137,11 +137,14 @@ include($path . "/scripts/entrancesession.php");
     </div>
 
 
-    <div class="col-md-12">
-        <div class="hr-fade"></div>
-        &nbsp;&nbsp;Site designed and developed by Sri Darshan S, Sankkara Narayanan R-(B.Tech Cse2014-18)
-    </div>
-
+    <footer style="position: fixed; bottom: 0; margin-left: 0" class="main-footer col-sm-12">
+        <div class="pull-right hidden-xs">
+            Site designed and developed by <b>Sri Darshan S</b>, <b>Sankkara Narayanan R</b> (B.Tech CSE 2014-18)
+        </div>
+        <strong>Copyright &copy; <a href="#" tabindex="-1">LUMS 2.0</a></strong> All
+        rights
+        reserved.
+    </footer>
     <script type="text/javascript">
 
 
@@ -149,6 +152,11 @@ include($path . "/scripts/entrancesession.php");
             checkFullScreen();
         }
 
+		function focusBack(){
+			var elem = document.getElementById("idcard-number"); // Get text field
+			elem.focus();
+        }
+		
         function checkFullScreen() {
             if ($.fullscreen.isNativelySupported() && !$.fullscreen.isFullScreen()) {
                 swal({
@@ -161,7 +169,6 @@ include($path . "/scripts/entrancesession.php");
                     },
                     function () {
                         $('#fullscreen').fullscreen();
-                        $('#idcard-number').focus();
                         return false;
                     });
             }
@@ -170,6 +177,8 @@ include($path . "/scripts/entrancesession.php");
 
         $(document).ready(function () {
 
+		
+			
             // submit form using $.ajax() method
 
             $('#send-out-all-btn').click(function () {
@@ -226,6 +235,7 @@ include($path . "/scripts/entrancesession.php");
                         resetvariable = setTimeout(function () {
                             startresettimer();
                         }, 2000);
+						
 
 
                     })
@@ -271,6 +281,7 @@ include($path . "/scripts/entrancesession.php");
                         visited_today = obj.result2;
                         $("#currently-in").text(currently_in);
                         $("#visited-today").text(visited_today);
+						
                     }
                     else {
                         console.log(obj.error);
