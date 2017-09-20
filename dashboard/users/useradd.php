@@ -2,11 +2,11 @@
 <?php
 $path = $_SERVER['DOCUMENT_ROOT'];
 session_start();
-include($path."/scripts/sessionvariables.php");
+include($path . "/scripts/sessionvariables.php");
 if ($permission == 1)
-    include($path."/scripts/adminsession.php");
+    include($path . "/scripts/adminsession.php");
 else if ($permission == 2)
-    include($path."/scripts/usersession.php");
+    include($path . "/scripts/usersession.php");
 else {
     header("location:../");
     die();
@@ -17,6 +17,7 @@ include($path . "/scripts/includejs.php");
 
 <html>
 <head>
+    <link type="text/plain" rel="author" href="/humans.txt"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>LUMS | Dashboard</title>
@@ -49,13 +50,13 @@ include($path . "/scripts/includejs.php");
         <section class="content-header">
 
             <h1>
-                Dashboard
-                <small>Version 1.0</small>
+                Add Users
+                <small></small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="../index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                <li class="active"><i class="fa fa-newspaper-o"></i> News</li>
+                <li><a href="/dashboard/">Home</a></li>
+                <li><a href="/dashboard/users/"><i class="fa fa-users"></i> Users</a></li>
+                <li class="active"><i class="fa fa-plus"></i> Add Users</li>
             </ol>
         </section>
 
@@ -200,7 +201,7 @@ include($path . "/scripts/includejs.php");
         <div class="pull-right hidden-xs">
             <b>Version</b> 1.0.0
         </div>
-        <strong>Copyright &copy; <a href="http://sridarshan.tk">Sri Darshan S</a>, Sankkara Narayanan.</strong> All
+        <strong>Copyright &copy; <a href="/humans.txt">LUMS 2.0</a></strong> All
         rights reserved.
     </footer>
 

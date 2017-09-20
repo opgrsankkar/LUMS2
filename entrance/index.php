@@ -6,6 +6,7 @@ include($path . "/scripts/entrancesession.php");
 <!DOCTYPE html>
 <html>
 <head>
+    <link type="text/plain" rel="author" href="/humans.txt"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>LUMS | Entrance</title>
@@ -74,7 +75,8 @@ include($path . "/scripts/entrancesession.php");
                     </div>
                 </div>
             </div>
-            <div class="panel-footer"></div>
+            <div class="panel-footer">
+            </div>
         </div>
         <div class="col-lg-6 col-xs-12">
             <div class="small-box bg-aqua">
@@ -134,6 +136,11 @@ include($path . "/scripts/entrancesession.php");
 
     </div>
 
+
+    <div class="col-md-12">
+        <div class="hr-fade"></div>
+        &nbsp;&nbsp;Site designed and developed by Sri Darshan S, Sankkara Narayanan R-(B.Tech Cse2014-18)
+    </div>
 
     <script type="text/javascript">
 

@@ -110,8 +110,8 @@ angular.module('usersApp', ['ngAnimate'])
                 addReq.data.users = [{
                     id: id,
                     name: name,
-                    batch: batch?batch:"",
-                    designation: designation?designation:""
+                    batch: batch ? batch : "",
+                    designation: designation ? designation : ""
                 }];
                 $http(addReq).then(function (result) {
                     $scope.single.uploading = false;

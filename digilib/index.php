@@ -6,6 +6,7 @@ include($path . "/scripts/digilibsession.php");
 <!DOCTYPE html>
 <html>
 <head>
+    <link type="text/plain" rel="author" href="/humans.txt"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>LUMS | Digilib</title>
@@ -131,6 +132,11 @@ include($path . "/scripts/digilibsession.php");
 
         </div>
 
+    </div>
+
+    <div class="col-md-12">
+        <div class="hr-fade"></div>
+        &nbsp;&nbsp;Site designed and developed by Sri Darshan S, Sankkara Narayanan R-(B.Tech Cse2014-18)
     </div>
 
 

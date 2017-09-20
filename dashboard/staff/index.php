@@ -2,9 +2,9 @@
 <?php
 $path = $_SERVER['DOCUMENT_ROOT'];
 session_start();
-include($path."/scripts/sessionvariables.php");
+include($path . "/scripts/sessionvariables.php");
 if ($permission == 1)
-    include($path."/scripts/adminsession.php");
+    include($path . "/scripts/adminsession.php");
 else {
     header("location:../");
     die();
@@ -15,6 +15,7 @@ include($path . "/scripts/includejs.php");
 
 <html>
 <head>
+    <link type="text/plain" rel="author" href="/humans.txt"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>LUMS | Dashboard</title>
@@ -44,12 +45,11 @@ include($path . "/scripts/includejs.php");
         <section class="content-header">
 
             <h1>
-                Dashboard
-                <small>Version 1.0</small>
+                LUMS
+                <small>users</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="../index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="/dashboard/">Home</a></li>
                 <li class="active"><i class="fa fa-user"></i> Staff</li>
             </ol>
         </section>
@@ -58,7 +58,7 @@ include($path . "/scripts/includejs.php");
         <section class="row content" ng-app="staffApp" ng-controller="staffController">
             <div class="box box-success">
                 <div class="box-header">
-                    <h3 class="">Staff List</h3>
+                    <h3 class="">Library Staff List</h3>
                 </div>
 
                 <div class="box-body">
@@ -288,7 +288,7 @@ include($path . "/scripts/includejs.php");
         <div class="pull-right hidden-xs">
             <b>Version</b> 1.0.0
         </div>
-        <strong>Copyright &copy; <a href="http://sridarshan.tk">Sri Darshan S</a>, Sankkara Narayanan.</strong> All
+        <strong>Copyright &copy; <a href="/humans.txt">LUMS 2.0</a></strong> All
         rights
         reserved.
     </footer>
