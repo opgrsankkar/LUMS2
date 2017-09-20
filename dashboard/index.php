@@ -191,7 +191,7 @@ include($path . "/scripts/includejs.php");
             ?>
 
             <div class="col-md-4 col-sm-6 col-xs-12 hover">
-                <a href="/dashboard/users/">
+                <a href="/dashboard/news/">
                     <div class="info-box hoverinfo">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-newspaper-o"></i></span>
                         <div class="info-box-content">
