@@ -1,5 +1,5 @@
 body.idcard {
-    height:99vh;
+    height: 99vh;
 }
 
 .hr-fade {
@@ -8,29 +8,29 @@ body.idcard {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
-.square-image-logo{
+.square-image-logo {
     height: 18vh;
     width: auto
 }
-.square-image-logo.left{
+
+.square-image-logo.left {
     position: absolute;
-    left:10px;
-    top:10px;
+    left: 10px;
+    top: 10px;
 }
 
-.square-image-logo.right{
+.square-image-logo.right {
     position: absolute;
     right: 10px;
-    top:10px;
+    top: 10px;
 }
 
-
-.idcard-wrapper{
+.idcard-wrapper {
     float: right;
     text-align: center;
 }
 
-.idcard-instructions{
+.idcard-instructions {
     margin-top: 20vh;
 }
 
@@ -41,7 +41,7 @@ body.idcard {
     width: 25vw;
 }
 
-.idcard-group{
+.idcard-group {
 
     border: 3px solid #f5f5f5;
     border-radius: 4px;
@@ -52,7 +52,7 @@ body.idcard {
     border-radius: 4px;
 }
 
-.idcard-credentials .btn{
+.idcard-credentials .btn {
     background-color: #fff;
     border: 0;
     padding: 0 10px;
@@ -66,17 +66,29 @@ body.idcard {
     max-height: 20vh;
 }
 
-.news-panel{
+.news-panel {
     margin-top: 5vh;
 }
-.news-item-div{
+
+.news-item-div {
     min-height: 20vh;
 }
 
-.bgcol{
-    background-color: #fafafa;
+.bgcol {
+    background: url('/ext-res/campus.JPG') no-repeat;
+    background-size: 100%;
 }
-.idcard-user-image{
+
+.bg-overlay {
+    background-color: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.idcard-user-image {
     width: 100px;
     height: auto;
     float: left;
