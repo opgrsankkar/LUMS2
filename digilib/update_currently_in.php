@@ -1,7 +1,7 @@
 <?php
 session_start();
 $path = $_SERVER['DOCUMENT_ROOT'];
-include($path . "/scripts/entrancesession.php");
+include($path . "/scripts/digilibsession.php");
 
 $sql = "SELECT count(*) as today FROM digilib where date(timein) = date(now())";
 $result = mysqli_query($connection, $sql);

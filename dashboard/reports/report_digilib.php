@@ -75,11 +75,11 @@ include($path . "/scripts/includejs.php");
                                     <label>Export:</label>
 
                                     <div>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-default " id="Excel">
+                                        <div class="btn-group" id="export-btns">
+                                            <button type="button" class="btn btn-default " id="Excel" disabled>
                                                 <i class="fa fa-file-excel-o"></i> Excel
                                             </button>
-                                            <button type="button" class="btn btn-default " id="PDF">
+                                            <button type="button" class="btn btn-default " id="PDF" disabled>
                                                 <i class="fa fa-file-pdf-o"></i> PDF
                                             </button>
 
@@ -88,7 +88,7 @@ include($path . "/scripts/includejs.php");
                                     </div>
                                 </div>
 
-                                <div class="pull-right" style="padding: 0cm 30px 0cm 0cm;">
+                                <div class="pull-left" style="padding: 0cm 30px 0cm 0cm;">
                                     <label>Date Range:</label>
 
 
@@ -176,6 +176,33 @@ include($path . "/scripts/includejs.php");
 
     });
 
+
+
+    function exportCheck(){
+        var result=false;
+        var dataset = table.columns().search();
+        var count =0;
+
+        for(i=0;i<5;i++){
+            if (dataset[i]=="")
+                count++;
+        }
+
+        if(!(table.search()=="" && count==5)){
+            result=true;
+        }
+        if(datefrom!="" && dateto !=""){
+            result=true;
+        }
+        $("#export-btns .btn").prop("disabled",!result);
+
+    }
+
+    table.on( 'search.dt', function () {
+        exportCheck();
+    });
+
+
     table.columns().every(function () {
         var that = this;
 
@@ -211,18 +238,15 @@ include($path . "/scripts/includejs.php");
             //do something, like clearing an input
             $('#daterange-btn span').html(" \<i class=\"fa fa-calendar\"\>\</i\> Filter");
             dateto = datefrom = "";
-
             table.ajax.reload(null, false);
-
-            console.log("Cleared");
+            exportCheck();
 
         });
         $('#daterange-btn').on('apply.daterangepicker', function (ev, picker) {
             datefrom = picker.startDate.format('YYYY-MM-DD') + " 00:00:00";
             dateto = picker.endDate.format('YYYY-MM-DD') + " 23:59:59";
             table.ajax.reload(null, false);
-            console.log(picker.startDate.format('YYYY-MM-DD'));
-            console.log(picker.endDate.format('YYYY-MM-DD'));
+            exportCheck();
         });
 
 
