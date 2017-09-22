@@ -2,6 +2,23 @@
  * make the list of news items to scroll
  * instead of the whole page
  */
+#news-list new{
+    display: inline;
+}
+#news-list new::before{
+    background-color: aqua;
+    padding: 3px;
+    border-radius: 3px;
+    font-size: .67em;
+    font-weight: bold;
+    color: red;
+    content: 'NEW';
+    animation: blink 0.5s linear 0s infinite;
+}
+@keyframes blink {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
 #news-list {
     max-height: 70vh;
     overflow-x: hidden;

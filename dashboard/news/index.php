@@ -22,85 +22,6 @@ include($path . "/scripts/includejs.php");
     <title>LUMS | Dashboard</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-
-
-    <style>
-        body {
-            font-family: Verdana;
-            font-size: 11px;
-        }
-
-        h2 {
-            margin-bottom: 0;
-        }
-
-        small {
-            display: block;
-            margin-top: 40px;
-            font-size: 9px;
-        }
-
-        small,
-        small a {
-            color: #666;
-        }
-
-        a {
-            color: #000;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
-        #toolbar [data-wysihtml5-action] {
-            float: right;
-        }
-
-        #toolbar,
-        textarea {
-            width: 920px;
-            padding: 5px;
-            -webkit-box-sizing: border-box;
-            -ms-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            height: 280px;
-            border: 2px solid green;
-            font-family: Verdana;
-            font-size: 11px;
-        }
-
-        textarea:focus {
-            color: black;
-            border: 2px solid black;
-        }
-
-        .wysihtml5-command-active {
-            font-weight: bold;
-        }
-
-        [data-wysihtml5-dialog] {
-            margin: 5px 0 0;
-            padding: 5px;
-            border: 1px solid #666;
-        }
-
-        a[data-wysihtml5-command-value="red"] {
-            color: red;
-        }
-
-        a[data-wysihtml5-command-value="green"] {
-            color: green;
-        }
-
-        a[data-wysihtml5-command-value="blue"] {
-            color: blue;
-        }
-    </style>
-
-
     <?php
     include($path . "/scripts/includecss.php");
     ?>
@@ -185,36 +106,31 @@ include($path . "/scripts/includejs.php");
                         <label for="{{n.id}}" class="control control--checkbox">
                             <input id="{{n.id}}" type="checkbox" ng-model="n.isChecked" ng-checked="n.isChecked"/>
                             <span class="control__indicator"></span>
-                            <span class="news-content">{{n.news}}</span>
+                            <span class="news-content" ng-bind-html="n.trustedNews"></span>
                         </label>
 
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 ewrapper">
+            <div class="col-lg-8">
                 <div class="page-header">
                     <h2>Edit news</h2>
                 </div>
-                <div class="toolbar" style="display: none;">
-                    <a data-wysihtml5-command="bold" title="CTRL+B">bold</a> |
-                    <a data-wysihtml5-command="italic" title="CTRL+I">italic</a> |
-                    <a data-wysihtml5-command="superscript" title="sup">superscript</a> |
-                    <a data-wysihtml5-command="subscript" title="sub">subscript</a> |
-                    <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1">h1</a> |
-                    <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2">h2</a> |
-                    <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-blank-value="true">plaintext</a> |
-                    <a data-wysihtml5-command="insertUnorderedList">insertUnorderedList</a> |
-                    <a data-wysihtml5-command="insertOrderedList">insertOrderedList</a> |
-                    <a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="red">red</a> |
-                    <a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="green">green</a> |
-                    <a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue">blue</a> |
-                    <a data-wysihtml5-command="undo">undo</a> |
-                    <a data-wysihtml5-command="redo">redo</a> |
-                    <a data-wysihtml5-action="change_view">switch to html view</a>
-
+                <div class="row">
+                    <label>New
+                        <input type="checkbox" ng-model="currCheckedOptions.newItem"/>
+                    </label>
                 </div>
-                <textarea id="edit-area" class="col-lg-12 form-control editable" rows="10" ng-model="currNews"
-                          autofocus></textarea>
+                <wysiwyg
+                        textarea-id="edit-area"
+                        textarea-class="col-lg-12 form-control"
+                        textarea-height="80px"
+                        textarea-name="textareaQuestion"
+                        ng-model="currNews"
+                        enable-bootstrap-title="true"
+                        textarea-menu="customMenu">
+                </wysiwyg>
+
                 <button id="save" ng-click="updateNewsItem(currNews)" class="btn btn-primary">Save</button>
             </div>
         </section>
@@ -234,20 +150,4 @@ include($path . "/scripts/includejs.php");
 <!-- ./wrapper -->
 </body>
 
-<script src="/dist/js/advanced_unwrap.js"></script>
-<script src="/dist/js/wysihtml-toolbar.min.js"></script>
-<script>
-    var editors = [];
-
-    $('.ewrapper').each(function(idx, wrapper) {
-        var e = new wysihtml5.Editor($(wrapper).find('.editable').get(0), {
-            toolbar:        $(wrapper).find('.toolbar').get(0),
-            parserRules:    wysihtml5ParserRules,
-            stylesheets:  "wysiwyg-stylesheet.css"
-            //showToolbarAfterInit: false
-        });
-        editors.push(e);
-    });
-
-</script>
 </html>

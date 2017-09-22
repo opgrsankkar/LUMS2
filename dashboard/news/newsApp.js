@@ -2,8 +2,11 @@
  * Created by Sankkara Narayanan on 16-Jul-17.
  */
 
-angular.module("newsApp", ['ngAnimate'])
-    .controller("newsControl", function ($scope, $http) {
+angular.module("newsApp", ['wysiwyg.module'])
+    .controller("newsControl", function ($scope, $http, $sce) {
+        $scope.currCheckedOptions = {
+            newItem: false,
+        };
         /**
          * highlighted news items are assigned
          * 'list-group-item-success'    for giving the default bootstrap green
@@ -70,11 +73,13 @@ angular.module("newsApp", ['ngAnimate'])
                 }
                 if ($scope.news.length) {
                     for (let i = 0; i < $scope.news.length; i++) {
+                        $scope.news[i].trustedNews = $sce.trustAsHtml($scope.news[i].news);
                         $scope.news[i].isHighlighted = highlight.unHighlighted;
                         $scope.news[i].isChecked = false;
                     }
                     $scope.news[prevHighlighted].isHighlighted = highlight.highlighted;
                     $scope.currNews = $scope.news[prevHighlighted].news;
+                    $scope.currCheckedOptions.newItem = checkNewLabel($scope.currNews);
                     $("#edit-area").focus();
                 }
             });
@@ -109,6 +114,21 @@ angular.module("newsApp", ['ngAnimate'])
             }
             return checkedItems;
         };
+        let checkNewLabel = function (str) {
+            return (str.search("<new></new>") !== -1);
+        };
+        let addNewLabel = function (str) {
+            if(!checkNewLabel(str)) {
+                str = "<new></new>" + str;
+            }
+            return str;
+        };
+        let removeNewLabel = function (str) {
+            if(checkNewLabel(str)) {
+                str = str.replace('<new></new>','');
+            }
+            return str;
+        };
         /**
          * 'highlightNews( newsToHighlight)' - un-highlights the
          * previously highlighted item and highlights the item
@@ -120,6 +140,7 @@ angular.module("newsApp", ['ngAnimate'])
             newsObj.isHighlighted = highlight.unHighlighted;
             n.isHighlighted = highlight.highlighted;
             $scope.currNews = n.news;
+            $scope.currCheckedOptions.newItem = checkNewLabel($scope.currNews);
             $('#edit-area').focus();
         };
 
@@ -132,6 +153,12 @@ angular.module("newsApp", ['ngAnimate'])
         $scope.updateNewsItem = function (stringToUpdateWith) {
             let newsObj = getHighlightedNews();
             prevHighlighted = $scope.news.indexOf(newsObj);
+
+            if($scope.currCheckedOptions.newItem) {
+                stringToUpdateWith = addNewLabel(stringToUpdateWith);
+            } else {
+                stringToUpdateWith = removeNewLabel(stringToUpdateWith);
+            }
 
             updateReq.data.id = newsObj.id;
             updateReq.data.newNews = stringToUpdateWith;
@@ -183,4 +210,12 @@ angular.module("newsApp", ['ngAnimate'])
                 }
             });
         };
+        $scope.customMenu = [
+            ['bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript'],
+            ['format-block'],
+            ['font-size'],
+            ['font-color', 'hilite-color'],
+            ['remove-format'],
+            ['ordered-list', 'unordered-list']
+        ];
     });

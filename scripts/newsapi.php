@@ -74,7 +74,7 @@ function add_news( $num ){
     }
 
     global $connection;
-    $newNews = "Please Enter the new News";
+    $newNews = "<new></new>Please Enter the new News";
     $stmt = mysqli_stmt_init($connection);
     if (mysqli_stmt_prepare($stmt, 'INSERT INTO news (news) VALUES (?)')) {
         mysqli_stmt_bind_param($stmt, "s", $newNews);
