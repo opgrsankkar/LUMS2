@@ -22,7 +22,6 @@ include($path . "/scripts/includejs.php");
     <title>LUMS | Dashboard</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-
     <?php
     include($path . "/scripts/includecss.php");
     ?>
@@ -107,7 +106,7 @@ include($path . "/scripts/includejs.php");
                         <label for="{{n.id}}" class="control control--checkbox">
                             <input id="{{n.id}}" type="checkbox" ng-model="n.isChecked" ng-checked="n.isChecked"/>
                             <span class="control__indicator"></span>
-                            <span class="news-content">{{n.news}}</span>
+                            <span class="news-content" ng-bind-html="n.trustedNews"></span>
                         </label>
 
                     </div>
@@ -117,8 +116,21 @@ include($path . "/scripts/includejs.php");
                 <div class="page-header">
                     <h2>Edit news</h2>
                 </div>
-                <textarea id="edit-area" class="col-lg-12 form-control" rows="10" ng-model="currNews"
-                          autofocus></textarea>
+                <div class="row">
+                    <label>New
+                        <input type="checkbox" ng-model="currCheckedOptions.newItem"/>
+                    </label>
+                </div>
+                <wysiwyg
+                        textarea-id="edit-area"
+                        textarea-class="col-lg-12 form-control"
+                        textarea-height="80px"
+                        textarea-name="textareaQuestion"
+                        ng-model="currNews"
+                        enable-bootstrap-title="true"
+                        textarea-menu="customMenu">
+                </wysiwyg>
+
                 <button id="save" ng-click="updateNewsItem(currNews)" class="btn btn-primary">Save</button>
             </div>
         </section>
@@ -136,6 +148,6 @@ include($path . "/scripts/includejs.php");
 
 </div>
 <!-- ./wrapper -->
-
 </body>
+
 </html>

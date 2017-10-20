@@ -21,6 +21,8 @@ echo <<<EOD
 <script src="/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script src="/dist/js/angular.min.js"></script>
 <script src="/dist/js/angular-animate.min.js"></script>
+<script src="/dist/js/bootstrap-colorpicker-module.js"></script>
+<script src="/dist/js/angular-wysiwyg.js"></script>
 <script src="/dashboard/news/newsApp.js"></script>
 <script src="/dashboard/staff/staffApp.js"></script>
 <!--<script src="/dist/js/xlsxjs.full.min.js"></script>-->

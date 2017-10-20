@@ -27,7 +27,25 @@ include($path . "/scripts/entrancesession.php");
     <script src="/dist/js/news/jquery.bootstrap.newsbox.min.js"></script>
     <script src="/dist/js/news/script.js"></script>
     <script src="/dist/js/sweetalert.min.js"></script>
-
+    <style>
+        .news-panel new{
+            display: inline;
+        }
+        .news-panel new::before{
+            background-color: aqua;
+            padding: 3px;
+            border-radius: 3px;
+            font-size: .67em;
+            font-weight: bold;
+            color: red;
+            content: 'NEW';
+            animation: blink 0.5s linear 0s infinite;
+        }
+        @keyframes blink {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+    </style>
 
 </head>
 

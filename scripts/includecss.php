@@ -17,4 +17,5 @@ echo <<<EOD
     <link rel="stylesheet" href="/plugins/datatables/dataTables.bootstrap.css">
     <link rel="stylesheet" href="/plugins/datatables/dataTables.checkboxes.css">
     <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="/dist/css/bootstrap-colorpicker-module.css">
 EOD;
