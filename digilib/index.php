@@ -27,6 +27,43 @@ include($path . "/scripts/digilibsession.php");
     <script src="/dist/js/news/jquery.bootstrap.newsbox.min.js"></script>
     <script src="/dist/js/news/script.js"></script>
     <script src="/dist/js/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            setInterval(function(){
+                $("#clock").load('time.php')
+            },1000)
+        });
+    </script>
+
+    <style>
+        .news-panel new{
+            display: inline;
+        }
+        .news-panel new::before{
+            background-color: aqua;
+            padding: 3px;
+            border-radius: 3px;
+            font-size: .67em;
+            font-weight: bold;
+            color: red;
+            content: 'NEW';
+            animation: blink 0.5s linear 0s infinite;
+        }
+        @keyframes blink {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        #clock
+        {
+            width: 100%;
+            margin: 0 auto;
+            font-size: 40px;
+            position: fixed;
+            bottom: 8%;
+            left: 3%;
+        }
+    </style>
+
 
 </head>
 
@@ -135,6 +172,10 @@ include($path . "/scripts/digilibsession.php");
 
         </div>
 
+
+        <div id="clock">
+            00 : 00 PM
+        </div>
 
         <footer style="position: fixed; bottom: 0; margin-left: 0" class="main-footer col-sm-12">
             <div class="pull-right hidden-xs">
