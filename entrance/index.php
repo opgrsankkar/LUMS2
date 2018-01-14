@@ -27,6 +27,13 @@ include($path . "/scripts/entrancesession.php");
     <script src="/dist/js/news/jquery.bootstrap.newsbox.min.js"></script>
     <script src="/dist/js/news/script.js"></script>
     <script src="/dist/js/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            setInterval(function(){
+                $("#clock").load('time.php')
+            },1000)
+        });
+    </script>
     <style>
         .news-panel new{
             display: inline;
