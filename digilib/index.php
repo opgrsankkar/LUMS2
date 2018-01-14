@@ -200,6 +200,13 @@ include($path . "/scripts/digilibsession.php");
                 elem.focus();
             }
 
+
+            function autoFullScreen(){
+                if ($.fullscreen.isNativelySupported() && !$.fullscreen.isFullScreen()) {
+                    $('#fullscreen').fullscreen();
+                }
+            }
+
             function checkFullScreen() {
                 if ($.fullscreen.isNativelySupported() && !$.fullscreen.isFullScreen()) {
                     swal({
@@ -259,6 +266,7 @@ include($path . "/scripts/digilibsession.php");
                 var resetvariable;
                 $('#reg-form').submit(function (e) {
 
+                    autoFullScreen();
                     e.preventDefault(); // Prevent Default Submission
 
                     $.ajax({
