@@ -45,6 +45,15 @@ include($path . "/scripts/entrancesession.php");
             from {opacity: 0;}
             to {opacity: 1;}
         }
+        #clock
+        {
+            width: 100%;
+            margin: 0 auto;
+            font-size: 40px;
+            position: fixed;
+            bottom: 8%;
+            left: 3%;
+        }
     </style>
 
 </head>
@@ -154,7 +163,10 @@ include($path . "/scripts/entrancesession.php");
             </div>
 
         </div>
-
+        
+        <div id="clock">
+            00 : 00 PM
+        </div>
 
         <footer style="position: fixed; bottom: 0; margin-left: 0" class="main-footer col-sm-12">
             <div class="pull-right hidden-xs">
